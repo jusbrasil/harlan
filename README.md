@@ -1,15 +1,15 @@
 Bem Vindo ao Harlan
 ======
 
-**Conheça o modo mais conveniente de capturar dados e gerar relatórios para sua empresa, transforme o Harlan na plataforma nº 1 para ficar sabendo do que importa.**
+**Conheça o modo mais conveniente de capturar dados e gerar relatórios para sua empresa, transforme o Harlan na plataforma Nº 1 para ficar sabendo do que importa.**
 
-Nossa ferramenta é um CRM de governança cadastral que permite pesquisar dados e empresas na nuvem. Dessa forma todas as informações estarão sempre atualizadas, salvas com segurança e você avisado de qualquer alteração.
+Nossa ferramenta é um CRM que permite pesquisar dados e empresas na nuvem. Dessa forma todas estas informações estarão sempre atualizadas e salvas com segurança. Você é avisado de qualquer alteração.
 
 ----------
 
 ## As Vantagens do Harlan
 
-Com o Harlan você gera qualquer relatório, fica sabendo quando as coisas mudam, isso tudo de forma extremamente prática. Nosso CRM de governança cadastral foi desenhado para que seu banco de dados nunca mais fique desatualizado, impactando suas operações na área de vendas, negócio, fiscal ou jurídica.
+Com o Harlan você gera qualquer relatório e fica sabendo quando as coisas mudam de forma extremamente prática. Nosso CRM foi desenhado para que seu banco de dados nunca mais fique desatualizado, assim impactando suas operações na área de vendas, negócios, fiscal ou jurídica de forma positiva.
 
 ### Cadastro na Nuvem
 
@@ -17,11 +17,11 @@ Cada consulta salva é permanentemente atualizada, isto é, sempre que você con
 
 ### Comente o que é importante
 
-Trabalhar em equipe é sempre fundamental. Por isso, o Harlan conta com uma ferramenta que permite você adicionar notas nos resultados salvos para que outros membros da equipe saibam do que é importante, ou até mesmo para você lembrar no futuro.
+Trabalhar em equipe é sempre fundamental. Por isso, o Harlan conta com uma ferramenta que permite você adicionar notas nos resultados salvos para que outros membros da equipe saibam do que é importante, ou até mesmo lembretes a você mesmo.
 
 ### Open Source e Comunitário
 
-O Harlan é uma ferramenta open-source distribuída sobre a licença MIT, o código fonte e maiores informações podem ser encontradas no nosso repositório de código [Bitbucket](https://bitbucket.org/bipbop/harlan). Ser uma ferramenta livre significa que se você é desenvolvedor pode criar módulos e APIs para o sistema para atender demandas específicas, ganhando dinheiro com isso.
+O Harlan é uma ferramenta open-source distribuída sobre a licença MIT, o código fonte e maiores informações podem ser encontradas no nosso repositório de código [Bitbucket](https://bitbucket.org/bipbop/harlan). Ser uma ferramenta livre significa que se você é um desenvolvedor, é possível que você crie módulos e APIs para o sistema para atender demandas específicas, ganhando dinheiro com isso.
 
 ----------
 
@@ -46,3 +46,12 @@ Para realizar o deploy do Harlan será necessário que você tenha instalado um 
     $ gulp build
     $ cd Server/web
     $ python -m SimpleHTTPServer
+    
+----------
+
+###Dúvidas?
+
+Cheque nossos outros documentos, localizados aqui no Github.
+
+[Harlan/Install](https://github.com/bipbop/harlan/blob/master/INSTALL.md)
+[Harlan/DEVEL](https://github.com/bipbop/harlan/blob/master/DEVEL.md)
