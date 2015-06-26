@@ -6,15 +6,7 @@
   ],
   "description": "Harlan é o sistema modular que permite você automatizar toda sua governança cadastral da nuvem.",
   "main": "index.html",
-  "keywords": [
-    "inpi",
-    "patente",
-    "marca",
-    "desenho",
-    "software",
-    "governo",
-    "egov"
-  ],
+  "keywords": [],
   "license": "COPYRIGHT",
   "private": true,
   "ignore": [

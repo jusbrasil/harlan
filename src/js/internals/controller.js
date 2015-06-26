@@ -160,47 +160,11 @@ module.exports = function () {
     };
 
 
-    /* Parsers */
-    require("./parsers/placasWiki")(this);
-    require("./parsers/juntaEmpresa")(this);
-
-    /* Forms */
-    require("./forms/receitaCertidao")(this);
-
     /* Modules */
     require("./modules/i18n")(this);
-    require("./modules/autocomplete")(this);
-    require("./modules/openReceipt")(this);
-    require("./modules/findDatabase")(this);
-    require("./modules/loader")(this);
-    require("./modules/error")(this);
-    require("./modules/endpoint")(this);
     require("./modules/clipboard")(this);
-    require("./modules/remove")(this);
-    require("./modules/databaseSearch")(this);
-    require("./modules/comments")(this);
-    require("./modules/modal")(this);
-    require("./modules/welcomeScreen")(this);
-    require("./modules/authentication")(this);
-    require("./modules/history")(this);
-    require("./modules/module")(this);
-    require("./modules/selectedResults")(this);
-    require("./modules/searchJuntaEmpresa")(this);
-    require("./modules/save")(this);
-    require("./modules/findCompany")(this);
-    require("./modules/findDocument")(this);
-    require("./modules/xmlDocument")(this);
-    require("./modules/section")(this);
-    require("./modules/databaseError")(this);
-    require("./modules/messages")(this);
-    require("./modules/mainSearch")(this);
-    require("./modules/push")(this);
+    require("./modules/error")(this);
     require("./modules/oauth-io")(this);
-    require("./modules/urlParameter")(this);
-    require("./modules/resultGenerator")(this);
-    require("./modules/demonstrate")(this);
-    require("./modules/forgotPassword")(this);
-    require("./modules/iframeEmbed")(this);
     require("./modules/googleAnalytics")(this);
 
     return this;
