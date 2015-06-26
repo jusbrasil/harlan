@@ -1,11 +1,11 @@
-.netbeans.xml
 art/
-.sass-cache/
+bower_components/
 nbproject/
-tmp/
-temp/
+.netbeans.xml
 node_modules/
 public/
-Server/web/
 .publish/
-bower_components/
+.sass-cache/
+Server/web/
+temp/
+tmp/
