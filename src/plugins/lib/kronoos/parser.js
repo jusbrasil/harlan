@@ -760,9 +760,9 @@ export class KronoosParse {
                         "A pessoa física se candidatou a cargo político e consta na base de dados do TSE.",
                         "Visualização das candidaturas da pessoa física na base de dados do Tribunal Superior Eleitoral.");
                     kelement[behaviour](true);
-                    let captionTableElement = kelement.captionTable("Registros no Tribunal Superior Eleitoral", "Partido", "Descrição do Cargo", "Situação", "Candidatura", "Ano da Eleição");
+                    let captionTableElement = kelement.captionTable("Registros no Tribunal Superior Eleitoral", "Partido", "Descrição do Cargo", "Situação", "Candidatura", "Ano da Eleição", "Cidade");
                     for (let row of data) {
-                        captionTableElement(row.NOME_PARTIDO, row.DESCRICAO_CARGO, row.DESC_SIT_TOT_TURNO || "Não há", row.DES_SITUACAO_CANDIDATURA, row.ANO_ELEICAO);
+                        captionTableElement(row.NOME_PARTIDO, row.DESCRICAO_CARGO, row.DESC_SIT_TOT_TURNO || "Não há", row.DES_SITUACAO_CANDIDATURA, row.ANO_ELEICAO, row.DESCRICAO_UE);
                     }
                     this.append(kelement.element());
                 }
