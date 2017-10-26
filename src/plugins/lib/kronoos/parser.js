@@ -1080,6 +1080,9 @@ export class KronoosParse {
                     kelement.behaviourAccurate(!!/\:\s*constam/i.test(text));
                     this.append(kelement.element());
                 },
+                error: (data) => {
+                  this.errorHappen(`Indisponibilidade de conexão com a fonte de dados - Certidão de Débitos Relativos a Créditos Tributários Federais e à Dívida Ativa da União`);
+                }
             }, true));
     }
 
