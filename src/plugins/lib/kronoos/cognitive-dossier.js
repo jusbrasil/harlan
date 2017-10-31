@@ -5,6 +5,7 @@ import VMasker from 'vanilla-masker';
 const RISK = ['BAIXISSIMO RISCO', 'BAIXO', 'MEDIO', 'ALTO', 'ALTISSIMO'];
 let qtdEnd = 0;
 let ehPep = false;
+let arrayEnderecos = [];
 
 export class CognitiveDossier {
 
@@ -18,7 +19,6 @@ export class CognitiveDossier {
        this.phrases = [];
 
        this.parsers = {
-         "SELECT FROM 'CBUSCA'.'HOMONYMOUS'": 'homonymous',
          "SELECT FROM 'KRONOOS'.'GEOCODE'": 'endereco',
          "SELECT FROM 'RFB'.'CERTIDAO'": 'rfb',
          "SELECT FROM 'KRONOOS'.'ELEICOES'": 'pep',
@@ -67,55 +67,60 @@ export class CognitiveDossier {
       this.getFirstPhrase().push(`é pessoa física inscrita no CPF/MF ${this.parser.cpf_cnpj}`);
 
       this.empregador();
-      this.phrases.push(this.phrase.map(x => arrayToSentence(x, {lastSeparator: ', '})));
+      return _.values(this.phrase).map(x => arrayToSentence(x, {lastSeparator: ', '}));
 
     }
 
     generateSecondPhrase() {
+
       if (this.parser.informationQA().hasNotation) {
           let length = _.reduce(_.values(this.parser.informationQA().hasNotation), (x, y) => x + y, 0)
           if (length === 1) {
-              this.getSecondPhrase().push(`\nEm relação à situação jurídica consta 1 apontamento cadastral no sistema Kronoos`);
+              this.getSecondPhrase().push(` Em relação à situação jurídica consta 1 apontamento cadastral no sistema Kronoos`);
           } else {
-              this.getSecondPhrase().push(`\nEm relação à situação jurídica constam ${length} apontamentos cadastrais no sistema Kronoos`);
+              this.getSecondPhrase().push(` Em relação à situação jurídica constam ${length} apontamentos cadastrais no sistema Kronoos`);
           }
       } else {
-          this.getSecondPhrase().push(`\nEm relação à situação jurídica não constam apontamentos cadastrais no sistema Kronoos`);
+          this.getSecondPhrase().push(` Em relação à situação jurídica não constam apontamentos cadastrais no sistema Kronoos`);
       }
 
-      this.phrases.push(this.phrase.map(x => arrayToSentence(x, {lastSeparator: ' e '})));
+      return _.values(this.phrase).map(x => arrayToSentence(x, {lastSeparator: ' e '}));
 
     }
 
     generateThirdPhrase() {
+
       let xml = this.parser.ccbuscaData;
       let qtdEmpresas = $("BPQL > body > parsocietaria > empresa", xml);
       if(qtdEmpresas.length > 0) {
-        this.getThirdPhrase().push(`\n${this.parser.name} possui relações societárias com ${qtdEmpresas.length} pessoa(s) jurídica(s)`);
+        this.getThirdPhrase().push(`${this.parser.name} possui relações societárias com ${qtdEmpresas.length} pessoa(s) jurídica(s)`);
       }
       for (let response of this.parser.responses) {
           if (!this.parsers[response.query])
               continue;
           this[this.parsers[response.query]](response);
       }
-      this.phrases.push(this.phrase.map(x => arrayToSentence(x, {lastSeparator: ' e '})).join("."));
+      this.getFirstPhrase().push(` reside ou residiu em ${arrayEnderecos[qtdEnd -1]}`);
+      return _.values(this.phrase).map(x => arrayToSentence(x, {lastSeparator: ' e '})).join(".");
 
     }
 
     generateParagraph() {
         this.generateFirstPhrase();
         this.generateSecondPhrase();
-        this.generateThirdPhrase();
+        let retorno = this.generateThirdPhrase();
         qtdEnd = 0;
         ehPep = false;
-
-        return this.phrases[this.phrases.length -1];
+        arrayEnderecos = [];
+        return retorno;
     }
 
     endereco (serverCall) {
-        if(qtdEnd++ === 0 && serverCall.response.status !== "ZERO_RESULTS") {
-          this.getFirstPhrase().push(`reside ou residiu em ${serverCall.response.results[0].formatted_address}`);
+        if(serverCall.response.status !== "ZERO_RESULTS") {
+          arrayEnderecos[qtdEnd] = serverCall.response.results[0].formatted_address;
+          qtdEnd++;
         }
+
     }
 
     empregador() {
@@ -127,9 +132,9 @@ export class CognitiveDossier {
       let tempo;
 
       if(textoEmpregadores[1]) {
-        let empregos = textoEmpregadores[1].split(/s\./);
+        let empregos = textoEmpregadores[1].split("Não Constam ApontamentosPesquisa")[0].split("anos.");
 
-        if(empregos[1].indexOf("Não") === -1) {
+        if(empregos.length > 1) {
           ultimoEmprego = empregos[1].split("-");
           cargo = ultimoEmprego[1].split("De");
         }else{
@@ -138,25 +143,21 @@ export class CognitiveDossier {
         }
         salario = cargo[1].split(",");
         tempo = salario[1] + "s";
-        this.getFirstPhrase().push(`${cargo[0]} em ${ultimoEmprego[0]} possui renda de ${salario[0]}`);
+        this.getFirstPhrase().push(` ${cargo[0]} em ${ultimoEmprego[0]} possui renda de ${salario[0]}`);
       }
     }
 
     rfb(serverCall) {
+
         let situacaoCadastral = $("BPQL > body > RFB > situacao", serverCall.response).text();
         if(situacaoCadastral !== "") {
           if(!ehPep) {
-            this.getThirdPhrase().push(` Encontra-se em situação ${situacaoCadastral} junto à Receita Federal.`);
+            this.getThirdPhrase().push(` Encontra-se em situação ${situacaoCadastral} junto à Receita Federal`);
           }else{
-            this.getThirdPhrase().push(`${this.parser.name} encontra-se em situação ${situacaoCadastral} junto à Receita Federal.`);
+            this.getThirdPhrase().push(` ${this.parser.name} encontra-se em situação ${situacaoCadastral} junto à Receita Federal`);
           }
 
         }
-    }
-
-    homonymous(serverCall) {
-        /* JSON */
-        return `existem ${serverCall.response.homonymous} homônimos no país`;
     }
 
     pep(serverCall) {
@@ -183,16 +184,16 @@ export class CognitiveDossier {
 
         if(anos.length > 1) {
           if(stringAnosEleitos.length >= 1) {
-            this.getFourthPhrase().push(`\nSegundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta) e concorreu aos cargos de ${stringOcupacoes} nos anos ${stringAnos} respectivamente. Sendo eleito no(s) ano(s) ${stringAnosEleitos}`);
+            this.getFourthPhrase().push(` Segundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta) e concorreu aos cargos de ${stringOcupacoes} nos anos ${stringAnos} respectivamente. Sendo eleito no(s) ano(s) ${stringAnosEleitos}`);
           }else{
-            this.getFourthPhrase().push(`\nSegundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta) e concorreu aos cargos de ${stringOcupacoes} nos anos ${stringAnos} respectivamente`);
+            this.getFourthPhrase().push(` Segundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta) e concorreu aos cargos de ${stringOcupacoes} nos anos ${stringAnos} respectivamente`);
           }
 
         }else{
           if(stringAnosEleitos.length >= 1) {
-            this.getFourthPhrase().push(`\nSegundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta), e concorreu ao cargo de ${stringOcupacoes} no ano ${stringAnos}. Sendo eleito no(s) ano(s) ${stringAnosEleitos}`);
+            this.getFourthPhrase().push(` Segundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta), e concorreu ao cargo de ${stringOcupacoes} no ano ${stringAnos}. Sendo eleito no(s) ano(s) ${stringAnosEleitos}`);
           }else{
-            this.getFourthPhrase().push(`\nSegundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta), e concorreu ao cargo de ${stringOcupacoes} no ano ${stringAnos}`);
+            this.getFourthPhrase().push(` Segundo a base de dados do COAF, ${this.parser.name} é uma PEP (Pessoa Politicamente Exposta), e concorreu ao cargo de ${stringOcupacoes} no ano ${stringAnos}`);
           }
         }
       }
@@ -200,6 +201,7 @@ export class CognitiveDossier {
     }
 
     consultaSpc(serverCall) {
+
       let pesquisas = serverCall.response.consultaRealizada;
       let valoresPesquisas = _.values(pesquisas);
       let cidadeConsultas = [];
@@ -219,36 +221,32 @@ export class CognitiveDossier {
         let stringNomesAssociados = arrayToSentence(nomesConsultas, {lastSeparator: ' e '});
 
         if(pesquisas.length === 1) {
-            this.getFifthPhrase().push(`\nForam encontradas consultas para esse CPF no banco de dados do SPC/Serasa [BACEN e protestos], realizadas na data ${stringDatasConsulta} por ${stringNomesAssociados}, oriundos de ${stringCidadesConsulta}`);
+            this.getFifthPhrase().push(` Foram encontradas consultas para esse CPF no banco de dados do SPC/Serasa [BACEN e protestos], realizadas na data ${stringDatasConsulta} por ${stringNomesAssociados}, oriundos de ${stringCidadesConsulta}`);
         } else {
 
-          this.getFifthPhrase().push(`\nForam encontradas consultas para esse CPF no banco de dados do SPC/Serasa [BACEN e protestos], realizadas nas datas ${stringDatasConsulta} por ${stringNomesAssociados}, oriundos de ${stringCidadesConsulta} respectivamente`);
+          this.getFifthPhrase().push(` Foram encontradas consultas para esse CPF no banco de dados do SPC/Serasa [BACEN e protestos], realizadas nas datas ${stringDatasConsulta} por ${stringNomesAssociados}, oriundos de ${stringCidadesConsulta} respectivamente`);
         }
 
       }
     }
-
+    verificaTamanhoData(data) {
+      if(data.toString().length === 8) {
+        return VMasker.toPattern(data, "99/99/9999");
+      } else if(data.toString().length === 7){
+        return VMasker.toPattern(data, "9/99/9999");
+      }
+    }
     comprot(serverCall) {
       let qtdProcessos = serverCall.response.totalDeProcessosEncontrados;
 
       if(qtdProcessos >= 1) {
-        let dataPrimeiro = serverCall.response.processos[0].dataProtocolo;
-        let dataUltimo = serverCall.response.processos[qtdProcessos -1].dataProtocolo;
-        if(dataPrimeiro.length === 8) {
-          dataPrimeiro = VMasker.toPattern(serverCall.response.processos[0].dataProtocolo, "99/99/9999");
-        } else {
-          dataPrimeiro = VMasker.toPattern(serverCall.response.processos[0].dataProtocolo, "9/99/9999");
-        }
-        if(dataUltimo.length === 8) {
-          dataUltimo = VMasker.toPattern(serverCall.response.processos[qtdProcessos -1].dataProtocolo, "99/99/9999");
-        } else {
-          dataUltimo = VMasker.toPattern(serverCall.response.processos[qtdProcessos -1].dataProtocolo, "9/99/9999");
-        }
+        let dataPrimeiro = this.verificaTamanhoData(serverCall.response.processos[0].dataProtocolo);
+        let dataUltimo = this.verificaTamanhoData(serverCall.response.processos[qtdProcessos -1].dataProtocolo);
 
         if(qtdProcessos === 1) {
-          this.getSixthPhrase().push(`existe 1 processo administrativo perante o Ministério da Fazenda para o CPF/MF ${this.parser.cpf_cnpj}, datado de ${dataPrimeiro}`);
+          this.getSixthPhrase().push(` Existe 1 processo administrativo perante o Ministério da Fazenda para o CPF/MF ${this.parser.cpf_cnpj}, datado de ${dataPrimeiro}`);
         } else {
-          this.getSixthPhrase().push(`existem ${qtdProcessos} processos administrativos perante o Ministério da Fazenda para o CPF/MF ${this.parser.cpf_cnpj}, sendo o primeiro datado de ${dataPrimeiro} e o último ${dataUltimo}`);
+          this.getSixthPhrase().push(` Existem ${qtdProcessos} processos administrativos perante o Ministério da Fazenda para o CPF/MF ${this.parser.cpf_cnpj}, sendo o primeiro datado de ${dataPrimeiro} e o último ${dataUltimo}`);
         }
       }
 
@@ -256,18 +254,18 @@ export class CognitiveDossier {
     cnd(serverCall) {
       let codControle = $("BPQL > body > codigo_de_controle", serverCall.response);
       if(codControle !== undefined) {
-        this.getFifthPhrase().push(`a situação da CND de ${this.parser.name} é, até o momento, regular`);
+        this.getFifthPhrase().push(` A situação da CND de ${this.parser.name} é, até o momento, regular`);
       } else {
-        this.getFifthPhrase().push(`a situação da CND de ${this.parser.name} é, até o momento, irregular`);
+        this.getFifthPhrase().push(` A situação da CND de ${this.parser.name} é, até o momento, irregular`);
       }
     }
 
     processos(serverCall) {
       let qtd = _.values(this.parser.procElements).length;
       if(qtd === 1) {
-          this.getEightPhrase().push(`${this.parser.name} é parte em 1 processo jurídico`);
+          this.getEightPhrase().push(` ${this.parser.name} é parte em 1 processo jurídico`);
       } else {
-        this.getEightPhrase().push(`${this.parser.name} é parte em ${ _.values(this.parser.procElements).length} processos jurídicos`);
+        this.getEightPhrase().push(` ${this.parser.name} é parte em ${ _.values(this.parser.procElements).length} processos jurídicos`);
       }
 
     }
@@ -290,7 +288,6 @@ export class CognitiveDossier {
 
     generateOutput(callback) {
       let paragraph = this.generateParagraph();
-      debugger;
       callback("Risco de Crédito", 0.01, paragraph);
       this.recuperaPessoaFisica(callback);
       this.parser.controller.trigger("kronoos::cognitiveDossier", [callback, this]);
