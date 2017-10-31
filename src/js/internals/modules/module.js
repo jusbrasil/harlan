@@ -37,6 +37,7 @@ module.exports = function (controller) {
 
                 var onLoad = function () {
                     if (!--scripts) {
+                        controller.trigger("plugin::authenticated", args);
                         callback();
                     }
                 };

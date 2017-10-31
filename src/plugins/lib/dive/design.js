@@ -3,9 +3,14 @@ module.exports = function (controller) {
     var siteTemplate = require('../../templates/dive-site.html.js'),
             emailRegex = require("email-regex");
 
+            require("../../styles/dive.js");
+
+    if (!controller.confs.dive.isDive) {
+        return;
+    }
+
     document.title = "Mergulhe sua cobrança em dados. | Dive";
     controller.interface.helpers.changeFavicon('//cdn-dive.harlan.com.br/favicon.png');
-    require("../../styles/dive.js");
     $(controller.confs.container).append(siteTemplate);
 
     var resize = function () {

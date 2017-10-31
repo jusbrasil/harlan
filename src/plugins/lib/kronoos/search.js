@@ -167,12 +167,8 @@ module.exports = function(controller) {
                         kronoos: true
 
                     },
-                    success: (ret) => {
-                        controller.call("kronoos::ccbusca", $("BPQL > body > nome", ret).first().text(), document);
-                    },
-                    error: () => {
-                        controller.call("kronoos::ccbusca", null, document);
-                    }
+                    success: (ret) => controller.call("kronoos::ccbusca", $("BPQL > body > nome", ret).first().text(), document),
+                    error: () => controller.call("kronoos::ccbusca", null, document)
                 })));
         });
     });

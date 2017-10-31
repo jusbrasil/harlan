@@ -18,6 +18,12 @@ $color-header-2: #f9f9fa;
 $color-green: #66c27c;
 $color-complementary: #7c66c2;
 
+.gamification.kronoos {
+    background: url(/images/kronoos/icon.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .kronoos-application {
 
     .kronoos-resume {
@@ -28,7 +34,7 @@ $color-complementary: #7c66c2;
 
         .container {
             border-left: 1px solid #d6d6d6;
-            background: linear-gradient(to bottom, #ffffff 0%,#eeeeee 100%);            
+            background: linear-gradient(to bottom, #ffffff 0%,#eeeeee 100%);
         }
 
         h3 {

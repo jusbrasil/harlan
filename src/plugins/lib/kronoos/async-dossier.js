@@ -26,7 +26,7 @@ module.exports = function(controller) {
                 success: () => toastr.success(`Um novo acompanhamento foi adicionado para o documento ${data.documento}`,
                     "Em alguns instantes o dossiê será finalizado e as informações estarão a sua disposição")
             }))).configure({
-            title: "Adicionar Acompanhamentos",
+            title: "Adicionar Acompanhamento",
             subtitle: "Preencha o formulário para acompanhar o dossiê Kronoos.",
             paragraph: "Uma vez preenchido o sistema acompanhará o target.",
             gamification: "star",
@@ -133,7 +133,7 @@ module.exports = function(controller) {
             }
         });
 
-        report.button("Adicionar Acompanhamentos", () => controller.call("kronoos::async::new"));
+        report.button("Adicionar Acompanhamento", () => controller.call("kronoos::async::new"));
 
         report.newAction("fa-play-circle", () =>
             controller.interface.helpers.activeWindow(".kronoos-application"),
@@ -149,7 +149,7 @@ module.exports = function(controller) {
         // }, "Filtrar Dossiês");
 
 
-        report.gamification("pass");
+        report.gamification("kronoos");
         $(".app-content").append(report.element());
     });
 

@@ -53,6 +53,12 @@ var Controller = function() {
     };
 
     this.registerTrigger = (name, id, callback) => {
+        if (Array.isArray(name)) {
+            for (let n of name) {
+                this.registerTrigger(n, id, callback);
+            }
+            return;
+        }
         console.log(':: register trigger ::', name);
         if (!(name in events)) {
             events[name] = {};

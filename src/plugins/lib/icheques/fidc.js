@@ -657,7 +657,7 @@ module.exports = (controller) => {
                     for (let check of storage) {
                         check.name = check.cpf || check.cnpj;
                         check.protesto = check.protesto || 0;
-                        check.ccf = check.ccf || 0;
+                        check.ccf = controller.confs.ccf ? (check.ccf || 0) : "Não Informado";
                         check.expire = moment(check.expire, "YYYYMMDD").format("DD/MM/YYYY");
                         check.number = new CMC7Parser(check.cmc).number;
                         sum += check.ammount;

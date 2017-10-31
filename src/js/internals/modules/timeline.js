@@ -44,22 +44,22 @@ var Timeline = function() {
             (function() {
                 var [icon, label, action] = actions[idx];
 
+                var id = require('node-uuid').v4(),
+                    item = $("<li />").append($("<i />").addClass("fa " + icon)).click(function(e) {
+                        e.preventDefault();
+                        action(obj);
+                    }).attr({
+                        id: id
+                    }),
+                    materialTip = $('<div />').addClass('mdl-tooltip').attr("for", id).text(label);
+
+                item.append(materialTip);
+                obj.actions.append(item);
+
                 var componentVisible = setInterval(function() {
-                    if (!obj.actions.is(':visible')) {
+                    if (!item.is(':visible')) {
                         return;
                     }
-
-                    var id = require('node-uuid').v4(),
-                        item = $("<li />").append($("<i />").addClass("fa " + icon)).click(function(e) {
-                            e.preventDefault();
-                            action(obj);
-                        }).attr({
-                            id: id
-                        }),
-                        materialTip = $('<div />').addClass('mdl-tooltip').attr("for", id).text(label);
-
-                    item.append(materialTip);
-                    obj.actions.append(item);
 
                     componentHandler.upgradeElement(materialTip.get(0), "MaterialTooltip");
                     clearInterval(componentVisible);
