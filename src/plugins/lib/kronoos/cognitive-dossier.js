@@ -130,12 +130,12 @@ export class CognitiveDossier {
       let cargo;
       let salario;
       let tempo;
-
+      debugger;
       if(textoEmpregadores[1]) {
         let empregos = textoEmpregadores[1].split("Não Constam ApontamentosPesquisa")[0].split("anos.");
 
         if(empregos.length > 1) {
-          ultimoEmprego = empregos[1].split("-");
+          ultimoEmprego = empregos[empregos.length -2].split("-");
           cargo = ultimoEmprego[1].split("De");
         }else{
           ultimoEmprego = empregos[0].split("-");

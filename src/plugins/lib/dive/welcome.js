@@ -2,6 +2,7 @@ import _ from 'underscore';
 import { CPF, CNPJ } from 'cpf_cnpj';
 import sprintf from 'sprintf';
 import arrayToSentence from 'array-to-sentence';
+import VMasker from 'vanilla-masker';
 
 module.exports = (controller) => {
 
@@ -204,7 +205,8 @@ module.exports = (controller) => {
             retornoSocios += `tendo como sócio ${entity.reduce.socios[0].name} - CPF/MF ${entity.reduce.socios[0].cpf}`;
           } else {
             for (let socio of entity.reduce.socios) {
-              socios.push(`${socio.name} - CPF/MF ${socio.cpf}`);
+              let cpfFormatado = VMasker.toPattern(socio.cpf, '999.999.999-99');
+              socios.push(`${socio.name} - CPF/MF ${cpfFormatado}`);
             }
             let stringFinalSocios = arrayToSentence(socios, {lastSeparator: ' e '});
             retornoSocios += `tendo como sócios ${stringFinalSocios}`;
@@ -222,7 +224,7 @@ module.exports = (controller) => {
             let temEmpresa = stringTemEmpresaAcompanhamento();
             let rfb = entity.reduce.incomeTaxReturnLastYear.message.replace(".", "");
 
-            retornoParagrafo = ` O target reside em ${enderecoCompleto} e ${temEmpresa}. ${rfb} e ${temProtesto}.`
+            retornoParagrafo = ` O target reside em ${enderecoCompleto}, conforme sua última atualização cadastral e ${temEmpresa}. ${rfb} e ${temProtesto}.`
 
             if(entity.reduce.recuperaPF.IDADE_CLUSTER !== "") {
               retornoParagrafo += ` O target é ${entity.reduce.recuperaPF.IDADE_CLUSTER} e possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA}, bem como um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO}.`
@@ -231,7 +233,7 @@ module.exports = (controller) => {
             }
           } else {
             let socios = stringSocios();
-            retornoParagrafo += `A empresa reside em ${enderecoCompleto} ${socios}. Está ${entity.reduce["rfb-status"]}, exerce atividade de número ${entity.reduce.atividade} e há ${entity.reduce.protestos} protestos associados a esse CNPJ.`;
+            retornoParagrafo += `A empresa localiza-se em ${enderecoCompleto} ${socios}. Está ${entity.reduce["rfb-status"]}, exerce atividade de número ${entity.reduce.atividade} e há ${entity.reduce.protestos} protestos associados a esse CNPJ.`;
           }
 
           return retornoParagrafo;
