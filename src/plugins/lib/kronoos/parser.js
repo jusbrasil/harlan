@@ -491,6 +491,20 @@ export class KronoosParse {
         return this._notFoundList(...args);
     }
 
+    searchDtec() {
+
+        this.serverCall("SELECT FROM 'DTEC'.'SEARCH'", {
+            dataType: "json",
+            data: {documento: this.cpf_cnpj},
+            success: data => {
+                let klist = this.firstElement().captionTable("Mídias");
+                for (let appointMent of data.result) {
+                    klist(`<br />${appointMent.titulo || 'Não há'}<br /><br />${appointMent.citacao || 'Não há'}<br /><br /><small>Data da notícia: ${appointMent.dataNoticia || 'Não há'}, Fonte da Notícia: ${appointMent.fonteNoticia || 'Não há'}, <a href="${appointMent.linkNoticia || 'Não há'}" target="_blank">Link da Notícia</a></small>`);
+                }
+            }
+        })
+    }
+
     searchCertidaoTRFPDF() {
         _.each([
             [
@@ -1007,6 +1021,7 @@ export class KronoosParse {
         this.searchMTE();
         this.searchIbama();
         this.searchDAU();
+        this.searchDtec();
         this.searchBovespa();
         if (this.cnpj)
             this.searchCertidao();
