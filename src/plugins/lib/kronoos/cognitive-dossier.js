@@ -130,7 +130,6 @@ export class CognitiveDossier {
       let cargo;
       let salario;
       let tempo;
-      debugger;
       if(textoEmpregadores[1]) {
         let empregos = textoEmpregadores[1].split("Não Constam ApontamentosPesquisa")[0].split("anos.");
 

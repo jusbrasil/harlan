@@ -233,7 +233,7 @@ module.exports = (controller) => {
             }
           } else {
             let socios = stringSocios();
-            retornoParagrafo += `A empresa localiza-se em ${enderecoCompleto} ${socios}. Está ${entity.reduce["rfb-status"]}, exerce atividade de número ${entity.reduce.atividade} e há ${entity.reduce.protestos} protestos associados a esse CNPJ.`;
+            retornoParagrafo += `A empresa fica localizada em ${enderecoCompleto} ${socios}. Está ${entity.reduce["rfb-status"]}, exerce atividade de número ${entity.reduce.atividade} e há ${entity.reduce.protestos} protestos associados a esse CNPJ.`;
           }
 
           return retornoParagrafo;
