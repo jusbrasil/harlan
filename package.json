@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "apk-signer": "^0.1.0",
+    "array-to-sentence": "^1.1.0",
     "async": "^2.5.0",
     "babel-core": "^6.26.0",
     "babel-plugin-syntax-async-functions": "^7.0.0-beta.0",

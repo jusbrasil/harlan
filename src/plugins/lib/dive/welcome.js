@@ -1,6 +1,8 @@
 import _ from 'underscore';
 import { CPF, CNPJ } from 'cpf_cnpj';
 import sprintf from 'sprintf';
+import arrayToSentence from 'array-to-sentence';
+import VMasker from 'vanilla-masker';
 
 module.exports = (controller) => {
 
@@ -164,12 +166,81 @@ module.exports = (controller) => {
                 }
             });
 
-
     });
 
     controller.registerCall("dive::entity::timeline", (timeline, entity) => {
+        function stringTemEmpresaAcompanhamento() {
+          let temEmpresa = entity.reduce.conclusions.hasCompany;
+          if(temEmpresa) {
+            if(entity.reduce.conclusions.totalCompany === 1) {
+                return `possui relação societária com 1 CNPJ`;
+            }
+            return `possui relações societárias com ${entity.reduce.conclusions.totalCompany} CNPJ`;
+          } else {
+            return `não possui relação societária`;
+          }
+        }
+
+        function stringProtestosAcompanhamento() {
+          let temProtestos = entity.reduce.protestos;
+          if(temProtestos >= 1) {
+            if(temProtestos === 1) {
+              return `há 1 protesto associado a esse CPF/MF`;
+            }
+            return `há ${temProtestos} protestos associados a esse CPF/MF`;
+          } else {
+            return `não há protestos associados a esse CPF/MF`;
+          }
+        }
+
+        function gerarEndereco() {
+          let endereco = entity.reduce.addresses[entity.reduce.addresses.length -1];
+          return `${endereco.kind || 'não informado'} ${endereco.address || 'não informado'}, ${endereco.number || 'não informado'} - ${endereco.neighborhood || 'não informado'}, ${endereco.city || 'não informado'} - ${endereco.state || 'não informado'}`;
+        }
+
+        function stringSocios() {
+          let retornoSocios = "";
+          let socios = [];
+          if(entity.reduce.socios.length === 1) {
+            retornoSocios += `tendo como sócio ${entity.reduce.socios[0].name} - CPF/MF ${entity.reduce.socios[0].cpf}`;
+          } else {
+            for (let socio of entity.reduce.socios) {
+              let cpfFormatado = VMasker.toPattern(socio.cpf, '999.999.999-99');
+              socios.push(`${socio.name} - CPF/MF ${cpfFormatado}`);
+            }
+            let stringFinalSocios = arrayToSentence(socios, {lastSeparator: ' e '});
+            retornoSocios += `tendo como sócios ${stringFinalSocios}`;
+          }
+          return retornoSocios;
+        }
+
+        function paragrafoDoAcompanhamento() {
+
+          let retornoParagrafo = "";
+          let enderecoCompleto = gerarEndereco();
+          let temProtesto = stringProtestosAcompanhamento();
+
+          if(entity.reduce.incomeTaxReturnLastYear) {
+            let temEmpresa = stringTemEmpresaAcompanhamento();
+            let rfb = entity.reduce.incomeTaxReturnLastYear.message.replace(".", "");
+
+            retornoParagrafo = ` O target reside em ${enderecoCompleto}, conforme sua última atualização cadastral e ${temEmpresa}. ${rfb} e ${temProtesto}.`
+
+            if(entity.reduce.recuperaPF.IDADE_CLUSTER !== "") {
+              retornoParagrafo += ` O target é ${entity.reduce.recuperaPF.IDADE_CLUSTER} e possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA}, bem como um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO}.`
+            } else {
+              retornoParagrafo += ` O target possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA} e um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO}.`
+            }
+          } else {
+            let socios = stringSocios();
+            retornoParagrafo += `A empresa localiza-se em ${enderecoCompleto} ${socios}. Está ${entity.reduce["rfb-status"]}, exerce atividade de número ${entity.reduce.atividade} e há ${entity.reduce.protestos} protestos associados a esse CNPJ.`;
+          }
+
+          return retornoParagrafo;
+
+        }
         timeline.add(entity.created, `Acompanhamento ${entity.reduce.name ? 'para ' + entity.reduce.name : ''}, documento ${(CPF.isValid(entity.label) ? CPF : CNPJ).format(entity.label)}.`,
-            'O documento está sendo acompanhado e qualquer novo evento será notificado.', generateActions(null, entity)).attr("data-entity", entity._id);
+            paragrafoDoAcompanhamento(), generateActions(null, entity)).attr("data-entity", entity._id);
     });
 
     controller.registerTrigger(["plugin::authenticated", "authentication::authenticated"], "dive::events", function(arg, cb) {
