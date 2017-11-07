@@ -250,7 +250,7 @@ var KronoosElement = function(title, subtitle, sidenote) {
         addItem.element = table;
         return addItem;
     };
-
+    
     this.networkOptions = {
         clickToUse: true,
         physics: {

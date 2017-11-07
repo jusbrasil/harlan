@@ -497,9 +497,14 @@ export class KronoosParse {
             dataType: "json",
             data: {documento: this.cpf_cnpj},
             success: data => {
-                let klist = this.firstElement().captionTable("Mídias");
-                for (let appointMent of data.result) {
-                    klist(`<br />${appointMent.titulo || 'Não há'}<br /><br />${appointMent.citacao || 'Não há'}<br /><br /><small>Data da notícia: ${appointMent.dataNoticia || 'Não há'}, Fonte da Notícia: ${appointMent.fonteNoticia || 'Não há'}, <a href="${appointMent.linkNoticia || 'Não há'}" target="_blank">Link da Notícia</a></small>`);
+                if (data.result.length !== 0) {
+                  for (let appointMent of data.result) {
+                    let kelement = this.kronoosElement("Presença do target nas mídias", `${appointMent.titulo}`, `${appointMent.citacao}`);
+                    kelement.table("Fonte da Notícia", "Link da Notícia")(appointMent.fonteNoticia || null, $("<a />").text("Clique para acessar a fonte").attr({target: '_blank', href: appointMent.linkNoticia}) || null);
+
+                    kelement.behaviourAccurate(true);
+                    this.append(kelement.element());
+                  }
                 }
             }
         })
