@@ -215,7 +215,6 @@ module.exports = (controller) => {
         }
 
         function paragrafoDoAcompanhamento() {
-
           let retornoParagrafo = "";
           let enderecoCompleto = gerarEndereco();
           let temProtesto = stringProtestosAcompanhamento();
@@ -227,9 +226,9 @@ module.exports = (controller) => {
             retornoParagrafo = ` O target reside em ${enderecoCompleto}, conforme sua última atualização cadastral e ${temEmpresa}. ${rfb} e ${temProtesto}.`
 
             if(entity.reduce.recuperaPF.IDADE_CLUSTER !== "") {
-              retornoParagrafo += ` O target é ${entity.reduce.recuperaPF.IDADE_CLUSTER} e possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA}, bem como um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO}.`
+              retornoParagrafo += ` O target é ${entity.reduce.recuperaPF.IDADE_CLUSTER} e possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA}, bem como um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO || 'não informado'}.`
             } else {
-              retornoParagrafo += ` O target possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA} e um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO}.`
+              retornoParagrafo += ` O target possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA} e um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO || 'não informado'}.`
             }
           } else {
             let socios = stringSocios();

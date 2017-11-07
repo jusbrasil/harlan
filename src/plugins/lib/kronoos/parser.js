@@ -499,9 +499,9 @@ export class KronoosParse {
             success: data => {
                 if (data.result.length !== 0) {
                   for (let appointMent of data.result) {
-                    let kelement = this.kronoosElement("Presença do target nas mídias", `${appointMent.titulo}`, `${appointMent.citacao}`);
-                    kelement.table("Fonte da Notícia", "Link da Notícia")(appointMent.fonteNoticia || null, $("<a />").text("Clique para acessar a fonte").attr({target: '_blank', href: appointMent.linkNoticia}) || null);
-
+                    let kelement = this.kronoosElement("Presença do target nas mídias", null, appointMent.titulo);
+                    kelement.table("Data da Notícia", "Fonte da Notícia", "Link da Notícia")(appointMent.dataNoticia || 'Não há', appointMent.fonteNoticia || 'Não há', $("<a />").text("Clique para acessar a fonte").attr({target: '_blank', href: appointMent.linkNoticia}) || 'Não há');
+                    kelement.paragraph(appointMent.citacao);
                     kelement.behaviourAccurate(true);
                     this.append(kelement.element());
                   }
@@ -1009,37 +1009,37 @@ export class KronoosParse {
     }
 
     searchAll() {
-        this.searchPepCoaf();
-        this.searchSerasa();
-        this.searchCrawler();
-        this.jusSearch();
-        // this.searchTRF1();
-        this.searchComprot();
-        this.searchTjsp();
-        this.searchTjspDocument();
-        this.searchCARFDocumento();
-        this.searchCertidaoTRFPDF();
-        this.searchMPT();
-        this.searchTribunais();
-        this.searchMandados();
-        this.searchCNDT();
-        this.searchMTE();
-        this.searchIbama();
-        this.searchDAU();
+        // this.searchPepCoaf();
+        // this.searchSerasa();
+        // this.searchCrawler();
+        // this.jusSearch();
+        // // this.searchTRF1();
+        // this.searchComprot();
+        // this.searchTjsp();
+        // this.searchTjspDocument();
+        // this.searchCARFDocumento();
+        // this.searchCertidaoTRFPDF();
+        // this.searchMPT();
+        // this.searchTribunais();
+        // this.searchMandados();
+        // this.searchCNDT();
+        // this.searchMTE();
+        // this.searchIbama();
+        // this.searchDAU();
         this.searchDtec();
-        this.searchBovespa();
-        if (this.cnpj)
-            this.searchCertidao();
-
-        // if (this.cnpj) this.searchTJSPCertidao();
-        this.searchReporterBrasil();
-        this.searchCepim();
-        this.searchExpulsoes();
-        this.searchCnep();
-        this.searchCeis();
-        this.searchCCF();
-        this.searchProtestos();
-        this.searchCNJImprobidade();
+        // this.searchBovespa();
+        // if (this.cnpj)
+        //     this.searchCertidao();
+        //
+        // // if (this.cnpj) this.searchTJSPCertidao();
+        // this.searchReporterBrasil();
+        // this.searchCepim();
+        // this.searchExpulsoes();
+        // this.searchCnep();
+        // this.searchCeis();
+        // this.searchCCF();
+        // this.searchProtestos();
+        // this.searchCNJImprobidade();
 
         if (!this.ccbuscaData) {
             this.serverCall("SELECT FROM 'CCBUSCA'.'CONSULTA'", this.loader("fa-bank", `Acessando bureau de crédito para ${this.name || ""} ${this.cpf_cnpj}.`, {
