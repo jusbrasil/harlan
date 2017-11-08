@@ -223,7 +223,7 @@ module.exports = (controller) => {
             let temEmpresa = stringTemEmpresaAcompanhamento();
             let rfb = entity.reduce.incomeTaxReturnLastYear.message.replace(".", "");
 
-            retornoParagrafo = ` O target reside em ${enderecoCompleto}, conforme sua última atualização cadastral e ${temEmpresa}. ${rfb} e ${temProtesto}.`
+            retornoParagrafo = ` O target reside provavelmente em ${enderecoCompleto}, conforme sua última atualização cadastral e ${temEmpresa}. ${rfb} e ${temProtesto}.`
 
             if(entity.reduce.recuperaPF.IDADE_CLUSTER !== "") {
               retornoParagrafo += ` O target é ${entity.reduce.recuperaPF.IDADE_CLUSTER} e possui uma renda ${entity.reduce.recuperaPF.RENDA_CLUSTER} de aproximadamente R$${entity.reduce.recuperaPF.RENDA}, bem como um score de risco ${entity.reduce.recuperaPF.SCORE_RISCO || 'não informado'}.`
