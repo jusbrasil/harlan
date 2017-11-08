@@ -152,9 +152,67 @@ module.exports = function(controller) {
             report.newAction("fa-info-circle", () => window.open("https://www.kronoos.com"), "Sobre o Kronoos");
         }
 
-        // report.newAction("fa-filter", () => {
-        //
-        // }, "Filtrar Dossiês");
+        report.newAction("fa-filter", () => {
+          var modal = controller.call("modal");
+          modal.title("Filtro de Acompanhamentos");
+          modal.subtitle("Escolha o filtro");
+
+          var form = modal.createForm();
+          let stringBuscada = form.addInput("stringBuscada", "text", "Palavra-chave para a pesquisa");
+          form.addSubmit(null, "Mostrar todos os acompanhamentos").click((e) => {
+            e.preventDefault();
+            removerTodosOsAcompanhamentos();
+            filtrar("todos", null);
+            modal.close();
+          });
+          form.addSubmit(null, "Filtrar por observação").click((e) => {
+            e.preventDefault();
+            filtrar("observation", stringBuscada);
+            modal.close();
+          });
+          form.addSubmit(null, "Filtrar por grupo").click((e) => {
+            e.preventDefault();
+            filtrar("group", stringBuscada);
+            modal.close();
+          });
+          form.addSubmit(null, "Sair").click((e) => {
+            e.preventDefault();
+            modal.close();
+          });
+        }, "Filtrar Dossiês");
+
+        function filtrar(tipoFiltro, palavraChave) {
+          controller.server.call("SELECT FROM 'DOSSIERKRONOOS'.'CAPTURE'", {
+            dataType: "json",
+            success: (data) => {
+              _.values(data).find((x) => {
+                  if(tipoFiltro === "todos") {
+                    controller.trigger("serverCommunication::websocket::dossierNew", x);
+                  }
+                  if(tipoFiltro === "observation") {
+                    if(x.observation === palavraChave[0].value) {
+                      dossiers[x.documento] = parseDossier(x);
+                      controller.trigger("serverCommunication::websocket::dossierDelete", x);
+                    } else {
+                      controller.trigger("serverCommunication::websocket::dossierDelete", x);
+                    }
+                  }
+                  if(tipoFiltro === "group") {
+                    if(x.group === palavraChave[0].value) {
+                      dossiers[x.documento] = parseDossier(x);
+                      controller.trigger("serverCommunication::websocket::dossierDelete", x);
+                    } else {
+                      controller.trigger("serverCommunication::websocket::dossierDelete", x);
+                    }
+                  }
+              });
+            }
+          });
+        };
+
+        function removerTodosOsAcompanhamentos() {
+          $('div.app-content > div:first-child > div .content:last-child > ul').empty();
+        };
 
         report.gamification("kronoos");
         $(".app-content").append(report.element());
