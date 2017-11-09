@@ -5,6 +5,7 @@ import VMasker from 'vanilla-masker';
 const RISK = ['BAIXISSIMO RISCO', 'BAIXO', 'MEDIO', 'ALTO', 'ALTISSIMO'];
 let qtdEnd = 0;
 let ehPep = false;
+let ehEmpresa = false;
 let arrayEnderecos = [];
 
 export class CognitiveDossier {
@@ -62,10 +63,16 @@ export class CognitiveDossier {
     }
 
     generateFirstPhrase() {
+      let textTipoPessoa = "";
       this.getFirstPhrase().push(this.parser.name);
       this.getFirstPhrase().push((moment().years()) - (moment(this.parser.nascimento, "DD/MM/YYYY").years()) + ' anos');
-      this.getFirstPhrase().push(`é pessoa física inscrita no CPF/MF ${this.parser.cpf_cnpj}`);
-
+      if(this.parser.cnpj !== 0) {
+        ehEmpresa = true;
+        textTipoPessoa = ` é pessoa jurídica inscrita no CNPJ ${this.parser.cpf_cnpj}`;
+      } else {
+        textTipoPessoa = `é pessoa física inscrita no CPF/MF ${this.parser.cpf_cnpj}`;
+      }
+      this.getFirstPhrase().push(textTipoPessoa);
       this.empregador();
       return _.values(this.phrase).map(x => arrayToSentence(x, {lastSeparator: ', '}));
 
@@ -89,7 +96,7 @@ export class CognitiveDossier {
     }
 
     generateThirdPhrase() {
-
+      let textoEnd = "";
       let xml = this.parser.ccbuscaData;
       let qtdEmpresas = $("BPQL > body > parsocietaria > empresa", xml);
       if(qtdEmpresas.length > 0) {
@@ -100,7 +107,12 @@ export class CognitiveDossier {
               continue;
           this[this.parsers[response.query]](response);
       }
-      this.getFirstPhrase().push(` reside ou residiu em ${arrayEnderecos[qtdEnd -1]}`);
+      if (ehEmpresa) {
+        textoEnd = ` se localiza em ${arrayEnderecos[qtdEnd -1]}`;
+      } else {
+        textoEnd = ` reside ou residiu em ${arrayEnderecos[qtdEnd -1]}`;
+      }
+      this.getFirstPhrase().push(textoEnd);
       return _.values(this.phrase).map(x => arrayToSentence(x, {lastSeparator: ' e '})).join(".");
 
     }
