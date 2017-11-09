@@ -1,6 +1,9 @@
 <div class="actions">
     <div class="container">
         <div class="content user">
+            <span id="telefone">(11) 3495-2120</span>
+        </div>
+        <div class="content user">
             <span id="logged-user">bipbop</span>
         </div>
         <div class="content credits action-credits">
