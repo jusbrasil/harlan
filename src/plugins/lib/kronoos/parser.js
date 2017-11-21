@@ -860,19 +860,18 @@ export class KronoosParse {
     }
 
     searchAll() {
-        this.searchPepCoaf();
-        this.searchCrawler();
         if (this.cnpj) this.searchCertidao();
-        this.searchReporterBrasil();
-        this.searchCepim();
+
         this.searchExpulsoes();
         this.searchCnep();
         this.searchCeis();
         this.searchBovespa();
-        this.searchDtec();
 
-        this.buy("Pesquisar informações jurídicas dos Tribunais de Justiça.", 700, () => this.searchJuridic());
-        this.buy("Abrir informações de crédito - Cheques sem Fundo, protestos e Serasa.", 700, () => this.searchBureau());
+        this.buy("Processos em tribunais estaduais e federais em todo o Brasil.", 699, () => this.searchJuridic());
+        this.buy("Abrir informações de crédito - Cheques sem Fundo (CCF), protestos e Serasa.", 599, () => this.searchBureau());
+        this.buy("Responsabilidade socioambiental.", 224, () => this.searchResponsabilidadeSocioambiental());
+        this.buy("Pessoa Politicamente Exposta (PEP), influência política e doações de campanha.", 219, () => this.searchPEP());
+        this.buy("Consulta de análise reputacional e compliance.", 249, () => this.searchCompliance());
 
         if (!this.ccbuscaData) {
             this.serverCall("SELECT FROM 'CCBUSCA'.'CONSULTA'",
@@ -902,24 +901,44 @@ export class KronoosParse {
         this.searchCARFDocumento();
         this.searchCertidaoPDF();
         this.searchCRF();
-        this.searchMPT();
         this.searchTribunais();
         this.searchMandados();
         this.searchCNDT();
-        this.searchMTE();
-        this.searchIbama();
         if (this.cnpj) this.searchTJSPCertidao();
         this.searchCNJImprobidade();
+    }
+
+    searchResponsabilidadeSocioambiental() {
+      this.searchIbama();
+      this.searchMPT();
+      this.searchMTE();
+      this.searchReporterBrasil();
+    }
+
+    searchCompliance() {
+      this.searchCrawler();
+      this.searchDtec();
+      this.searchDAU();
+      this.searchComprot();
+      this.searchCertidaoPDF([["pgesp", "SELECT FROM 'CERTIDOES'.'PGESP'",
+          'PGESP', 'Procuradoria Geral do Estado - Dívida Ativa', null]]);
+      this.searchInterpol();
+      //this.searchCiaWorldLeaders();
+      //this.searchFatca();
+      //this.searchPostosCassados();
+      this.searchCepim();
     }
 
     searchBureau() {
         this.searchCCF();
         this.searchProtestos();
         this.searchSerasa();
-        this.searchComprot();
-        this.searchDAU();
-        this.searchCertidaoPDF([["pgesp", "SELECT FROM 'CERTIDOES'.'PGESP'",
-            'PGESP', 'Procuradoria Geral do Estado - Dívida Ativa', null]]);
+    }
+
+    searchPEP() {
+        this.searchPepCoaf();
+        this.searchPep();
+        //this.searchDoacoesCampanha();
     }
 
     buy(title, ammount, action) {
@@ -929,7 +948,7 @@ export class KronoosParse {
         }
 
         if (!this.adicionalInformation) {
-            this.adicionalInformation = this.firstElement().captionTable("Informações Adicionais");
+            this.adicionalInformation = this.firstElement().captionTable("Pesquise por dados específicos");
             this.adicionalInformation.element.addClass("kronoos-buy");
         }
 
