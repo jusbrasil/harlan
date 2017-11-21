@@ -10,10 +10,14 @@ module.exports = function (controller) {
                     return;
                 }
 
-                $.getScript("/js/kronoos.js", function () {
+                controller.registerTrigger("serverCommunication::websocket::authentication::end", "canUseKronoos", (args, callback) => {
                     callback();
+                    if (!/federalinvest/i.test(controller.confs.user.commercialReference)) {
+                        $.getScript("/js/kronoos.js", () => setTimeout(() => controller.trigger("kronoos::init", args), 1000));
+                    }
                 });
-                
+
+                callback();
             });
         });
     }

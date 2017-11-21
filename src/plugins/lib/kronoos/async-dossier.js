@@ -112,7 +112,7 @@ module.exports = function(controller) {
         return tlElement;
     }
 
-    controller.registerTrigger("authentication::authenticated", "kronoos::async", (arg, cb) => {
+    controller.registerTrigger(["authentication::authenticated", "kronoos::init"], "kronoos::async", (arg, cb) => {
         cb();
         if (report) report.close();
         report = controller.call("report",
@@ -184,4 +184,4 @@ module.exports = function(controller) {
         }
     });
 
-}
+};

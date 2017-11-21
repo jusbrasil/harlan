@@ -335,7 +335,7 @@ module.exports = function(controller) {
         });
     });
 
-    controller.registerTrigger("authentication::authenticated", "kronoos::autosearch", (i, cb) => {
+    controller.registerTrigger(["authentication::authenticated", "kronoos::init"], "kronoos::autosearch", (i, cb) => {
         cb();
         if (controller.query.k) {
             INPUT.val((CPF.isValid(controller.query.k) ? CPF : CNPJ).format(controller.query.k));

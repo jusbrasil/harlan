@@ -174,7 +174,11 @@ module.exports = function(controller) {
             })));
     });
 
-    var companyDraw = (list, data) => {
+    var companyDraw = (list, data, isAdmin, modal) => {
+
+        var icons = [...controller.confs.subaccount.icons];
+        if (isAdmin) icons.push("fa-edit");
+
         list.empty();
         $("BPQL > body > company", data).each(function(idx, item) {
             var status = $("status", item).text() === "1",
@@ -182,10 +186,13 @@ module.exports = function(controller) {
                 cnpj = $("cnpj", item).text(),
                 username = $("username", item).text(),
                 apiKey = $("apiKey", item).text();
+
             var iconStatus = function() {
                 return (status ? "fa-check" : "fa-times") + " block";
             };
-            var acc = list.add([iconStatus()].concat(controller.confs.subaccount.icons), [cnpj ? CNPJ.format(cnpj) : (cpf ? CPF.format(cpf) : "Sem Documento"), username]);
+
+
+            var acc = list.add([iconStatus()].concat(icons), [cnpj ? CNPJ.format(cnpj) : (cpf ? CPF.format(cpf) : "Sem Documento"), username]);
             acc.find(".fa-key").click(e => {
                 e.preventDefault();
                 controller.call("alert", {
@@ -195,21 +202,20 @@ module.exports = function(controller) {
                     paragraph: `A chave de API <strong class="apiKey">${apiKey}</strong> do usuário ${username} deve ser manipulada com segurança absoluta, não devendo ser repassada a terceiros. Tenha certeza que você sabe o que está fazendo.`
                 });
             });
-            acc.find(".fa-cogs").click(e => {
+            acc.find(".fa-cogs").click(controller.click("subaccount::limit", apiKey));
+            acc.find(".fa-edit").click((e) => {
                 e.preventDefault();
-                controller.call("subaccount::limit", apiKey);
+                modal.close();
+                controller.call("admin::viewCompany", item);
             });
-            acc.find(".fa-folder-open").click(e => {
-                e.preventDefault();
-                controller.call("confirm", {
-                    icon: "powerUp",
-                    title: "Você deseja se conectar a essa subconta?",
-                    subtitle: "Você será redirecionado para uma conta derivada.",
-                    paragraph: "As contas derivadas podem ser administradas por você, a qualquer momento você pode as acessar e editar."
-                }, () => {
-                    window.open(`${document.location.protocol}\/\/${document.location.host}?apiKey=${encodeURIComponent(apiKey)}`);
-                });
-            });
+            acc.find(".fa-folder-open").click(controller.click("confirm", {
+                icon: "powerUp",
+                title: "Você deseja se conectar a essa subconta?",
+                subtitle: "Você será redirecionado para uma conta derivada.",
+                paragraph: "As contas derivadas podem ser administradas por você, a qualquer momento você pode as acessar e editar."
+            }, () => {
+                window.open(`${document.location.protocol}\/\/${document.location.host}?apiKey=${encodeURIComponent(apiKey)}`);
+            }));
             acc.find(".block").click(e => {
                 e.preventDefault();
                 var unregisterLoader = $.bipbopLoader.register();
@@ -229,7 +235,7 @@ module.exports = function(controller) {
         });
     };
 
-    var updateList = (modal, pageActions, results, pagination, list, autoCreate = false, limit = 5, skip = 0, text = null, callback = null, bipbopLoader = true) => {
+    var updateList = (modal, pageActions, results, pagination, list, autoCreate = false, limit = 5, skip = 0, text = null, callback = null, bipbopLoader = true, companyNode = null, username = null, section = null) => {
         if (!text || /^\s*$/.test(text)) {
             text = undefined;
         }
@@ -240,7 +246,8 @@ module.exports = function(controller) {
                 data: {
                     username: text,
                     skip: skip,
-                    limit: limit
+                    limit: limit,
+                    owner: username
                 },
                 success: data => {
                     var queryResults = parseInt($("BPQL > body count", data).text()),
@@ -259,7 +266,7 @@ module.exports = function(controller) {
                     results.text(`Página ${currentPage} de ${pages}`);
                     pagination.text(`Resultados ${queryResults}`);
 
-                    companyDraw(list, data);
+                    companyDraw(list, data, companyNode ? true : false, modal);
                     if (callback) {
                         callback();
                     }
@@ -267,7 +274,7 @@ module.exports = function(controller) {
             }, bipbopLoader));
     };
 
-    controller.registerCall("subaccount::list", function() {
+    controller.registerCall("subaccount::list", function(companyNode, username, section) {
         var modal = controller.call("modal");
         modal.title("Gestão de Subcontas");
         modal.subtitle("Crie e Bloqueie Subchaves");
@@ -297,20 +304,20 @@ module.exports = function(controller) {
         var pageActions = {
             next: actions.add("Próxima Página").click(() => {
                 skip += 5;
-                updateList(modal, pageActions, results, pagination, list, false, 5, skip, text);
+                updateList(modal, pageActions, results, pagination, list, false, 5, skip, text, null, true, companyNode, username, section);
             }).hide(),
 
             back: actions.add("Página Anterior").click(() => {
                 skip -= 5;
-                updateList(modal, pageActions, results, pagination, list, false, 5, skip, text);
+                updateList(modal, pageActions, results, pagination, list, false, 5, skip, text, null, true, companyNode, username, section);
             }).hide()
         };
 
-        updateList(modal, pageActions, results, pagination, list, true, 5, skip, text);
+        updateList(modal, pageActions, results, pagination, list, true, 5, skip, text, null, false, companyNode, username, section);
         controller.call("instantSearch", search, (query, autocomplete, callback) => {
             text = query;
             skip = 0;
-            updateList(modal, pageActions, results, pagination, list, false, 5, skip, text, callback, false);
+            updateList(modal, pageActions, results, pagination, list, false, 5, skip, text, callback, true, companyNode, username, section);
         });
     });
 
