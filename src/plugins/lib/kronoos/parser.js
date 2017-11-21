@@ -866,10 +866,11 @@ export class KronoosParse {
         this.searchCnep();
         this.searchCeis();
         this.searchBovespa();
+        // this.searchFinderConsulta();
 
         this.buy("Processos em tribunais estaduais e federais em todo o Brasil.", 699, () => this.searchJuridic());
         this.buy("Abrir informações de crédito - Cheques sem Fundo (CCF), protestos e Serasa.", 599, () => this.searchBureau());
-        this.buy("Responsabilidade socioambiental.", 224, () => this.searchResponsabilidadeSocioambiental());
+        this.buy("Responsabilidade socioambiental e trabalhista.", 224, () => this.searchResponsabilidadeSocioambiental());
         this.buy("Pessoa Politicamente Exposta (PEP), influência política e doações de campanha.", 219, () => this.searchPEP());
         this.buy("Consulta de análise reputacional e compliance.", 249, () => this.searchCompliance());
 
@@ -892,7 +893,6 @@ export class KronoosParse {
 
     }
 
-    /* @TODO Carol, definir com o Alexandre como será realizada a cobrança e qual fonte pesquisa ou não. */
     searchJuridic() {
         this.jusSearch();
         // this.searchTRF1();
