@@ -866,13 +866,10 @@ export class KronoosParse {
         this.searchCnep();
         this.searchCeis();
         this.searchBovespa();
-        // this.searchFinderConsulta();
 
-        this.buy("Processos em tribunais estaduais e federais em todo o Brasil.", 699, () => this.searchJuridic());
-        this.buy("Abrir informações de crédito - Cheques sem Fundo (CCF), protestos e Serasa.", 599, () => this.searchBureau());
-        this.buy("Responsabilidade socioambiental e trabalhista.", 224, () => this.searchResponsabilidadeSocioambiental());
-        this.buy("Pessoa Politicamente Exposta (PEP), influência política e doações de campanha.", 219, () => this.searchPEP());
-        this.buy("Consulta de análise reputacional e compliance.", 249, () => this.searchCompliance());
+        this.buy("Processos em tribunais estaduais e federais em todo o Brasil.", 660, () => this.searchJuridic());
+        this.buy("Abrir informações de crédito - Cheques sem Fundo (CCF), protestos e Serasa.", 660, () => this.searchBureau());
+        this.buy("Compliance (impacto social, transparência e conformidade com leis/tratados internacionais), Exposição Política (PEP, corrupção, doações de campanha), Responsabilidade socioambiental e trabalhista (IBAMA, listas de trabalho análogo à escravidão, processos trabalhistas).", 660, () => this.searchCompliance());
 
         if (!this.ccbuscaData) {
             this.serverCall("SELECT FROM 'CCBUSCA'.'CONSULTA'",
@@ -908,13 +905,6 @@ export class KronoosParse {
         this.searchCNJImprobidade();
     }
 
-    searchResponsabilidadeSocioambiental() {
-      this.searchIbama();
-      this.searchMPT();
-      this.searchMTE();
-      this.searchReporterBrasil();
-    }
-
     searchCompliance() {
       this.searchCrawler();
       this.searchDtec();
@@ -922,23 +912,24 @@ export class KronoosParse {
       this.searchComprot();
       this.searchCertidaoPDF([["pgesp", "SELECT FROM 'CERTIDOES'.'PGESP'",
           'PGESP', 'Procuradoria Geral do Estado - Dívida Ativa', null]]);
-      this.searchInterpol();
+      // this.searchInterpol();
       //this.searchCiaWorldLeaders();
       //this.searchFatca();
       //this.searchPostosCassados();
       this.searchCepim();
+      this.searchIbama();
+      this.searchMPT();
+      this.searchMTE();
+      this.searchReporterBrasil();
+      this.searchPepCoaf();
+      this.searchPep();
+      //this.searchDoacoesCampanha();
     }
 
     searchBureau() {
         this.searchCCF();
         this.searchProtestos();
         this.searchSerasa();
-    }
-
-    searchPEP() {
-        this.searchPepCoaf();
-        this.searchPep();
-        //this.searchDoacoesCampanha();
     }
 
     buy(title, ammount, action) {
