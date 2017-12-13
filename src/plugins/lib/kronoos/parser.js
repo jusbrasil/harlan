@@ -1511,12 +1511,7 @@ export class KronoosParse {
                 data: name || this.name
             },
             bipbopError: (type, message, code, push, xml) => !push && this.errorHappen(`Indisponibilidade de conexão com a fonte de dados - JUCESP`),
-            success: data => {
-                $("nire", data).each((i, e) => {
-                    this.searchJucespNire($(e).text());
-                });
-            }
-        }));
+            success: data => $("node > node", data).filter((im, n) => this.compareNames($("name", n).text(), this.name)).each((im, n) => $("nire", n).each((im, n) => this.searchJucespNire($(n).text())))}));
     }
 
     searchCertidao(nascimento = null, cpf_cnpj = null) {
