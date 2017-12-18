@@ -2386,16 +2386,6 @@ export class KronoosParse {
                             title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target?`,
                             subtitle: `${node.label}, documento ${cpf_cnpj} é relacionado com ${this.name}.`,
                             paragraph: `A conexão é para ${connection.label} <small>(${f(connection.id)})</small> do tipo ${edge.relationType}.`
-                        }, () => {
-                            dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            defaultActionSearch[edge.relationType] = true;
-                            searchTarget(cb);
-                        }, () => {
-                            dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            defaultActionSearch[edge.relationType] = false;
-                            cb();
-                        }, (modal, form, actions) => {
-                            dontAskAgainInput = form.addCheckbox("confirm", `Aplicar ação para todos os targets relacionados (${edge.relationType}).`);
                         });
                     }, () => callback()));
                 }
