@@ -704,8 +704,8 @@ export class KronoosParse {
                         this.searchTJSPCertidaoPDF(tipo, pedido, data);
                     });
                     this.append(kelement.element());
-                    if (cb) cb();
-                }
+                },
+                complete: () =>  cb && cb()
             }, true)));
     }
 
@@ -875,7 +875,8 @@ export class KronoosParse {
                         this.searchTJSPCertidaoPDF(tipo, pedido, data);
                     });
                     this.append(kelement.element());
-                    if (cb) cb();                }
+                }, 
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1195,8 +1196,8 @@ export class KronoosParse {
                     kelement.paragraph(htmlEncode(text));
                     kelement.behaviourAccurate(!!/\:\s*constam/i.test(text));
                     this.append(kelement.element());
-                    if (cb) cb();
                 },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1222,8 +1223,8 @@ export class KronoosParse {
                         })));
                     kelement.behaviourAccurate(!/\N[Ãã]O CONSTA/i.test($("body > text", data).text()));
                     this.append(kelement.element());
-                    if (cb) cb();
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1257,8 +1258,8 @@ export class KronoosParse {
                         kelement.behaviourAccurate(!/\NADA CONSTA/i.test($("body > text", data).text()));
                     }
                     this.append(kelement.element());
-                    if (cb) cb();
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1315,8 +1316,8 @@ export class KronoosParse {
                         })));
                     kelement.behaviourAccurate(!/\N[Ãã]O CONSTA/i.test($("body > text", data).text()));
                     this.append(kelement.element());
-                    if (cb) cb();
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1508,8 +1509,8 @@ export class KronoosParse {
                         src: `data:image/png;base64,${$("body > png", data).text()}`
                     })));
                 this.append(kelement.element());
-                if (cb) cb();
-            }
+            },
+            complete: () =>  cb && cb()
         }));
     }
 
@@ -1598,8 +1599,8 @@ export class KronoosParse {
 
                     kelement.behaviourAccurate(["REGULAR", "ATIVA"].indexOf(x("situacao").split(" ")[0]) === -1);
                     this.append(kelement.element());
-                    if (cb) cb();
                 },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -2482,8 +2483,8 @@ export class KronoosParse {
                     } else {
                         this.juristekCNJ(jusSearch, null, true, false);
                     }
-                    if (cb) cb();
-                }
+                },
+                complete: () =>  cb && cb()
             }), lowPriority);
     }
 
