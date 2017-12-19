@@ -1517,7 +1517,7 @@ export class KronoosParse {
         if (!this.cnpj) return;
         this.serverCall("SELECT FROM 'PORTALTRANSPARENCIA'.'CEPIM'",
             this.loader("fa-archive", `Verificando entidades privadas sem fins lucrativas impedidas com o CNPJ ${this.cnpj}.`, {
-                error: () => this.notFoundAdm("Entidades privadas sem fins lucrativas impedidas na controladoria geral da união"),
+                error: () => this.notFoundAdm("Entidades privadas sem fins lucrativas impedidas na Controladoria Geral da União"),
                 data: {
                     documento: this.cnpj
                 },
@@ -1708,13 +1708,13 @@ export class KronoosParse {
             let icon = "exclamation";
             switch (notationType) {
                 case "hasNotation":
-                    notationMessage = ["possui apontamento", "possuem apontamentos"];
+                    notationMessage = ["apresenta registro nos órgãos pesquisados", "apresentam registros nos órgãos pesquisados"];
                     break;
                 case "hasntNotation":
-                    notationMessage = ["não possui apontamento", "não possuem apontamentos"];
+                    notationMessage = ["não apresenta registro nos órgãos pesquisados", "não apresentam registros nos órgãos pesquisados"];
                     break;
                 default:
-                    notationMessage = ["de apontamento desconhecido e", "de apontamentos desconhecidos e"];
+                    notationMessage = ["de registro desconhecido e", "de registros desconhecidos e"];
             }
             for (let behaviourType in informationQA[notationType]) {
                 let behaviourMessage;
@@ -1722,16 +1722,16 @@ export class KronoosParse {
                     case "behaviourAccurate":
                         if (notationType === "hasntNotation") icon = "check";
                         else icon = "times";
-                        behaviourMessage = [", sem possibilidade da presença de falsos positivos", ", sem possibilidade da presença de falsos positivos"];
+                        behaviourMessage = ["", ""];
                         break;
                     case "behaviourUnstructured":
-                        behaviourMessage = ["pendente de verificação por ser desestruturado", "pendentes de verificação por serem desestruturados"];
+                        behaviourMessage = [" e pode conter dados não estruturados, devendo ser verificado ", " e podem conter dados não estruturados, devendo ser verificados"];
                         break;
                     case "behaviourUnstructuredHomonym":
-                        behaviourMessage = ["pendente de verificação por ser desestruturado e com presença de possíveis homônimos", "pendentes de verificação por serem desestruturados e com presença de possíveis homônimos"];
+                        behaviourMessage = [" e pode conter homônimos e dados não estruturados, devendo ser verificado", " e podem conter homônimos e dados não estruturados, devendo ser verificados"];
                         break;
                     case "behaviourHomonym":
-                        behaviourMessage = ["pendente de verificação por presença de possíveis homônimos", "pendentes de verificação por presença de possíveis homônimos"];
+                        behaviourMessage = [" e pode conter homônimos, devendo ser verificado", " e podem conter homônimos, devendo ser verificados"];
                         break;
                     default:
                         behaviourMessage = ["pendente de verificação", "pendentes de verificação"];
@@ -1739,9 +1739,9 @@ export class KronoosParse {
 
                 let searchMessage;
                 if (informationQA[notationType][behaviourType] > 1) {
-                    searchMessage = `${informationQA[notationType][behaviourType]} resultados ${notationMessage[1]} ${behaviourMessage[1]}.`;
+                    searchMessage = `${informationQA[notationType][behaviourType]} resultados encontrados ${notationMessage[1]} ${behaviourMessage[1]}.`;
                 } else {
-                    searchMessage = `1 resultado ${notationMessage[0]} ${behaviourMessage[0]}.`;
+                    searchMessage = `1 resultado encontrado ${notationMessage[0]} ${behaviourMessage[0]}.`;
                 }
                 this.firstElement().stage(icon, searchMessage.replace(/\s+,/, ',')).addClass(`type-${notationType}-${behaviourType}`);
             }
@@ -2439,7 +2439,7 @@ export class KronoosParse {
                         // }
 
                         this.call("confirm", {
-                            title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target?`,
+                            title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target? O valor adicional de uma consulta será cobrado caso responda afirmativamente.`,
                             subtitle: `${node.label}, documento ${cpf_cnpj} é relacionado com ${this.name}.`,
                             paragraph: `A conexão é para ${connection.label} <small>(${f(connection.id)})</small> do tipo ${edge.relationType}.`
                         }, () => {
