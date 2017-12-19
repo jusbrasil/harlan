@@ -250,7 +250,7 @@ module.exports = function(controller) {
                 // CPF,
                 `Documento: ${doc}`,
                 // Valor
-                `Valor: ${numeral(parseFloat(element.ammount/100)).format('$ 0,0.00')}`
+                `Valor: ${numeral(element.ammount/100.).format('$ 0,0.00')}`
             ]).click(function(e) {
                 checks.splice(checks.indexOf(element), 1);
                 updateList(modal, pageActions, results, pagination, list, checks, limit, skip, text, checksSum);
@@ -496,7 +496,7 @@ module.exports = function(controller) {
                 list.add("fa-share", [
                     $("company > nome", element).text() || $("company > responsavel", element).text() || $("company > username", element).text(), !approved ?
                     "Solicitar Aprovação" :
-                    `${numeral(parseFloat($(element).children("interest").text().replace(',', '.'))).format('0.00%')} / ${numeral(parseInt($(element).children("limit").text()) / 100).format('$0,0.00')}`,
+                    `${numeral($(element).children("interest").text().replace(',', '.')).format('0.00%')} / ${numeral(parseInt($(element).children("limit").text()) / 100).format('$0,0.00')}`,
                     `${$("company > endereco > node:eq(4)", element).text()} / ${$("company > endereco > node:eq(6)", element).text()} - ${geoposition ? numeral(calculateDistance({
                         lat: geoposition.coords.latitude,
                         lon: geoposition.coords.longitude

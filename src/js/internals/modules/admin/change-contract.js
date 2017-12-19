@@ -27,7 +27,7 @@ module.exports = controller => {
                         "labelText": "Valor do Contrato (R$)",
                         "mask": "000.000.000.000.000,00",
                         "optional": false,
-                        "value" : numeral(parseFloat(contrato.find("contrato:eq(1)").text() || "0.0")).format('0,0.00'),
+                        "value" : numeral(contrato.find("contrato:eq(1)").text() || "0.0").format('0,0.00'),
                         "maskOptions": {
                             "reverse": true
                         },
@@ -39,7 +39,7 @@ module.exports = controller => {
                         "labelText": "Consulta Excedente (R$)",
                         "mask": "000.000.000.000.000,00",
                         "optional": false,
-                        "value" : numeral(parseFloat(contrato.find("contrato:eq(3)").text() || "0.0")).format('0,0.00'),
+                        "value" : numeral(contrato.find("contrato:eq(3)").text() || "0.0").format('0,0.00'),
                         "maskOptions": {
                             "reverse": true
                         },

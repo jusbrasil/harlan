@@ -93,7 +93,7 @@ module.exports = controller => {
             recoverPhoto();
         }
 
-        let parseMoneyData = a => numeral(parseFloat(data.find(a).text())).format('$0,0.00'),
+        let parseMoneyData = a => numeral(data.find(a).text()).format('$0,0.00'),
             subtitle = args.report.element().find("h3");
 
         args.report.label(`Classificação ${data.find("criteria").text()}`)

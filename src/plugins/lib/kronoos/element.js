@@ -28,6 +28,7 @@ var KronoosElement = function(title, subtitle, sidenote) {
             negativeCertificates = {};
             this.list("Resultados Negativos", negativeCertificates);
             negativeCertificates.container.addClass("kronoos-stage");
+            
             negativeCertificates.container.insertAfter(sidenoteElement);
         }
         let item = {};
