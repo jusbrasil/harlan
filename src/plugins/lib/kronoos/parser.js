@@ -726,7 +726,7 @@ export class KronoosParse {
             }, true));
     }
 
-    searchTJSPCertidaoFisica() {
+    searchTJSPCertidaoFisica(cb = null) {
         if (!this.cpf || !this.name) return;
         _.map(['M'], flGenero => this.serverCall("SELECT FROM 'TJSP'.'CERTIDAO'",
             this.loader("fa-balance-scale", `Capturando certidões no Tribunal de Justiça de São Paulo - ${this.cpf}.`, {
@@ -753,7 +753,8 @@ export class KronoosParse {
                         this.searchTJSPCertidaoPDF(tipo, pedido, data);
                     });
                     this.append(kelement.element());
-                }
+                },
+                complete: () =>  cb && cb()
             }, true)));
     }
 
@@ -902,7 +903,7 @@ export class KronoosParse {
     }
 
 
-    searchTJSPCertidao() {
+    searchTJSPCertidao(cb = null) {
         if (!this.cnpj) return;
         this.serverCall("SELECT FROM 'TJSP'.'CERTIDAO'",
             this.loader("fa-balance-scale", `Capturando certidões no Tribunal de Justiça de São Paulo - ${this.cnpj}.`, {
@@ -926,7 +927,8 @@ export class KronoosParse {
                         this.searchTJSPCertidaoPDF(tipo, pedido, data);
                     });
                     this.append(kelement.element());
-                }
+                }, 
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1221,7 +1223,7 @@ export class KronoosParse {
 
     searchBovespa() {}
 
-    searchDAU() {
+    searchDAU(cb = null) {
         this.serverCall("SELECT FROM 'RFBDAU'.'CONSULTA'",
             this.loader("fa-money", `Pesquisando Dívida Ativa da União para o documento ${this.cpf_cnpj}.`, {
                 data: {
@@ -1252,10 +1254,11 @@ export class KronoosParse {
                     kelement.behaviourAccurate(!!/\:\s*constam/i.test(text));
                     this.append(kelement.element());
                 },
+                complete: () =>  cb && cb()
             }, true));
     }
 
-    searchCNDT() {
+    searchCNDT(cb = null) {
         if (!this.cnpj) return;
         this.serverCall("SELECT FROM 'CNDT'.'CERTIDAO'",
             this.loader("fa-legal", `Certidão Negativa de Débitos Trabalhistas ${this.cpf_cnpj}.`, {
@@ -1277,11 +1280,12 @@ export class KronoosParse {
                         })));
                     kelement.behaviourAccurate(!/\N[Ãã]O CONSTA/i.test($("body > text", data).text()));
                     this.append(kelement.element());
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
-    searchIbama() {
+    searchIbama(cb = null) {
         if (!this.cnpj) return;
         this.serverCall("SELECT FROM 'Ibama'.'CERTIDAO'",
             this.loader("fa-tree", `Geração de Certidão Negativa de Débito do Ibama para o documento ${this.cpf_cnpj}.`, {
@@ -1311,7 +1315,8 @@ export class KronoosParse {
                         kelement.behaviourAccurate(!/\NADA CONSTA/i.test($("body > text", data).text()));
                     }
                     this.append(kelement.element());
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1345,7 +1350,7 @@ export class KronoosParse {
     }
 
 
-    searchMTE() {
+    searchMTE(cb = null) {
         if (!this.cnpj) return;
         this.serverCall("SELECT FROM 'MTE'.'CERTIDAO'",
             this.loader("fa-legal", `Geração de Certidão de Débito e Consulta a Informações Processuais de Autos de Infração ${this.cpf_cnpj}.`, {
@@ -1368,7 +1373,8 @@ export class KronoosParse {
                         })));
                     kelement.behaviourAccurate(!/\N[Ãã]O CONSTA/i.test($("body > text", data).text()));
                     this.append(kelement.element());
-                }
+                },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -1541,7 +1547,7 @@ export class KronoosParse {
             }, true));
     }
 
-    searchJucespNire(nire) {
+    searchJucespNire(nire, cb = null) {
         this.serverCall("SELECT FROM 'JUCESP'.'DOCUMENT'", this.loader("fa-archive", `Procurando ficha cadastral da empresa ${this.name} (NIRE: ${nire}) junto a JUCESP.`, {
             data: {
                 nire: nire
@@ -1560,7 +1566,8 @@ export class KronoosParse {
                         src: `data:image/png;base64,${$("body > png", data).text()}`
                     })));
                 this.append(kelement.element());
-            }
+            },
+            complete: () =>  cb && cb()
         }));
     }
 
@@ -1573,7 +1580,7 @@ export class KronoosParse {
             success: data => $("node > node", data).filter((im, n) => this.compareNames($("name", n).text(), this.name)).each((im, n) => $("nire", n).each((im, n) => this.searchJucespNire($(n).text())))}));
     }
 
-    searchCertidao(nascimento = null, cpf_cnpj = null) {
+    searchCertidao(nascimento = null, cpf_cnpj = null, cb = null) {
         cpf_cnpj = cpf_cnpj || this.cpf_cnpj;
         this.serverCall(CNPJ.isValid(cpf_cnpj) ? "SELECT FROM 'RFBCNPJANDROID'.'CERTIDAO'" : "SELECT FROM 'RFB'.'CERTIDAO'",
             this.loader("fa-archive", `Verificando a situação do documento ${this.cpf_cnpj} junto a Receita Federal.`, {
@@ -1650,6 +1657,7 @@ export class KronoosParse {
                     kelement.behaviourAccurate(["REGULAR", "ATIVA"].indexOf(x("situacao").split(" ")[0]) === -1);
                     this.append(kelement.element());
                 },
+                complete: () =>  cb && cb()
             }, true));
     }
 
@@ -2529,7 +2537,7 @@ export class KronoosParse {
         return this.call("error::ajax", ...args);
     }
 
-    searchCARFDocumento() {
+    searchCARFDocumento(cb = null) {
         this.serverCall("SELECT FROM 'KRONOOSJURISTEK'.'DATA'",
             this.loader("fa-balance-scale", `Buscando por processos jurídicos no CARF para ${this.name}, documento ${this.cpf_cnpj}.`, {
                 data: {
@@ -2542,7 +2550,8 @@ export class KronoosParse {
                     } else {
                         this.juristekCNJ(jusSearch, null, true, false);
                     }
-                }
+                },
+                complete: () =>  cb && cb()
             }), lowPriority);
     }
 
