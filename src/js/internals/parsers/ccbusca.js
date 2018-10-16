@@ -315,13 +315,13 @@ module.exports = controller => {
                 continue;
             if (idx === 'CPF/CNPJ') {
                 data = data.replace(/^0+/, '');
-                data = pad(14, data, '0');
-                data = CNPJ.isValid(data) ? data : data.substr(3);
+                data = pad(11, data, '0');
                 if (CPF.isValid(data)) {
                     result.addItem('CPF', CPF.format(data), nodes[idx]);
                     doc = CPF.format(data);
                 }
                 else {
+                    data = pad(14, data, '0');
                     result.addItem('CNPJ', CNPJ.format(data), nodes[idx]);
                     doc = CNPJ.format(data);
                 }
