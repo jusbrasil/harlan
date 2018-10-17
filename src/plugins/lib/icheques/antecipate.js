@@ -7,7 +7,7 @@ import { titleCase } from 'change-case';
 
 const PAGINATE_FILTER = 5;
 
-const parseLocation = (element, elementPath) => parseFloat($(element).find(elementPath).text());
+const parseLocation = (element, elementPath) => parseFloat($(element).find(elementPath).text().replace(',', '.'));
 const R = 6378137;
 const PI_360 = Math.PI / 360;
 
@@ -354,15 +354,18 @@ module.exports = controller => {
     });
 
     controller.registerCall('icheques::antecipate::show', (data, checks, {revenue}, filterReference = true) => controller.call('geolocation', geoposition => {
-        let banks = $('BPQL > body > fidc', data);
+        let banks = $('BPQL > body > fidc', data).filter((i, element) => !!parseInt($(element).children('company').children('status').text()));
+
         const validBankReferences = $();
 
         /* https://trello.com/c/FSOYf1yH/163-cadastro-de-cliente-exclusivo-a-1-fundo-so */
         if (filterReference && commercialReference) {
             _.each(commercialReference.split(','), reference => {
                 banks.each((i, element) => {
+                    const cnpj = $('cnpj', element).text().replace(/[^\d]/g, '');
+                    const referenceCNPJ = reference.replace(/[^\d]/g, '');
                     if ($('username', element).text() == reference ||
-                        $('cnpj', element).text().replace(/[^\d]/g, '') == reference.replace(/[^\d]/g, '')) {
+                        (cnpj && referenceCNPJ && cnpj == referenceCNPJ)) {
                         validBankReferences.push(element);
                         return false; /* loop break */
                     }
