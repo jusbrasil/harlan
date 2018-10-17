@@ -353,7 +353,9 @@ module.exports = controller => {
         updateList(modal, pageActions, results, pagination, list, checks, PAGINATE_FILTER, skip, text, checksSum);
     });
 
-    controller.registerCall('icheques::antecipate::show', (data, checks, {revenue}, filterReference = true) => controller.call('geolocation', geoposition => {
+    controller.registerCall('icheques::antecipate::show', (data, checks, profile, filterReference = true, forceApprove = false) => controller.call('geolocation', geoposition => {
+        const {revenue} = profile;
+
         let banks = $('BPQL > body > fidc', data).filter((i, element) => !!parseInt($(element).children('company').children('status').text()));
 
         const validBankReferences = $();
@@ -419,7 +421,6 @@ module.exports = controller => {
                 });
                 return;
             }
-
             banks = _.sortBy(_.filter(banks.toArray(), element => calculateDistance({
                 lat: geoposition.coords.latitude,
                 lon: geoposition.coords.longitude
@@ -446,8 +447,7 @@ module.exports = controller => {
             }
         }
 
-
-        if (!_.filter(banks, element => $(element).children('approvedCustomer').text() === 'true').length) {
+        if (!_.filter(banks, element => $(element).children('approvedCustomer').text() === 'true').length || forceApprove) {
             const modal = controller.call('modal');
             modal.gamification('accuracy');
             modal.title('Aprovação dos Fundos');
@@ -531,6 +531,11 @@ module.exports = controller => {
         actions.add('Sair').click(e => {
             e.preventDefault();
             modal.close();
+        });
+
+        actions.add('Pesquisar Factorings').click(e => {
+            e.preventDefault();
+            controller.call('icheques::antecipate::show', data, checks, profile, filterReference, true);
         });
 
         if (validBankReferences.length) {
