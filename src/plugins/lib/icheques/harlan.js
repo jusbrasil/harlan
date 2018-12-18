@@ -651,7 +651,7 @@ module.exports = controller => {
 
         let queryTry = (callback, query, data = {}) => controller.server.call(query, {
             cache: true,
-            // timeout: humanInterval('15 seconds'),
+            timeout: humanInterval('30 seconds'),
             data: Object.assign({
                 documento: task[0]
             }, data),
@@ -666,11 +666,7 @@ module.exports = controller => {
                 'q[0]' : 'USING \'CCBUSCA\' SELECT FROM \'FINDER\'.\'CONSULTA\'',
                 'q[1]' : 'SELECT FROM \'RFB\'.\'CERTIDAO\'',
             }));
-            queryList.push(callback => queryTry(callback, 'USING \'CCBUSCA\' SELECT FROM \'FINDER\'.\'CONSULTA\'', {
-                'q[0]' : 'SELECT FROM \'CCBUSCA\'.\'CONSULTA\'',
-                'q[1]' : 'SELECT FROM \'RFB\'.\'CERTIDAO\'',
-            }));
-        }
+	}
 
         queryList.push(callback => queryTry(callback, 'USING \'CCBUSCA\' SELECT FROM \'FINDER\'.\'CONSULTA\''));
         queryList.push(callback => queryTry(callback, 'SELECT FROM \'CCBUSCA\'.\'CONSULTA\''));
