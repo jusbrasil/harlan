@@ -590,7 +590,7 @@ module.exports = controller => {
                 data: {
                     documento: task[0]
                 },
-                // timeout: humanInterval('20 seconds'),
+                timeout: humanInterval('20 seconds'),
                 success: ret => {
                     let totalRegistro = parseInt($(ret).find('BPQL > body > data > resposta > totalRegistro').text());
 

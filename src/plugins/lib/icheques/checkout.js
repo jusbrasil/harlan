@@ -31,6 +31,7 @@ import changeCase from 'change-case';
 import async from 'async';
 import _ from 'underscore';
 import validCheck from './data/valid-check';
+import escapeString from 'sql-string-escape';
 
 module.exports = controller => {
 
@@ -42,7 +43,7 @@ module.exports = controller => {
             if (!DATABASE_KEYS.includes(changeCase.camelCase(i))) {
                 continue;
             }
-            n[changeCase[type](i)] = obj[i];
+            n[changeCase[type](i)] = escapeString(obj[i].replace('\'', ''));
         }
         return n;
     };
@@ -65,10 +66,8 @@ module.exports = controller => {
             check.ocurrence = 'Instituição bancária não monitorada';
             check.pushId = null;
         }
-        try {
-            controller.database.exec(squel.insert().into('ICHEQUES_CHECKS').setFields(databaseObject(check)).toString());
-        } catch (e) {
-        }
+
+        controller.database.exec(squel.insert().into('ICHEQUES_CHECKS').setFields(databaseObject(check)).toString());
     };
 
     controller.registerCall('icheques::insertDatabase', insertDatabase);
