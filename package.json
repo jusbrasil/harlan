@@ -1,6 +1,6 @@
 {
   "name": "Harlan",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Harlan é o sistema modular que permite você automatizar toda sua governança cadastral da nuvem.",
   "main": "gulpfile.js",
   "scripts": {
