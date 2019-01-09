@@ -258,6 +258,7 @@ module.exports = controller => {
             $.getJSON({
                 url: 'https://maps.googleapis.com/maps/api/geocode/json',
                 data: {
+                    key: controller.confs.maps,
                     sensor: false,
                     address: `CEP ${task}, Brazil`
                 },

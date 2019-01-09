@@ -15,7 +15,7 @@ module.exports = controller => {
             cmc: getElement('cmc'),
             cpf: getElement('cpf'),
             cnpj: getElement('cnpj'),
-            observation: getElement('observation'),
+            observation: getElement('observation').replace(/\'/, ''),
             expire: getElement('expire'),
             ammount: databaseInteger(getElement('ammount')),
             pushId: getElement('pushId'),

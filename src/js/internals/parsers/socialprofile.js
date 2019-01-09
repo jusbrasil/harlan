@@ -82,6 +82,7 @@ module.exports = controller => {
         const width = window.innerWidth - 90;
 
         const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?${$.param({
+            key: controller.confs.maps,
             scale: '1',
             size: `${(width < 120 ? 120 : width).toString()}x150`,
             maptype: 'roadmap',

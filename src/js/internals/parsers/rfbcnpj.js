@@ -74,6 +74,7 @@ module.exports = controller => {
                 });
 
                 const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?${$.param({
+                    key: controller.confs.maps,
                     scale: '1',
                     size: '600x150',
                     maptype: 'roadmap',

@@ -386,6 +386,7 @@ module.exports = controller => {
                 let image = new Image();
 
                 let imageAddress = `https://maps.googleapis.com/maps/api/staticmap?${$.param({
+                    key: controller.confs.maps,
                     scale: '1',
                     size: '600x150',
                     maptype: 'roadmap',

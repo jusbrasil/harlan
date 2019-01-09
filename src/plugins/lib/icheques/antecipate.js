@@ -571,7 +571,7 @@ module.exports = controller => {
             target: '_blank'
         }).append(
             $('<div />').addClass('map').css({
-                'background-image': `url(http\:\/\/maps.googleapis.com/maps/api/staticmap?center=${encodeURI(address)}&zoom=13&scale=false&size=600x200&maptype=roadmap&format=png&visual_refresh=true)`
+                'background-image': `url(http\:\/\/maps.googleapis.com/maps/api/staticmap?center=${encodeURI(address)}&zoom=13&scale=false&size=600x200&maptype=roadmap&format=png&visual_refresh=true&key=${encodeURI(controller.confs.maps)})`
             })
         ));
 
