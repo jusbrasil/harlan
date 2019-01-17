@@ -392,6 +392,7 @@ module.exports = controller => {
                 })));
             });
         }
+
         controller.call('tooltip', separatorData.menu, 'Cobrar Cheque').append(
             $('<i />').addClass('fa fa-life-buoy')).click(e => {
             e.preventDefault();

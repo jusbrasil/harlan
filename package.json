@@ -172,6 +172,7 @@
     "sigma": "^1.2.1",
     "slug": "^0.9.1",
     "sprintf": "^0.1.5",
+    "sql-escape-string": "^1.1.0",
     "squel": "^5.12.0",
     "stream-browserify": "^2.0.1",
     "stream-http": "^2.7.2",

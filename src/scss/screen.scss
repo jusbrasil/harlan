@@ -1826,3 +1826,29 @@ a.help {
         }
     }
 }
+
+@keyframes dropzone {
+    from {background: #5a7a965c;}
+    to {background: #5a7a9687;}
+  }
+
+.dropzone {
+    display: none;
+    position: fixed;
+    width: 90%;
+    height: 90%;
+    left: 5%;
+    top: 5%;
+    z-index: 99999;
+    background: #5a7a965c;
+    border: 2px dashed;
+    border-spacing: 57px;
+    /* border: inset; */
+    /* margin: 20px; */
+    box-sizing: border-box;
+    animation-name: dropzone;
+    animation-duration: 300ms;
+    &.show {
+        display: block;
+    }
+}

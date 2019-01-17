@@ -105,6 +105,7 @@ import browserUpdate from 'browser-update';
     require('./internals/modules/remote-debug')(harlan);
     require('./internals/modules/take-picture')(harlan);
     require('./internals/modules/facebook-track')(harlan);
+    require('./internals/modules/dropzone')(harlan);
 
     /**
      * From day to night and night to day

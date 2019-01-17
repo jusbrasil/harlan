@@ -31,7 +31,7 @@ import changeCase from 'change-case';
 import async from 'async';
 import _ from 'underscore';
 import validCheck from './data/valid-check';
-import escapeString from 'sql-string-escape';
+import escapeString from 'sql-escape-string';
 
 module.exports = controller => {
 
