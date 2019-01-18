@@ -72,7 +72,7 @@ import browserUpdate from 'browser-update';
     require('./internals/modules/forgot-password')(harlan);
     require('./internals/modules/iframe-embed')(harlan);
     require('./internals/modules/site')(harlan);
-    require('./internals/modules/placas-wiki')(harlan);
+    // require('./internals/modules/placas-wiki')(harlan);
     require('./internals/modules/credits')(harlan);
     require('./internals/modules/alert')(harlan);
     require('./internals/modules/softphone')(harlan);
