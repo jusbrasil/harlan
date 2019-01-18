@@ -5,13 +5,14 @@ module.exports = controller => {
     const dropzone = $('<div />').addClass('dropzone');
     const dropzoneElement = dropzone.get(0);
 
-    let hideTimeout;
+    let oppTimeout;
     const showDropzone = () => {
-        clearTimeout(hideTimeout);
+        clearTimeout(oppTimeout);
         dropzone.addClass('show');
     };
 
     const hideDropzone = () => {
+        clearTimeout(oppTimeout);
         dropzone.removeClass('show');
     };
 
@@ -36,9 +37,11 @@ module.exports = controller => {
 
         document.addEventListener('drop', handleDrop);
         document.addEventListener('dragover', allowDrag);
-        document.addEventListener('dragenter', showDropzone);
+        document.addEventListener('dragenter', () => {
+            oppTimeout = setTimeout(() => showDropzone(), 1000);
+        });
         document.addEventListener('dragleave', () => {
-            hideTimeout = setTimeout(() => hideDropzone(), 5000);
+            oppTimeout = setTimeout(() => hideDropzone(), 5000);
         });
     });
 };
