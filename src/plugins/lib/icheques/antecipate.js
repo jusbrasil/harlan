@@ -427,7 +427,7 @@ module.exports = controller => {
             }, {
                 lat: parseLocation(element, 'geocode > geometry > location > lat'),
                 lon: parseLocation(element, 'geocode > geometry > location > lng')
-            }) <= 10000), element => calculateDistance({
+            }) <= controller.confs.fidcDistance), element => calculateDistance({
                 lat: geoposition.coords.latitude,
                 lon: geoposition.coords.longitude
             }, {

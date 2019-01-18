@@ -11,6 +11,7 @@ harlan.addPlugin(controller => {
 
     controller.registerCall('accountOverview', () => {});
 
+    controller.confs.fidcDistance = 150000;
     controller.confs.debtCollector = 'juridico@pgn.srv.br';
     controller.confs.ccf = true;
     controller.confs.iugu.token = 'b3ed1c2a-ee7b-47d2-ab4d-7e8fba14e933';
