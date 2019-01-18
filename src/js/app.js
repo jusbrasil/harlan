@@ -26,7 +26,7 @@ import browserUpdate from 'browser-update';
     require('./internals/modules/service-worker')(harlan);
 
     /* Parsers */
-    require('./internals/parsers/placas-wiki')(harlan);
+    // require('./internals/parsers/placas-wiki')(harlan);
     require('./internals/parsers/cbusca')(harlan);
     require('./internals/parsers/ccbusca')(harlan);
     require('./internals/parsers/ccf')(harlan);
