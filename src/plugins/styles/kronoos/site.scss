@@ -32,6 +32,9 @@ $color: #2A332E;
         .site {
             background: none;
             .nav {
+                a {
+                    cursor: pointer !important;
+                }
                 li {
                     color: #413939;
                     @media (max-width: 600px) {

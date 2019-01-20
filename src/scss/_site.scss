@@ -35,9 +35,9 @@
             color: $color-site-menu;
             vertical-align: middle;
             text-align: center !important;
+            cursor: pointer !important;
 
             a {
-                cursor: pointer;
                 box-sizing: border-box;
                 display: inline-block;
                 min-width: 74px;
