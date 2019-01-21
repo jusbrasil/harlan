@@ -32,7 +32,7 @@ import browserUpdate from 'browser-update';
     require('./internals/parsers/ccf')(harlan);
     require('./internals/parsers/ieptb')(harlan);
     require('./internals/parsers/rfbcnpj')(harlan);
-    require('./internals/parsers/socialprofile')(harlan);
+    // require('./internals/parsers/socialprofile')(harlan);
 
     /* Forms */
     require('./internals/forms/receita-certidao')(harlan);
@@ -83,7 +83,7 @@ import browserUpdate from 'browser-update';
     require('./internals/modules/instant-search')(harlan);
     require('./internals/modules/tooltip')(harlan);
     require('./internals/modules/icheques')(harlan);
-    require('./internals/modules/socialprofile')(harlan);
+    // require('./internals/modules/socialprofile')(harlan);
     require('./internals/modules/kronoos')(harlan);
     require('./internals/modules/billing-information')(harlan);
     require('./internals/modules/bipbop')(harlan);

@@ -29,24 +29,6 @@ module.exports = controller => {
     let hasBlockedBead = false;
     let hasProcessingOnes = false;
 
-    controller.registerTrigger('findDatabase::instantSearch', 'antecipate', (args, callback) => {
-        callback();
-
-        let [text, modal] = args;
-
-        if (!/antec?i?p?ar?/i.test(text)) {
-            return;
-        }
-
-        modal.item(`Análise para o documento ${(CPF.isValid(text) ? CPF: CNPJ).format(text)}`,
-            'Obtenha informações detalhadas para o documento.',
-            'Verifique telefone, e-mails, endereços e muito mais através da análise Harlan.')
-            .addClass('socialprofile')
-            .click(() => {
-                controller.call('icheques::antecipate', text);
-            });
-    });
-
     controller.registerCall('icheques::antecipate::checksIsEmpty', () => {
         let modal = controller.call('modal');
 
