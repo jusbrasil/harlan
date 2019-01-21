@@ -31,7 +31,7 @@ import changeCase from 'change-case';
 import async from 'async';
 import _ from 'underscore';
 import validCheck from './data/valid-check';
-import escapeString from 'sql-escape-string';
+// import escapeString from 'sql-escape-string';
 
 module.exports = controller => {
 
@@ -43,7 +43,7 @@ module.exports = controller => {
             if (!DATABASE_KEYS.includes(changeCase.camelCase(i))) {
                 continue;
             }
-            n[changeCase[type](i)] = typeof obj[i] === 'string' ? escapeString(obj[i]) :  obj[i];
+            n[changeCase[type](i)] = typeof obj[i] === 'string' ? obj[i].replace(/\'/g, '') :  obj[i];
         }
         return n;
     };
