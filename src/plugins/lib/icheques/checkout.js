@@ -43,7 +43,7 @@ module.exports = controller => {
             if (!DATABASE_KEYS.includes(changeCase.camelCase(i))) {
                 continue;
             }
-            n[changeCase[type](i)] = escapeString(obj[i].replace('\'', ''));
+            n[changeCase[type](i)] = typeof obj[i] === 'string' ? escapeString(obj[i]) :  obj[i];
         }
         return n;
     };
@@ -66,7 +66,6 @@ module.exports = controller => {
             check.ocurrence = 'Instituição bancária não monitorada';
             check.pushId = null;
         }
-
         controller.database.exec(squel.insert().into('ICHEQUES_CHECKS').setFields(databaseObject(check)).toString());
     };
 
