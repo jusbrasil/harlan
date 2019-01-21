@@ -32,7 +32,7 @@ module.exports = controller => {
         var query = squel.select().from('ICHEQUES_CHECKS').where(expr).toString();
         var databaseResult = controller.call('icheques::resultDatabase', controller.database.exec(query)[0]);
 
-        if (!databaseResult.values || databaseResult.values.length) {
+        if (databaseResult[0] || !databaseResult[0].values || databaseResult.values[0].length) {
             callback();
             return;
         }
@@ -58,17 +58,17 @@ module.exports = controller => {
 
         if (!new CMC7Validator(search).isValid()) return;
 
-        autocomplete.item('iCheques', 'Pesquisa Geral de Cheques', sprintf('Número: %s Cheque: %s', new CMC7Parser(search).number, CMC7_MASK.apply(search)))
-            .addClass('icheque')
-            .click((e) => {
-                e.preventDefault();
-                controller.serverCommunication.call('SELECT FROM \'ICHEQUES\'.\'CHECK\'', controller.call('error::ajax', {
-                    data: search,
-                    success: (ret) => {
+        controller.serverCommunication.call('SELECT FROM \'ICHEQUES\'.\'CHECK\'', {
+            data: search,
+            success: (ret) => {
+                autocomplete.item('iCheques', 'Pesquisa Geral de Cheques', sprintf('Número: %s Cheque: %s', new CMC7Parser(search).number, CMC7_MASK.apply(search)))
+                    .addClass('icheque')
+                    .click((e) => {
+                        e.preventDefault();
                         controller.call('icheques::show', controller.call('icheques::parse::element', $(ret).find('check').get(0)));
-                    }
-                }));
-            });
+                    });
+            }});
+
     });
 
     controller.registerTrigger('findDatabase::instantSearch', 'icheques::search', (args, callback) => {
