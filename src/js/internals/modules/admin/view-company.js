@@ -299,6 +299,9 @@ module.exports = controller => {
                 section
             });
 
+            controller.call('tooltip', actions, 'Esconder').append($('<i />').addClass('fa fa-eye-slash'))
+                .click(controller.click('admin::changeHide', companyNode, username, section));
+
             controller.call('tooltip', actions, 'Editar').append($('<i />').addClass('fa fa-edit'))
                 .click(controller.click('admin::changeCompany', companyNode, username, section));
 

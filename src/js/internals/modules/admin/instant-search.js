@@ -1,6 +1,5 @@
 const CREATE_COMPANY = /(^|\s)(adicio?n?a?r?|nova|criar)($|\s)/i;
 const ADMIN_COMPANY = /(^|\s)(admi?n?i?s?t?r?a?r?)($|\s)/i;
-const PRICE_TABLE = /(^|\s)(preço)($|\s)/i;
 
 module.exports = controller => {
     controller.registerTrigger('findDatabase::instantSearch', 'admin::createCompany', (args, callback) => {

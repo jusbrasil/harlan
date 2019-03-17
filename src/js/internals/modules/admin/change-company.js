@@ -4,6 +4,23 @@ import {CPF} from 'cpf_cnpj';
 import {CNPJ} from 'cpf_cnpj';
 
 module.exports = controller => {
+    controller.registerCall('admin::changeHide', (companyNode, account, section) => controller.confirm({
+        title: `Deseja remover esconder o usuário ${account}?`,
+        subtitle: 'O usuário não poderá ser encontrado novamente e o comportamento do sistema será alterado.',
+        paragraph: 'Se certique de que deseja realmente esconder o usuário.'
+    }, () => controller.serverCommunication.call('UPDATE \'BIPBOPCOMPANYS\'.\'HIDE\'',
+        controller.call('error::ajax', controller.call('loader::ajax', {
+            data: { account },
+            success: () => {
+                section.remove();
+                controller.alert({
+                    icon: 'locked',
+                    title: 'O usuário foi escondido com sucesso.',
+                    subtitle: `Não serão mais visualizados dados deste usuário ${account} na interface.`,
+                    paragraph: 'O cliente foi bloqueado e escondido, para recuperar contate o suporte técnico.',
+                });
+            },
+        })))));
 
     controller.registerCall('admin::changeCompany', (companyNode, username, section) => {
         const form = controller.call('form', opts => {
@@ -11,10 +28,7 @@ module.exports = controller => {
             controller.serverCommunication.call('UPDATE \'BIPBOPCOMPANYS\'.\'COMPANY\'',
                 controller.call('error::ajax', controller.call('loader::ajax', {
                     data: opts,
-                    success: response => {
-                        
-                        controller.call('admin::viewCompany', $(response).find('BPQL > body > company'), section, 'replaceWith');
-                    }
+                    success: response => controller.call('admin::viewCompany', $(response).find('BPQL > body > company'), section, 'replaceWith')
                 })));
         });
         form.configure({

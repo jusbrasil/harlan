@@ -6,6 +6,7 @@ module.exports = controller => {
     const dropzoneElement = dropzone.get(0);
 
     let oppTimeout;
+
     const showDropzone = () => {
         clearTimeout(oppTimeout);
         dropzone.addClass('show');
