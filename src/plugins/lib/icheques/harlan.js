@@ -460,6 +460,18 @@ module.exports = controller => {
             });
         }
 
+        const force = controller.call('tooltip', separatorData.menu, 'Forçar Atualização').append($('<i />').addClass('fa fa-refresh')).click(e => {
+            e.preventDefault();
+            controller.confirm({
+                title: 'Deseja realmente forçar a atualização do cheque?',
+                subtitle: 'O cheque pode ser bloqueado por excesso de tentativas junto ao operador bancário.',
+                paragraph: 'Atenção! Caso não saiba o que está fazendo não proceda esta operação.'
+            }, () => controller.server.call('SELECT FROM \'PUSH\'.\'DAEMON\'', controller.registerCall('loader::ajax', controller.call('error::ajax', {
+                data: { id: check.pushId },
+                success: () => toastr.warning('O cheque foi atualizado com sucesso.', 'Aguarde até que a interface seja atualizada.'),
+            }))));
+        });        
+
         separator.addClass('external-source loading');
         const checkResult = controller.call('result');
         checkResult.element().insertAfter(separator);
@@ -512,13 +524,14 @@ module.exports = controller => {
 
             if (check.queryStatus && check.queryStatus !== 10) {
                 rescan();
+                if (!controller.query.support) force.hide();
 
                 if (check.debtCollector) {
                     nodes.push(checkResult.addItem('Cobrança', 'Ativa'));
                 }
 
                 if (check.lastDebtCollectorMessage) {
-                    nodes.push(checkResult.addItem('Última Histórico do Sacado', check.lastDebtCollectorMessage));
+                    nodes.push(checkResult.addItem('Último Histórico do Sacado', check.lastDebtCollectorMessage));
                 }
 
                 section[0].removeClass('loading');
@@ -549,6 +562,7 @@ module.exports = controller => {
 
                 separator.addClass(elementClass);
             } else {
+                force.show();
                 section[0].addClass('loadingCheck');
             }
         };
@@ -667,7 +681,7 @@ module.exports = controller => {
                 'q[0]' : 'USING \'CCBUSCA\' SELECT FROM \'FINDER\'.\'CONSULTA\'',
                 'q[1]' : 'SELECT FROM \'RFB\'.\'CERTIDAO\'',
             }));
-	}
+        }
 
         queryList.push(callback => queryTry(callback, 'USING \'CCBUSCA\' SELECT FROM \'FINDER\'.\'CONSULTA\''));
         queryList.push(callback => queryTry(callback, 'SELECT FROM \'CCBUSCA\'.\'CONSULTA\''));

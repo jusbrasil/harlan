@@ -316,7 +316,7 @@ module.exports = controller => {
 
             controller.call('tooltip', actions, 'Abrir Conta').append($('<i />').addClass('fa fa-folder-open')).click(e => {
                 e.preventDefault();
-                window.open(`${document.location.protocol}\/\/${document.location.host}?apiKey=${encodeURIComponent(apiKey)}`);
+                window.open(`${document.location.protocol}\/\/${document.location.host}?apiKey=${encodeURIComponent(apiKey)}&support=1`);
             });
 
             controller.call('tooltip', actions, 'Editar Endereço').append($('<i />').addClass('fa fa-map'))
