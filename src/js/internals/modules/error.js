@@ -7,7 +7,6 @@ module.exports = controller => {
         if (exceptionType === 'ExceptionDatabase') {
             switch (exceptionCode) {
             case e.ExceptionDatabase.authenticationFailure:
-                controller.call('buyit');
                 return;
             case e.ExceptionDatabase.missingBillingInformation:
                 controller.confirm({
