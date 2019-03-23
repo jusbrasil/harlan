@@ -19,7 +19,7 @@ module.exports = controller => {
     };
 
     controller.registerTrigger('authentication::authenticated', 'module::authenticated', (args, callback) => {
-        controller.serverCommunication.call('SELECT FROM \'HARLANMODULES\'.\'JS\'', {
+        controller.serverCommunication.call('SELECT FROM \'HARLANMODULES\'.\'JS\'', controller.call('error::ajax', {
             error() {
                 callback(Array.from(arguments));
             },
@@ -47,7 +47,7 @@ module.exports = controller => {
                 });
 
             }
-        });
+        }));
     });
 
     controller.registerBootstrap('module', callback => {

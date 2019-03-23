@@ -8,7 +8,7 @@ module.exports = controller => {
     let alert = null;
 
     controller.registerCall('inbox::check', () => {
-        controller.serverCommunication.call('SELECT FROM \'HARLANMESSAGES\'.\'CountUnread\'', {
+        controller.serverCommunication.call('SELECT FROM \'HARLANMESSAGES\'.\'CountUnread\'', controller.call('error::ajax', {
             success(ret) {
                 const count = parseInt($(ret).find('BPQL > body > count').text());
                 if (count > 0) {
@@ -23,7 +23,7 @@ module.exports = controller => {
                     alert = null;
                 }
             }
-        });
+        }));
     });
 
     const checkbox = (data, cb) => {
