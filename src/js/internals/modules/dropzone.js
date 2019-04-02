@@ -3,7 +3,6 @@ import uniqBy from 'lodash/uniqBy';
 
 module.exports = controller => {
     const dropzone = $('<div />').addClass('dropzone');
-    const dropzoneElement = dropzone.get(0);
 
     let oppTimeout;
 
