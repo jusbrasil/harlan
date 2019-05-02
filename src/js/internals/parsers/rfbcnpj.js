@@ -181,6 +181,7 @@ module.exports = controller => {
 
     controller.registerBootstrap('parserRFBCNPJ', callback => {
         callback();
+        controller.importXMLDocument.register('RFB', 'CERTIDAO', parserConsultas);
         controller.importXMLDocument.register('RFBCNPJ', 'CERTIDAO', parserConsultas);
         controller.importXMLDocument.register('RFBCNPJANDROID', 'CERTIDAO', parserConsultas);
     });
