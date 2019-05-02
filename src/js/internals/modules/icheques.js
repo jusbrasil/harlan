@@ -15,14 +15,9 @@ module.exports = controller => {
 
         callback();
 
-        controller.registerTrigger('serverCommunication::websocket::authentication::end', 'kronoosPlugin', (args, callbackAuthentication) => {
-            callbackAuthentication();
-            if (!(controller.confs.user.tags && 
+        if (!(controller.confs.user.tags && 
                 controller.confs.user.tags.indexOf('no-refin') !== -1)) refinCall();
-            if (!(controller.confs.user.tags && 
+        if (!(controller.confs.user.tags && 
                 controller.confs.user.tags.indexOf('no-veiculos') !== -1)) veiculosCall();
-            if (/federal\s*invest/i.test(controller.confs.user.commercialReference)) return;
-            kronoosCall(args);
-        });
     }));
 };
