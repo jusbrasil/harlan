@@ -5,7 +5,7 @@
             <ul>
                 <li><a href="#" class="action-home">Home</a></li>
                 <li><a href="mailto:consrctato@bipbop.com.br">Suporte</a></li>
-                <li><a href="https://api.bipbop.com.br/">Web Service</a></li>
+                <li><a href="https://www.bipbop.com.br/">BIPBOP</a></li>
                 <li><a href="#" class="action-login">Login</a></li>
             </ul>
         </nav>
