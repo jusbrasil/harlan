@@ -16,7 +16,7 @@ module.exports = controller => {
         });
     });
 
-    controller.registerCall('ccbusca', (val, callback) => {
+    controller.registerCall('ccbusca', (val, callback, ...args) => {
         let ccbuscaQuery = {
             documento: val,
             cache: 'DISABLED'
@@ -31,16 +31,15 @@ module.exports = controller => {
             controller.call('error::ajax', controller.call('loader::ajax', {
                 data: ccbuscaQuery,
                 success(ret) {
-                    controller.call('ccbusca::parse', ret, val, callback);
+                    controller.call('ccbusca::parse', ret, val, callback, ...args);
                 }
             })));
     });
 
-    controller.registerCall('ccbusca::parse', (ret, val, callback) => {
-
+    controller.registerCall('ccbusca::parse', (ret, val, callback, ...args) => {
         const sectionDocumentGroup = controller.call('section', 'Busca Consolidada',
             'Informações agregadas do CPF ou CNPJ',
-            'Registro encontrado');
+            'Registro encontrado', ...args);
 
         let subtitle = $('.results-display', sectionDocumentGroup[0]);
         let messages = [subtitle.text()];

@@ -53,7 +53,7 @@ module.exports = controller =>  {
                 form.element().submit(e =>  {
                     e.preventDefault();
                     modal.close();
-                    controller.call('credits::buy', Math.abs(missing), ret =>  {
+                    controller.call('credits::buy', Math.max(Math.abs(missing), 25000), ret =>  {
                         defaultChargeCallback(ret, callback);
                     });
                 });
