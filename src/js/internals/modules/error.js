@@ -15,8 +15,8 @@ module.exports = controller => {
                 title: 'Whops! Teremos de autenticá-lo novamente.',
                 subtitle: 'Por razões de segurança será necessário que se autentique novamente no sistema.',
                 paragraph: 'Você será redirecionado para que possa realizar novamente a autenticação.',
-                confirmText: 'Fechar'
-            }, logout, logout);
+                confirmText: 'Sair'
+            }, logout, () => {});
             return;
         case e.ExceptionDatabase.missingBillingInformation:
             controller.confirm({
