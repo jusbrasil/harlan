@@ -41,7 +41,7 @@ module.exports = controller => {
         form.addSubmit('continue', parameters.confirmText || controller.i18n.system.confirm());
         checkbox = useCheckbox ? form.addCheckbox('confirm', 'Eu <strong>aceito as condições</strong> para continuar.') : null;
 
-        actions.add(controller.i18n.system.cancel()).click(e => {
+        actions.add(parameters.cancelText || controller.i18n.system.cancel()).click(e => {
             e.preventDefault();
             if (onCancel)
                 onCancel();

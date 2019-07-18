@@ -50,6 +50,13 @@ module.exports = controller => {
     const KRONOOS_SEARCH_BY_NAME = $('.kronoos-application .icon');
     const KRONOOS_DEPTH = $('.kronoos-application .depth');
 
+    controller.registerCall('kronoos::elements', () => ({
+        input: INPUT,
+        searchBar: SEARCH_BAR,
+        action: KRONOOS_ACTION,
+        pdf: $('#kronoos-pdf'),
+    }));
+
     KRONOOS_SEARCH_BY_NAME.click(controller.click('kronoos::searchByName'));
 
     KRONOOS_DEPTH.addClass(`fa-thermometer-${depth}`);
@@ -138,14 +145,14 @@ module.exports = controller => {
     };
 
     KRONOOS_ACTION.submit(e => {
+
         $(INPUT).blur();
         e.preventDefault();
         clearAll();
 
-        controller.call('kronoos::contractAccepted::app', () => {
+        let document = INPUT.val();
 
-            let document = INPUT.val();
-
+        controller.trigger('kronoos::search', { document }, () => controller.call('kronoos::contractAccepted::app', () => {
             if (!CPF.isValid(document) && !CNPJ.isValid(document)) {
                 toastr.error('O documento informado não é um CPF ou CNPJ válido.',
                     'Preencha um CPF ou CNPJ válido para poder realizar a consulta Kronoos');
@@ -159,12 +166,11 @@ module.exports = controller => {
                     data: {
                         documento: document,
                         kronoos: true
-
                     },
                     success: ret => controller.call('kronoos::ccbusca', $('BPQL > body > nome', ret).first().text(), document),
                     error: () => controller.call('kronoos::ccbusca', null, document)
                 })));
-        });
+        }));
     });
 
     controller.registerCall('kronoos::parse', (name, document, kronoosData, cbuscaData = null, style = 'maximized', parameters = {}) => {

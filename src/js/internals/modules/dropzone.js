@@ -38,11 +38,12 @@ module.exports = controller => {
         document.addEventListener('drop', handleDrop);
         document.addEventListener('dragover', allowDrag);
         document.addEventListener('dragenter', () => {
-            oppTimeout = setTimeout(() => showDropzone(), 1000);
-            oppTimeout = setTimeout(() => hideDropzone(), 5000);
+            oppTimeout = setTimeout(() => {
+                showDropzone();
+                oppTimeout = setTimeout(() => hideDropzone(), 5000);
+            }, 1000);
         });
-        document.addEventListener('dragleave', () => {
-            oppTimeout = setTimeout(() => hideDropzone(), 5000);
-        });
+
+        document.addEventListener('dragleave', () => hideDropzone());
     });
 };
