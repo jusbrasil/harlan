@@ -134,11 +134,12 @@ export default class KronoosParse {
                     data: {
                         nome: this.name
                     },
-                    timeout: humanInterval('10 seconds'),
+                    timeout: humanInterval('45 seconds'),
                     success: ret => {
                         this.homonymous = ret.homonymous;
+                        execute();
                     },
-                    complete: () => execute()
+                    error: () => execute(),
                 }));
         } else {
             this.homonymous = 1;
