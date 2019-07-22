@@ -409,12 +409,12 @@ module.exports = controller => {
 
                 let form = modal.createForm();
                 const input = form.addInput('Créditos', 'text', 'Créditos (R$)')
-                    .mask('#.##0,000', {
+                    .mask('#.##0,00', {
                         reverse: true
                     });
 
                 if (credits) {
-                    input.val(numeral(Math.abs(credits / 1000)).format('0,0.000'));
+                    input.val(numeral(Math.abs(credits / 1000)).format('0,0.00'));
                 }
 
                 const invertCredits = form.addCheckbox('invert', 'Saldo Devedor', credits < 0);
@@ -431,9 +431,9 @@ module.exports = controller => {
                             },
                             success: () => {
                                 if (creditsInput) {
-                                    creditsInput.find('.value').text(numeral(ammount / 1000.0).format('$0,0.000'));
+                                    creditsInput.find('.value').text(numeral(ammount / 1000.0).format('$0,0.00'));
                                 } else {
-                                    creditsInput = result.addItem('Créditos Sistema', numeral(ammount / 1000.0).format('$0,0.000')).insertAfter(inputApiKey);
+                                    creditsInput = result.addItem('Créditos Sistema', numeral(ammount / 1000.0).format('$0,0.00')).insertAfter(inputApiKey);
                                 }
                                 modal.close();
                             }

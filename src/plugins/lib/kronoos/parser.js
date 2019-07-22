@@ -474,7 +474,7 @@ export default class KronoosParse {
                     })));
 
                     execall(/\d{7}(\-)?\d{2}(\.)?\d{4}(\.)?\d(\.)?\d{2}(\.)?\d{4}/g, str).map(r => {
-                        let proc = r.match;kelement.beha;
+                        let proc = r.match;
                         this.serverCall('SELECT FROM \'KRONOOSJURISTEK\'.\'DATA\'', this.loader('fa-balance-scale', `Verificando processo ${r.match} para documento ${this.cpf_cnpj}`, {
                             data: {
                                 data: `SELECT FROM 'CNJ'.'PROCESSO' WHERE 'PROCESSO' = '${r.match}'`
@@ -1656,13 +1656,13 @@ export default class KronoosParse {
             let icon = 'exclamation';
             switch (notationType) {
             case 'hasNotation':
-                notationMessage = ['possui apontamento', 'possuem apontamentos'];
+                notationMessage = ['apresenta registro nos órgãos pesquisados', 'apresentam registros nos órgãos pesquisados'];
                 break;
             case 'hasntNotation':
-                notationMessage = ['não possui apontamento', 'não possuem apontamentos'];
+                notationMessage = ['não apresenta registro nos órgãos pesquisados', 'não apresentam registros nos órgãos pesquisados'];
                 break;
             default:
-                notationMessage = ['de apontamento desconhecido e', 'de apontamentos desconhecidos e'];
+                notationMessage = ['de registro desconhecido e', 'de registros desconhecidos e'];
             }
             for (let behaviourType in informationQA[notationType]) {
                 let behaviourMessage;
@@ -1670,16 +1670,16 @@ export default class KronoosParse {
                 case 'behaviourAccurate':
                     if (notationType === 'hasntNotation') icon = 'check';
                     else icon = 'times';
-                    behaviourMessage = [', sem possibilidade da presença de falsos positivos', ', sem possibilidade da presença de falsos positivos'];
+                    behaviourMessage = ['', ''];
                     break;
                 case 'behaviourUnstructured':
-                    behaviourMessage = ['pendente de verificação por ser desestruturado', 'pendentes de verificação por serem desestruturados'];
+                    behaviourMessage = [' e pode conter dados não estruturados, devendo ser verificado ', ' e podem conter dados não estruturados, devendo ser verificados'];
                     break;
                 case 'behaviourUnstructuredHomonym':
-                    behaviourMessage = ['pendente de verificação por ser desestruturado e com presença de possíveis homônimos', 'pendentes de verificação por serem desestruturados e com presença de possíveis homônimos'];
+                    behaviourMessage = [' e pode conter homônimos e dados não estruturados, devendo ser verificado', ' e podem conter homônimos e dados não estruturados, devendo ser verificados'];
                     break;
                 case 'behaviourHomonym':
-                    behaviourMessage = ['pendente de verificação por presença de possíveis homônimos', 'pendentes de verificação por presença de possíveis homônimos'];
+                    behaviourMessage = [' e pode conter homônimos, devendo ser verificado', ' e podem conter homônimos, devendo ser verificados'];
                     break;
                 default:
                     behaviourMessage = ['pendente de verificação', 'pendentes de verificação'];
@@ -1687,9 +1687,9 @@ export default class KronoosParse {
 
                 let searchMessage;
                 if (informationQA[notationType][behaviourType] > 1) {
-                    searchMessage = `${informationQA[notationType][behaviourType]} resultados ${notationMessage[1]} ${behaviourMessage[1]}.`;
-                } else {
-                    searchMessage = `1 resultado ${notationMessage[0]} ${behaviourMessage[0]}.`;
+                    searchMessage = `${informationQA[notationType][behaviourType]} resultados encontrados ${notationMessage[1]} ${behaviourMessage[1]}.`;
+                }   else {
+                    searchMessage = `1 resultado encontrado ${notationMessage[0]} ${behaviourMessage[0]}.`;
                 }
                 this.firstElement().stage(icon, searchMessage.replace(/\s+,/, ',')).addClass(`type-${notationType}-${behaviourType}`);
             }
@@ -1818,7 +1818,8 @@ export default class KronoosParse {
                 documento: this.cpf_cnpj,
                 elements: _.map(_.filter(this.kelements, n => n && !n.element().find('.certidao').length), originalContext => {
                     let element = originalContext.element().clone();
-                    let walk = document.createTreeWalker(element.get(0), NodeFilter.SHOW_TEXT, null, false);
+                    $("a[href]", element).each(element => element.text(element.attr('href')))
+		    let walk = document.createTreeWalker(element.get(0), NodeFilter.SHOW_TEXT, null, false);
 
                     let n;
                     while ((n = walk.nextNode())) {
