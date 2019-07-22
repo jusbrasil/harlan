@@ -60,7 +60,9 @@ const externalJsSources = [
     `${vendors}/pikaday/plugins/pikaday.jquery.js`,
     `${vendors}/jszip/dist/jszip.min.js`,
     `${vendors}/html-docx-js/dist/html-docx.js`,
-    `${vendors}/jdataview/dist/browser/jdataview.js`
+    `${vendors}/jdataview/dist/browser/jdataview.js`,
+    `${vendors}/react/react.production.min.js`,
+    `${vendors}/react/react-dom.production.min.js`,
 ];
 
 const ichequesKeystore = 'icheques.keystore';

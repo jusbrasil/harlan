@@ -117,6 +117,7 @@ $color-complementary: #7c66c2;
         box-sizing: border-box;
     }
     .search-bar {
+        overflow: auto;
         transition-property: all;
         transition-duration: 2s;
         position: relative;
@@ -160,6 +161,9 @@ $color-complementary: #7c66c2;
 
         &.minimize {
             height: auto !important;
+            #kronoos-pdf {
+                display: none;
+            }
         }
         .kronoos-logo {
             vertical-align: middle;
