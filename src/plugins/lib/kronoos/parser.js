@@ -1818,8 +1818,8 @@ export default class KronoosParse {
                 documento: this.cpf_cnpj,
                 elements: _.map(_.filter(this.kelements, n => n && !n.element().find('.certidao').length), originalContext => {
                     let element = originalContext.element().clone();
-                    $("a[href]", element).each(element => element.text(element.attr('href')))
-		    let walk = document.createTreeWalker(element.get(0), NodeFilter.SHOW_TEXT, null, false);
+                    $('a[href]', element).each(function () { $(this).text($(this).attr('href')); });
+        		    let walk = document.createTreeWalker(element.get(0), NodeFilter.SHOW_TEXT, null, false);
 
                     let n;
                     while ((n = walk.nextNode())) {
