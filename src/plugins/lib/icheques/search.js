@@ -59,7 +59,7 @@ module.exports = controller => {
         if (!new CMC7Validator(search).isValid()) return;
 
         controller.serverCommunication.call('SELECT FROM \'ICHEQUES\'.\'CHECK\'', {
-            data: search,
+            data: { search },
             success: (ret) => {
                 autocomplete.item('iCheques', 'Pesquisa Geral de Cheques', sprintf('Número: %s Cheque: %s', new CMC7Parser(search).number, CMC7_MASK.apply(search)))
                     .addClass('icheque')
