@@ -28,7 +28,7 @@
                         Módulos
                     </div>
                 </li>
-                <li>
+                <li style="display: none;">
                     <a href="#" id="action-show-endpoint"><i class="fa fa-key"></i></a>
                     <div class="mdl-tooltip" for="action-show-endpoint" data-i18n="index.integration">
                         Chave de API

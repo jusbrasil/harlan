@@ -154,8 +154,13 @@ module.exports = controller => {
                         return CNPJ.isValid(element.val());
                     return true;
                 }
-            }]
-            ],
+            }], {
+                name: 'priceList',
+                type: 'text',
+                placeholder: 'Lista de Preços',
+                labelText: 'Lista de Preços',
+                optional: true
+            }],
             validate: (callback, configuration, screen, formManager) => {
                 formManager.defaultScreenValidation((isValid) => {
                     if (!isValid) {
