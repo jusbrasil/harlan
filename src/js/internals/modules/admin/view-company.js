@@ -230,10 +230,13 @@ module.exports = controller => {
 
         const contrato = company.children('contrato');
 
+        const locale = numeral.locale();
+        numeral.locale('en');
         appendContractItem('Dia Vencimento', contrato.find('contrato:eq(0)').text() || '1');
         appendContractItem('Valor', numeral(contrato.find('contrato:eq(1)').text() || '0').format('$0,0.00'));
         appendContractItem('Pacote de Consultas', contrato.find('contrato:eq(2)').text() || '0');
         appendContractItem('Valor da Consulta Excedente', numeral(contrato.find('contrato:eq(3)').text() || '0').format('$0,0.00'));
+        numeral.locale(locale);
 
         appendContractItem('Tipo do Contrato', changeCase.titleCase(contrato.find('contrato:eq(4)').text()));
         appendContractItem('Criação', moment.unix(parseInt(contrato.find('contrato:eq(5)').text())).fromNow());
