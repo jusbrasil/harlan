@@ -282,6 +282,7 @@ export default class KronoosParse {
                 resourceUseAnalytics(xml, true);
                 if (error) error(...args);
             } catch (e) {
+                console.error(e);
                 toastr.error(e);
             }
         };
@@ -291,6 +292,7 @@ export default class KronoosParse {
                 resourceUseAnalytics(args[0], false);
                 if (success) success(...args);
             } catch (e) {
+                console.error(e);
                 toastr.error(e);
             }
         };
@@ -2136,7 +2138,11 @@ export default class KronoosParse {
             }
 
             let namespace = $('namespace', element).text();
-            let [title, description] = NAMESPACE_DESCRIPTION[namespace];
+            let title = 'Apontamento Positivo';
+            let description = 'Consta apontamento positivo';
+            if (namespace && namespace in NAMESPACE_DESCRIPTION) {
+                [title, description] = NAMESPACE_DESCRIPTION[namespace];
+            }
             let kelement = this.kronoosElement(null, title, 'Existência de apontamentos cadastrais.', description);
             let notes = $('notes node', element);
             let source = $('source node', element);
@@ -2733,6 +2739,7 @@ export default class KronoosParse {
         try {
             this._juristekCNJ(ret, cnj, findProc, nameSearch, checkName);
         } catch (e) {
+            console.error(e);
             if (cnj) {
                 let cnjInstance = this.procElements[cnj];
                 if (cnjInstance) {
