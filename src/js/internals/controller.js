@@ -104,7 +104,7 @@ module.exports = function() {
     this.reference = name => (...parameters) => this.call(name, ...parameters);
 
     this.click = (name, ...parameters) => e => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         this.call(name, ...parameters);
     };
 
