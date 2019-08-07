@@ -26,11 +26,11 @@ module.exports = controller => {
 
     controller.registerCall('icheques::cantAntecipate', () => {
         const report = controller.call('report',
-            'Você procura antecipar cheques?',
-            'Receba o dinheiro antes, não espere até o vencimento.',
-            'Com o iCheques você pode solicitar a antecipação dos seus cheques através de um dos nossos parceiros financeiros. Clique no botão abaixo para iniciar o processo de cadastro.');
+            'Cotar Taxas e Limites para Antecipação',
+            'Receba o dinheiro antes, não espere até o vencimento. CNPJ obrigatório.',
+            'Na iCheques você preenche seu cadastro PJ e envia ele, gratuitamente e com 1-click, para dezenas de Financeiras.  Encontre as melhores taxas e limites na iCheques sem dor de cabeça!');
 
-        report.button('Quero Antecipar Cheques!', () => {
+        report.button('Cotar taxas e limites', () => {
             controller.call('icheques::register::all');
         }).addClass('green-button');
 
@@ -52,11 +52,11 @@ module.exports = controller => {
 
         const report = controller.call('report',
             'Parabéns! Você possui cheques bons para antecipação.',
-            'Receba o dinheiro antes, descontamos depois para sua comodidade.', !ammount ?
-                `Com o iCheques você pode solicitar a antecipação dos seus <strong>${count}</strong> ${count == 1 ? 'cheque' : 'cheques'} através de uma das nossas antecipadoras. Clique no botão abaixo para iniciar o processo.` :
-                `Com o iCheques você pode solicitar a antecipação dos seus <strong>${count}</strong> ${count == 1 ? 'cheque de valor' : 'cheques que somam'} <strong>${numeral(ammount/100).format('$0,0.00')}<\/strong> através de uma das nossas antecipadoras. Clique no botão abaixo para iniciar o processo.`);
+            'Receba o dinheiro antes do vencimento. Desconte seu recebíveis com nossos Parceiros Finaneiros!', !ammount ?
+                `Você tem <strong>${count}</strong> ${count == 1 ? 'cheque' : 'cheques'} para antecipar com nossos Parceiros Financeiros. Clique abaixo para Antecipar!` :
+                `Você tem <strong>${count}</strong> ${count == 1 ? 'cheque de valor' : 'cheques que somam'} <strong>${numeral(ammount/100).format('$0,0.00')}<\/strong> para antecipar com nossos Parceiros Financeiros. Clique abaixo para Antecipar!`);
 
-        report.button('Solicitar Antecipação', () => {
+        report.button('Antecipar Cheques', () => {
             const checks = controller.call('icheques::resultDatabase', controller.database.exec(obtainChecks)[0]).values;
             controller.call('icheques::antecipate', checks);
         }).addClass('green-button');
