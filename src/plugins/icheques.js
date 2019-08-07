@@ -45,7 +45,6 @@ harlan.addPlugin(controller => {
     require('./lib/icheques/harlan')(controller);
     require('./lib/icheques/report')(controller);
     require('./lib/icheques/search')(controller);
-    require('./lib/icheques/buy-reader')(controller);
     require('./lib/icheques/full-profile')(controller);
     require('./lib/icheques/antecipate')(controller);
     require('./lib/icheques/contact')(controller);
