@@ -2049,7 +2049,7 @@ export default class KronoosParse {
                 modal.close();
             };
 
-            list.add('fa-file-word-o', 'DOCX - Microsoft Word 2007 (Windows)').click(clickEvent('downloadDOCX'));
+            // list.add('fa-file-word-o', 'DOCX - Microsoft Word 2007 (Windows)').click(clickEvent('downloadDOCX'));
             list.add('fa-file-excel-o', 'Excel simples de processos instantâneo.').click(clickEvent('downloadXLSX'));
             list.add('fa-file-excel-o', 'Excel de processos via e-mail.').click(clickEvent('downloadXLSXEmail'));
             list.add('fa-file-pdf-o', 'Dossiê em formato PDF.').click(clickEvent('downloadPDF'));
@@ -2389,21 +2389,21 @@ export default class KronoosParse {
                         //     return;
                         // }
 
-                        this.call('confirm', {
-                            title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target?`,
-                            subtitle: `${node.label}, documento ${cpf_cnpj} é relacionado com ${this.name}.`,
-                            paragraph: `A conexão é para ${connection.label} <small>(${f(connection.id)})</small> do tipo ${edge.relationType}.`
-                        }, () => {
-                            // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            // defaultActionSearch[edge.relationType] = true;
-                            searchTarget(cb);
-                        }, () => {
-                            // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            // defaultActionSearch[edge.relationType] = false;
-                            cb();
-                        }, (modal, form, actions) => {
-                            // dontAskAgainInput = form.addCheckbox("confirm", `Aplicar ação para todos os targets relacionados (${edge.relationType}).`);
-                        });
+                        // this.call('confirm', {
+                        //     title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target?`,
+                        //     subtitle: `${node.label}, documento ${cpf_cnpj} é relacionado com ${this.name}.`,
+                        //     paragraph: `A conexão é para ${connection.label} <small>(${f(connection.id)})</small> do tipo ${edge.relationType}.`
+                        // }, () => {
+                        //     // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
+                        //     // defaultActionSearch[edge.relationType] = true;
+                        //     searchTarget(cb);
+                        // }, () => {
+                        //     // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
+                        //     // defaultActionSearch[edge.relationType] = false;
+                        //     cb();
+                        // }, (modal, form, actions) => {
+                        //     // dontAskAgainInput = form.addCheckbox("confirm", `Aplicar ação para todos os targets relacionados (${edge.relationType}).`);
+                        // });
                     }, () => callback()));
                 }
             });
