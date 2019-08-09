@@ -120,8 +120,8 @@ module.exports = controller => {
             });
             report.gamification('fail');
         } else if (approved) {
-            report.title('Pronto! Seu FIDC/Factoring está configurado!');
-            report.subtitle('Essa conta está habilitada para receber operações. Bons negócios!');
+            report.title('Bem-vindo Parceiro Financeiro. Boas operações!');
+            report.subtitle('Essa conta está habilitada como Factoring/FIDC/Securitizadora/ESC e conta com todos serviços iCheques.');
             report.paragraph(bio);
 
             const timeline = report.timeline(controller);
@@ -184,11 +184,11 @@ module.exports = controller => {
                         controller.confirm({}, () => {
                             let modal = controller.call('modal');
                             modal.title('Motivo de Rejeição');
-                            modal.subtitle('Insira o motivo do cadastro estar sendo recusado.');
-                            modal.paragraph('Para poder continuar insira o motivo do cadastro estar sendo recusado.');
+                            modal.subtitle('Para o Cedente não entrar em contato, informe o motivo da rejeição.');
+                            modal.paragraph('Por que este cadastro foi rejeitado?');
                             let form = modal.createForm();
-                            let reason = form.addTextarea('reason', 'Por qual motivo o cadastro está sendo recusado?');
-                            form.addSubmit('send', 'Recusar');
+                            let reason = form.addTextarea('reason', 'Nos conte o motivo! Fora do Perfil?');
+                            form.addSubmit('send', 'Recusar Cadastro');
                             form.element().submit(e => {
                                 e.preventDefault();
                                 if (!reason.val().length) {
@@ -310,9 +310,9 @@ module.exports = controller => {
             });
 
         } else {
-            report.title('Seu cadastro de antecipador ainda não foi aprovado.');
-            report.subtitle('Infelizmente ainda não é possível receber carteiras de cheques.');
-            report.paragraph('Nosso prazo para validação de antecipadores parceiros é de até 7 dias úteis. Certifique que você atendeu a todas as ligações e leu todos seus e-mails, podemos entrar em contato a qualquer momento.');
+            report.title('Seu cadastro de Factoring/FIDC/Securitizadora/ESC ainda não foi aprovado.');
+            report.subtitle('Por favor aguarde até a liberação pela Equipe iCheques.');
+            report.paragraph('O prazo para validar seu cadastro é de até 1 dia útil.');
             report.gamification('fail');
         }
 
@@ -344,8 +344,8 @@ module.exports = controller => {
         }
 
         autocomplete.item('Antecipadora',
-            'Configurar Antecipadora',
-            'Habilite seu fundo a receber títulos do iCheques')
+            'Configurar Factoring/FIDC/Securitizadora/ESC',
+            'Insira o logotipo e configure a Prospecção Automática.')
             .addClass('icheque').click(e => {
                 e.preventDefault();
                 controller.call('fidc::configure');
@@ -358,9 +358,9 @@ module.exports = controller => {
             const gamification = modal.gamification('moneyBag');
             let logoImage = null;
 
-            modal.title('Configurar Antecipadora');
-            modal.subtitle('Comece já a receber títulos do iCheques');
-            modal.paragraph('Configurando sua antecipadora você passa a receber cheques de nossos clientes e parceiros, seu perfil estará sujeito a avaliação cadastral.');
+            modal.title('Configurar FACTORING/FIDC/SECURITIZADORA');
+            modal.subtitle('Comece já a receber cadastros da iCheques diariamente');
+            modal.paragraph('Configurando sua Financeira você passa a receber cadastros de novos cedentes.');
             const form = modal.createForm();
             const logo = form.addInput('logo', 'file', 'Logomarca - 150x150');
             const multifield = form.multiField();
@@ -432,9 +432,9 @@ module.exports = controller => {
 
                 modal.close();
                 controller.call('confirm', {
-                    title: 'Você aceita com o contrato de serviço?',
-                    subtitle: 'Para continuar é necessário que você aceite o contrato de serviço desta ferramenta.',
-                    paragraph: 'o contrato de serviço estão disponíveis <a target=\'_blank\' href=\'/legal/icheques/MINUTA___CONTRATO__ANTECIPADORA_DE_CHEQUES.pdf\' title=\'contrato de serviço\'>neste link</a>, após a leitura clique em confirmar para acessar sua conta. O aceite é fundamental para que possamos disponibilizar todos os nossos serviços e você assim desfrutar de todos os benefícios iCheques.',
+                    title: 'Você aceita os termos de uso?',
+                    subtitle: 'Para continuar é necessário que você aceite os termos de uso da iCheques.',
+                    paragraph: 'os termos de uso estão disponíveis <a target=\'_blank\' href=\'/legal/icheques/MINUTA___CONTRATO__ANTECIPADORA_DE_CHEQUES.pdf\' title=\'contrato de serviço\'>neste link</a>. Após a leitura clique em confirmar para acessar sua conta.',
                     confirmText: 'Aceitar'
                 }, () => {
                     controller.call('billingInformation::need', () => {
@@ -449,9 +449,9 @@ module.exports = controller => {
                             success: () => {
                                 controller.call('alert', {
                                     icon: 'pass',
-                                    title: 'Parabéns! Aguarde seu e-mail pela nossa aprovação.',
-                                    subtitle: 'Assim que aprovado seu cadastro você já poderá transacionar com nossos clientes e parceiros.',
-                                    paragraph: 'O nosso prazo é de 7 (sete) dias úteis, mas de repente podemos aprovar antes.'
+                                    title: 'Parabéns! Cadastro enviado.',
+                                    subtitle: 'Aguarde até 1 dia útil para ser aprovado.',
+                                    paragraph: 'Logo logo estará usando nossas consultas avançadas e protegendo seu negócio.'
                                 });
                             }
                         }, true)));
@@ -461,7 +461,7 @@ module.exports = controller => {
             modal.createActions().cancel();
         }, ret => {
             if (!$('BPQL > body > company > cnpj', ret).text().length) {
-                toastr.warning('É necessário um CNPJ de faturamento para poder continuar.',
+                toastr.warning('É necessário um CNPJ para poder continuar.',
                     'Você não possui um CNPJ no cadastro.');
                 return false;
             }
@@ -500,11 +500,11 @@ module.exports = controller => {
 
         controller.registerCall('icheques::fidc::enable', ({bio, name, _id, logo}) => {
             const report = controller.call('report',
-                'Deseja habilitar a empresa?',
-                'Ao habilitar a empresa você permite que todos os clientes iCheques possam enviar suas operações.',
+                'Deseja habilitar a Factoring/FIDC/Securitizadora?',
+                'Ao habilitar a empresa você permite utilizar todos serviços e receber cadastros.',
                 bio);
             report.label(`Empresa: ${name}`);
-            report.button('Habilitar Fundo', () => {
+            report.button('Habilitar Financeira', () => {
                 controller.call('confirm', {}, () => {
                     controller.server.call('UPDATE \'IChequesFIDC\'.\'Approve\'',
                         controller.call('loader::ajax', controller.call('error::ajax', {
@@ -514,9 +514,9 @@ module.exports = controller => {
                             success: ret => {
                                 controller.call('alert', {
                                     icon: 'pass',
-                                    title: 'Antecipadora aprovada com sucesso.',
-                                    subtitle: 'A antecipadora foi aprovada e já pode ser utilizada pelos clientes e parceiros iCheques.',
-                                    paragraph: 'Um e-mail foi enviado avisando da aprovação.'
+                                    title: 'Factoring/FIDC/Securitizadora aprovada com sucesso!',
+                                    subtitle: 'Seu cadastro foi aprovado e já consegue usar todas nossas funcionalidades + receber cadastros da Prospecção Automática.',
+                                    paragraph: 'Quer usar a iCheques em seu sistema? Entre em contato com eles e peça a atualização!'
                                 });
                                 report.close();
                             }
@@ -615,11 +615,11 @@ module.exports = controller => {
         const modal = controller.call('modal');
 
         modal.title('iCheques');
-        modal.subtitle('Apresentação de Recibo da Operação');
-        modal.addParagraph('Para finalizar a operação é necessário que você apresente o recibo no formato iTit (WBA).');
+        modal.subtitle('Sincronize os cheques que aprovou');
+        modal.addParagraph('Para finalizar a operação é necessário que você insira o arquivo no formato iTit (WBA).');
 
         const form = modal.createForm();
-        const inputFile = form.addInput('fidc-file', 'file', 'Selecionar arquivo.', {}, 'Arquivo de Fundo FIDC').attr({
+        const inputFile = form.addInput('fidc-file', 'file', 'Selecionar arquivo.', {}, 'Arquivo .iTit').attr({
             multiple: 'multiple'
         });
 
@@ -638,10 +638,10 @@ module.exports = controller => {
 
     controller.registerCall('icheques::fidc::operation::decision', args => {
         const report = controller.call('report');
-        report.title('Carteira de Antecipação');
-        report.subtitle('Visualização da Carteira Recebida');
-        report.paragraph('Você recebeu uma carteira de cheques para antecipação. ' +
-            'Para aceitar os cheques você deve encaminhar um arquivo .iTIT para geração de fatura e conclusão.');
+        report.title('Operação de Cheques');
+        report.subtitle('Visualização da Operação');
+        report.paragraph('Você recebeu uma operação de cheques. ' +
+            'Para aceitar os cheques você deve enviar o arquivo .iTIT (WBA) para monitorarmos até o vencimento ou aceitar/recusar manualmente.');
 
         report.label(`Usuário\: ${args.company.username}`);
         report.label(`Documento\: ${args.company.cnpj ? CNPJ.format(args.company.cnpj) : CPF.format(args.company.cpf)}`);
@@ -747,12 +747,12 @@ module.exports = controller => {
                 return;
             }
             let modal = controller.call('modal');
-            modal.title('Qual o motivo da recusa?');
-            modal.subtitle('Você precisa informar o motivo da recusa para continuar.');
-            modal.paragraph('Ao informar seu cliente o motivo da recusa você evita discussões posteriores no telefone ou email.');
+            modal.title('Por que foi REPROVADO?');
+            modal.subtitle('Para o Cedente não entrar em contato, informe o motivo.');
+            modal.paragraph('Informando ao Cedente o motivo da reprovação evita discussões posteriores pelo telefone ou email.');
             let form = modal.createForm();
-            let reason = form.addTextarea('textarea', 'Qual motivo da recusa?');
-            form.addSubmit('continue', 'Recusar');
+            let reason = form.addTextarea('textarea', 'Por que foi REPROVADO?');
+            form.addSubmit('continue', 'RECUSAR');
             form.element().submit(e => {
                 e.preventDefault();
                 modal.close();
@@ -767,7 +767,7 @@ module.exports = controller => {
             modal.gamification('moneyBag');
             modal.title(args.company.nome || args.company.responsavel);
             modal.subtitle(args.company.cnpj ? `CNPJ ${CNPJ.format(args.company.cnpj)}` : `CPF ${CPF.format(args.company.cpf)}`);
-            const paragraph = modal.paragraph('Dados cadastrais registrados sobre a empresa no sistema iCheques.');
+            const paragraph = modal.paragraph('Dados cadastrais registrados na iCheques.');
             companyData(paragraph, args.company);
             modal.createActions().cancel();
         });
@@ -798,9 +798,9 @@ module.exports = controller => {
         });
 
         form.configure({
-            title: 'Cadastro Completo',
-            subtitle: 'Realize o cadastro completo de sua empresa.',
-            paragraph: 'O cadastro completo permite a realização de operações de crédito.',
+            title: 'Configure a taxa/limite do seu Cedente.',
+            subtitle: 'Aqui voce configura que tipo de operação pode ser enviada',
+            paragraph: 'Além de taxa/limite, configure se o Cedente pode enviar cheques com talão bloqueado ou processando.  Quer pagar por ele? Faça um link de crédito.',
             gamification: 'star',
             screens: [{
                 magicLabel: true,
