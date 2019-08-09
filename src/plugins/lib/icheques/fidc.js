@@ -16,6 +16,14 @@ module.exports = controller => {
 
     let globalReport = null;
 
+    function numeralUS(str) {
+        const locale = numeral.locale();
+        numeral.locale('en');
+        const result = numeral(str || '0');
+        numeral.locale(locale);
+        return result;
+    }
+
     const companyData = (paragraph, {telefone, email, endereco}) => {
         const phones = $('<ul />').addClass('phones');
         _.each(telefone, phone => {
@@ -148,16 +156,16 @@ module.exports = controller => {
 
                         let printData = Object.assign({}, companyElement);
                         printData.document = CNPJ.format(printData.document);
-                        printData.revenue = numeral(printData.revenue).format('$0,0.00');
-                        printData.preBilling = numeral(printData.preBilling).format('$0,0.00');
-                        printData.totalPayroll = numeral(printData.totalPayroll).format('$0,0.00');
-                        printData.locationValue = numeral(printData.locationValue).format('$0,0.00');
-                        printData.monthCheckAmmount = numeral(printData.monthCheckAmmount).format('$0,0.00');
-                        printData.avgCheckAmmount = numeral(printData.avgCheckAmmount).format('$0,0.00');
+                        printData.revenue = numeralUS(printData.revenue).format('$0,0.00');
+                        printData.preBilling = numeralUS(printData.preBilling).format('$0,0.00');
+                        printData.totalPayroll = numeralUS(printData.totalPayroll).format('$0,0.00');
+                        printData.locationValue = numeralUS(printData.locationValue).format('$0,0.00');
+                        printData.monthCheckAmmount = numeralUS(printData.monthCheckAmmount).format('$0,0.00');
+                        printData.avgCheckAmmount = numeralUS(printData.avgCheckAmmount).format('$0,0.00');
                         printData.ownProperty = ['Próprio', 'Alugado'][printData.ownProperty];
                         printData.bulk = ['Concentrados', 'Pulverizados', 'Mistura de ambos'][printData.bulk];
                         printData.ownSend = ['Não Possuo', 'Própria', 'Terceirizada', 'Própia e Terceirizada'][printData.ownSend];
-                        printData.checkLiquidity = numeral(printData.checkLiquidity).format('0.00%');
+                        printData.checkLiquidity = numeralUS(printData.checkLiquidity).format('0.00%');
 
                         let render = Mustache.render(fdicPrint, printData);
                         let html =  new MarkdownIt().render(render);
