@@ -295,6 +295,7 @@ $color-complementary: #7c66c2;
             &:hover {
                 ul {
                     display: block;
+                    position: fixed;
                 }
             }
         }
