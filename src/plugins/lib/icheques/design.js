@@ -48,7 +48,7 @@ module.exports = controller => {
     $('.input-q').attr('placeholder',
         controller.confs.isCordova ? 'Digite um CPF, CNPJ, CMC7 ou Placa de Veículo.' :
             'Pesquise um CPF/CNPJ, número de cheque ou placa de veículo.');
-    $('.actions .container').prepend($('<div />').addClass('content support-phone').text('(11) 3661-4657 (Suporte)').prepend($('<i />').addClass('fa fa-phone')));
+    $('.actions .container').prepend($('<div />').addClass('content support-phone').text('(11) 3522-8363 (Suporte)').prepend($('<i />').addClass('fa fa-phone')));
     $('body > .icheques-site .call-to-action').css({
         height: window.innerHeight
     });
