@@ -19,8 +19,6 @@ harlan.addPlugin(controller => {
     controller.endpoint.forgotPassword = 'SELECT FROM \'ICHEQUESAUTHENTICATION\'.\'FORGOTPASSWORD\'';
     controller.endpoint.adminReport = 'SELECT FROM \'ICHEQUESREPORT\'.\'REPORT\'';
     controller.endpoint.commercialReferenceOverview = 'SELECT FROM \'IChequesReport\'.\'COMMERCIALREFERENCE\' WHERE \'CACHE\' = \'DISABLED\'';
-    controller.confs.webserviceAddress = 'https://irql.icheques.com.br/';
-    controller.confs.websocketAddress = 'https://irql.icheques.com.br/ws';
 
     Object.assign(controller.confs.icheques, {
         price: 1500,
