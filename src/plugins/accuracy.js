@@ -1,4 +1,4 @@
-harlan.addPlugin(controller => {
+harlan.addPlugin(/** @type {import('../js/internals/controller')} */controller => {
 
     controller.confs.accuracy = {
         webserver: 'https://app.accuracyapp.com.br/api/v2/', /* local da API */

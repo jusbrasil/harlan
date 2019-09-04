@@ -1,0 +1,40 @@
+declare namespace _default {
+    export namespace ExceptionDatabase {
+        export const tableNotFound: number;
+        export const notFound: number;
+        export const invalidArgument: number;
+        export const missingArgument: number;
+        export const multipleResultsFound: number;
+        export const unexpectedHttpCode: number;
+        export const remoteSiteUnderMaintenance: number;
+        export const authenticationFailure: number;
+        export const internalServerError: number;
+        export const overlimit: number;
+        export const unregisteredCompany: number;
+        export const insufficientFunds: number;
+        export const noRegisteredEmailForSending: number;
+        export const missingBillingInformation: number;
+        export const blockedUser: number;
+        export const blockedIp: number;
+        export const quotaExceeded: number;
+        export const paswordRequired: number;
+        export const forbidden: number;
+        export const killed: number;
+        export const zombie: number;
+        export const templateError: number;
+        export const captchaFailed: number;
+        export const pushExistWithLabel: number;
+        export const underMaintenance: number;
+        export const siteMessage: number;
+        export const blockedByConfig: number;
+        export const legalReview: number;
+        export const resourceUnavailable: number;
+        export const emailUnchecked: number;
+        export const notReady: number;
+        export const unregisteredRequiredData: number;
+        export const needAcceptContract: number;
+        export const invalidToken: number;
+        export const invalidTokenExpired: number;
+    }
+}
+export default _default;

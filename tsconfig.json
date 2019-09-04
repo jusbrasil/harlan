@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    // "declaration": true,
+    // "emitDeclarationOnly": true
+  },
+  "include": [
+    "typings.d.ts",
+    "seo/**/*.js",
+    "src/js/**/*.js",
+    "src/plugins/**/*.js"
+  ]
+}

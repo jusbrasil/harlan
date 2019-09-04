@@ -1,11 +1,15 @@
+/**
+ * @this {import('./store').default}
+ * @param {typeof import('../controller')} controller
+ */
 export default function (controller) {
-
+    /** @type {{ [key: string]: any }} */
     const elements = {};
 
     /**
      * Store a value
-     * @param key
-     * @param value
+     * @param {string} key
+     * @param {any} value
      * @returns idx
      */
     this.set = function (key, value) {
@@ -22,7 +26,7 @@ export default function (controller) {
 
     /**
      * Recover a value
-     * @param {int} idx
+     * @param {string} idx
      * @returns mixed
      */
     this.unset = function (idx) {
