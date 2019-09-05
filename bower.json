@@ -53,7 +53,9 @@
     "jquery-ui": "jquery.ui#^1.12.1",
     "outdated-browser": "^1.1.5",
     "jszip": "^3.1.4",
-    "jdataview": "^2.5.0"
+    "jdataview": "^2.5.0",
+    "enjoyhint": "^3.1.0",
+    "sql.js": "sql.js#35eb58fe42e8aa3348fc04c8971c5c5b23185766"
   },
   "resolutions": {
     "jquery": "~3.2.1",

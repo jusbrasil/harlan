@@ -1852,3 +1852,11 @@ a.help {
         display: block;
     }
 }
+
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+}
