@@ -152,7 +152,6 @@ harlan.addPlugin(controller => {
                         });
                     }
 
-                    
                     report.table();
                     report.grid();
 

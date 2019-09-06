@@ -1,6 +1,9 @@
 import gamificationIcons from './data/gamification-icons';
 
 import Form from './lib/form';
+import { header } from 'change-case';
+import { copyFile } from 'fs';
+import buildURL from 'build-url';
 
 module.exports = controller => {
 
@@ -74,11 +77,72 @@ module.exports = controller => {
             return elementRow;
         }
 
+        this.relatorioUrl = (date_start, date_end) => {
+            url = buildURL(bipbop.webserviceAddress, {
+                queryParams: {
+                    period: 'P1W',
+                    dateStart: date_start || moment().subtract(1, 'months').startOf('month').format('DD/MM/YYYY'),
+                    dateEnd: date_end || moment().subtract(1, 'months').endOf('month').format('DD/MM/YYYY'),
+                    q: controller.endpoint.myIChequesAccountOverview,
+                    download: 'true',
+                    apiKey: controller.server.apiKey(),
+                    report: 'credits'
+                }
+            });
+
+            return url;
+        }
+
+        this.csvParse = (csv) => {
+            let lines = csv.split("\n");
+            let result = [];
+            let new_header = [];
+            let headers = lines[0].split(";");
+
+            headers.forEach(head => {
+                head = head.replace(/ /g, "_").toLowerCase();
+                new_header.push(head);
+            });
+
+            headers = new_header;
+
+            for (let i = 1; i < lines.length; i++) {
+                let obj = {};
+                let currentline = lines[i].split(";");
+
+                for (let j = 0; j < headers.length; j++) {
+                    obj[headers[j]] = currentline[j];
+                }
+
+                result.push(obj);
+            }
+
+            return result;
+        }
+
+        this.csvFilter = (csv) => {
+            let consultas = {
+                cpf_cnpj: csv.filter(x => x.identificador === 'ccbusca').length,
+                veiculos: csv.filter(x => x.identificador === 'icheques-veiculos').length,
+                cheques: csv.filter(x => x.identificador === 'cheque').length,
+                refin_serasa: csv.filter(x => x.identificador === 'icheques-refin').length,
+                imoveis: csv.filter(x => x.identificador === 'icheques-imoveis').length
+            }
+
+            return consultas;
+        }
+
         this.table = content => {
             let newRow = $('<div />').addClass('mdl-grid');
-            const table = `
-            
-                <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp'>
+            csvParse = this.csvParse;
+            csvFilter = this.csvFilter;
+            let url = this.relatorioUrl(moment().startOf("month").format("DD/MM/YYYY"), moment().format("DD/MM/YYYY"));
+            $.get(url).then(function (response){
+                let csv = csvParse(response);
+                let consultas = csvFilter(csv);
+                
+                let table = `
+                <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp' style="margin-top: 10px">
                     <thead>
                         <tr>
                             <th colspan="3" class="mdl-data-table__cell--non-numeric">Resumo do mês atual</th>
@@ -86,45 +150,59 @@ module.exports = controller => {
                     </thead>
                     <thead>
                         <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Cheques Consultados</th>
-                            <th class="mdl-data-table__cell--non-numeric">Veículos Consultados</th>
-                            <th class="mdl-data-table__cell--non-numeric">CPF Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Cheques<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Veículos<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">CPF/CNPJ<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Imoveis(SP)<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Pefin/Refin Serasa<br>Consultados</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="mdl-data-table__cell--non-numeric">4</td>
-                            <td class="mdl-data-table__cell--non-numeric">5</td>
-                            <td class="mdl-data-table__cell--non-numeric">6</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.cheques}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.veiculos}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.cpf_cnpj}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.imoveis}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.refin_serasa}</td>
                         </tr>
                     </tbody>
                 </table>`
+                $('.right-col').append(table);
+            });
             
-            const table2 = `
+            let urlMesAnterior = this.relatorioUrl(moment().subtract(1, 'months').startOf('month').format('DD/MM/YYYY'), moment().subtract(1, 'months').endOf('month').format('DD/MM/YYYY'));
+            $.get(urlMesAnterior).then(function (response){
+                let csv = csvParse(response);
+                let consultas = csvFilter(csv);
+                
+                let table2 = `
                 <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp' style="margin-top: 10px">
                     <thead>
                         <tr>
-                            <th colspan="3" class="mdl-data-table__cell--non-numeric">Resumo do mês anterior</th>
+                            <th colspan="3" class="mdl-data-table__cell--non-numeric">Resumo do mês Anterior</th>
                         </tr>
                     </thead>
                     <thead>
                         <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Cheques Consultados</th>
-                            <th class="mdl-data-table__cell--non-numeric">Veículos Consultados</th>
-                            <th class="mdl-data-table__cell--non-numeric">CPF Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Cheques<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Veículos<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">CPF/CNPJ<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Imoveis(SP)<br>Consultados</th>
+                            <th class="mdl-data-table__cell--non-numeric">Pefin/Refin Serasa<br>Consultados</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="mdl-data-table__cell--non-numeric">4</td>
-                            <td class="mdl-data-table__cell--non-numeric">5</td>
-                            <td class="mdl-data-table__cell--non-numeric">6</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.cheques}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.veiculos}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.cpf_cnpj}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.imoveis}</td>
+                            <td class="mdl-data-table__cell--non-numeric">${consultas.refin_serasa}</td>
                         </tr>
                     </tbody>
                 </table>`
-
-            newRow.append(table);
-            newRow.append(table2);
+                $('.right-col').prepend(table2);
+            });
             
             elementColRight.append(newRow);
         }
