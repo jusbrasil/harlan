@@ -17,7 +17,7 @@ module.exports = controller => {
         let elementOpen = null;
         let elementRow = $('<div />').addClass('mdl-grid');
         let elementCol = $('<div />').addClass('mdl-cell mdl-cell--6-col left-col');
-        let elementColRight = $('<div />').addClass('mdl-cell mdl-cell--6-col right-col');;
+        let elementColRight = $('<div />').addClass('mdl-cell mdl-cell--6-col right-col').css({"overflow-x": "auto"});
 
         universalContainer.append(elementNews.append(elementContainer
             .append(elementActions)
@@ -133,7 +133,6 @@ module.exports = controller => {
         }
 
         this.table = content => {
-            let newRow = $('<div />').addClass('mdl-grid');
             csvParse = this.csvParse;
             csvFilter = this.csvFilter;
             let url = this.relatorioUrl(moment().startOf("month").format("DD/MM/YYYY"), moment().format("DD/MM/YYYY"));
@@ -201,10 +200,8 @@ module.exports = controller => {
                         </tr>
                     </tbody>
                 </table>`
-                $('.right-col').prepend(table2);
+                $('.right-col').append(table2);
             });
-            
-            elementColRight.append(newRow);
         }
 
         this.label = content => {
