@@ -64,11 +64,7 @@ module.exports = controller => {
             elementCol.append(canvas);
             return canvas.get(0);
         };
-
-        this.colRight = content => {
-            const right = '';
-        }
-
+        
         this.grid = () => {
             elementRow.append(elementCol);
             elementRow.append(elementColRight);
