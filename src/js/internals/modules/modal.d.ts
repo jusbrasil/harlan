@@ -8,14 +8,15 @@ declare class _export {
   addParagraph(content: string): JQuery<HTMLElement>;
   addProgress(initProgress?: number): (perc: number) => void;
   imageParagraph(image: string, content: string, imageTitle: string, imageAlternative: string): JQuery<HTMLElement>;
-  createForm(): typeof import('./form');
+  createForm(): import('./lib/form');
   fullscreen(): void;
   element(): void;
   modal(): void;
   onClose: (() => void) | null;
   createActions(): void;
+  title(value: string): void;
 }
 
-declare function _export(this: typeof import('../controller')): void
+declare function _export(this: import('../controller')): void
 
 export = _export;

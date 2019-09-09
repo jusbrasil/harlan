@@ -1,6 +1,6 @@
 /**
  * @this {import('./store').default}
- * @param {typeof import('../controller')} controller
+ * @param {import('../controller')} controller
  */
 export default function (controller) {
     /** @type {{ [key: string]: any }} */

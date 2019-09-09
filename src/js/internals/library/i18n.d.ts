@@ -1,6 +1,6 @@
 declare function _exports(
     locale: string,
-    controller: typeof import("../controller")
+    controller: import("../controller")
 ): typeof import("../i18n/pt") & {
     pikaday: {
         format: string;

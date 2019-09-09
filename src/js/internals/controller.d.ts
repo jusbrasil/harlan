@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 
-type Modal = typeof import('./modules/modal');
+type Modal = import('./modules/modal');
 
 interface Parameters {
     (
