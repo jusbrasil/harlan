@@ -4,7 +4,7 @@ module.exports = controller => {
 
     /**
      * Autocomplete
-     * @param mixed jinput
+     * @param {JQuery<HTMLElement>} input
      * @returns {module.exports = .autocomplete}
      */
     const Autocomplete = function (input) {

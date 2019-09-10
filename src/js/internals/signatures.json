@@ -1,0 +1,337 @@
+{
+    "call": [
+        {
+            "name": "admin::commercialReference",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::index",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::report",
+            "parameters": [
+                "Function",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::tagsViewer",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "authentication::loggedin",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "autocomplete",
+            "parameters": [
+                "jQuery"
+            ],
+            "return": "Autocomplete"
+        },
+        {
+            "name": "default::page",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "username",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "username",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "success",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "i18n",
+            "parameters": [
+                "HTMLDocument"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "iframeEmbed",
+            "parameters": [],
+            "return": "boolean"
+        },
+        {
+            "name": "inbox::check",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "username",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "username",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::catchElement",
+            "parameters": [],
+            "return": "jQuery"
+        },
+        {
+            "name": "loader::register",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "loader::unregister",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "report",
+            "parameters": [
+                "string",
+                "string",
+                "null",
+                "boolean"
+            ],
+            "return": "ReportModel"
+        },
+        {
+            "name": "report",
+            "parameters": [
+                "string",
+                "string",
+                "string"
+            ],
+            "return": "ReportModel"
+        },
+        {
+            "name": "site::buttons",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "site::carrousel",
+            "parameters": [],
+            "return": "undefined"
+        }
+    ]
+}

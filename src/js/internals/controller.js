@@ -5,7 +5,9 @@ import _ from 'underscore';
 import Promise from 'bluebird';
 
 import Sync from './library/sync';
+import { addSignature } from './type-extractor';
 
+/** @type { (this: import('./controller')) => void } */
 module.exports = function() {
 
     this.confs = require('./config');
@@ -118,6 +120,13 @@ module.exports = function() {
 
         const data = calls[name](...parameters);
         this.trigger(`call::${name}`, parameters);
+
+        try {
+            addSignature('call', name, parameters, data);
+        } catch (e) {
+            console.error(e);
+        }
+
         return data;
     };
 

@@ -1,8 +1,9 @@
 import { ParsedUrlQuery } from 'querystring';
+import { CallSignatures } from './signatures';
 
 type Modal = import('./modules/modal');
 
-interface Parameters {
+interface Signatures {
     (
         name: 'findDatabase::table::RFB::CERTIDAO',
         b: 'receitaCertidao::form',
@@ -50,15 +51,15 @@ declare class _export {
     registerBootstrap(name: string, callback: (cb: () => void) => void): this;
     unregisterTriggers(name: string, except: unknown[]): void;
     unregisterTrigger(name: string, ...list: string[]): void;
-    registerTrigger: Parameters;
-    trigger: Parameters;
+    registerTrigger: Signatures;
+    trigger: Signatures;
     triggered: unknown;
-    registerCall: Parameters;
+    registerCall: Signatures;
     reference: (name: string) => (...parameters: unknown[]) => void;
     click: (name: string, ...parameters: unknown[]) => (e: Event) => void;
     event: _export['click'];
     preventDefault: _export['click'];
-    call: Parameters;
+    call: CallSignatures;
 
     promise(
         name: string,
