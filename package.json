@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "cd Server/web && python -m SimpleHTTPServer",
     "build": "gulp build",
-    "clean": "git clean -dfx"
+    "clean": "git clean -dfx",
+    "build-typings": "cd src/js/internals && npx ts-node -T printer.ts"
   },
   "repository": {
     "type": "git",
@@ -239,6 +240,8 @@
     "@types/uuid": "^3.4.5",
     "@types/vanilla-masker": "^1.2.0",
     "@types/vis": "^4.21.19",
-    "@types/wordwrap": "^1.0.0"
+    "@types/wordwrap": "^1.0.0",
+    "typescript": "3.6.3",
+    "ts-node": "8.3.0"
   }
 }

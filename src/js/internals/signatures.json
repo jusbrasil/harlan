@@ -1,6 +1,15 @@
 {
     "call": [
         {
+            "name": "admin::changeAddress",
+            "parameters": [
+                "Element",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "admin::commercialReference",
             "parameters": [],
             "return": "undefined"
@@ -8,6 +17,115 @@
         {
             "name": "admin::index",
             "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::openCompanys",
+            "parameters": [
+                "ReportModel",
+                [
+                    {
+                        "name": "commercialReference",
+                        "type": "string"
+                    }
+                ]
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::openCompanys",
+            "parameters": [
+                "ReportModel",
+                [
+                    {
+                        "name": "tag",
+                        "type": "string"
+                    }
+                ]
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::openCompanys",
+            "parameters": [
+                "ReportModel"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::remove::email",
+            "parameters": [
+                "jQuery",
+                "jQuery",
+                "string",
+                "string"
+            ],
+            "return": "jQuery"
+        },
+        {
+            "name": "admin::remove::phone",
+            "parameters": [
+                "jQuery",
+                "jQuery",
+                "string",
+                "string",
+                "string",
+                "string"
+            ],
+            "return": "jQuery"
+        },
+        {
+            "name": "admin::report::dataset",
+            "parameters": [
+                "jQuery"
+            ],
+            "return": [
+                {
+                    "name": "datasets",
+                    "type": "Array"
+                },
+                {
+                    "name": "labels",
+                    "type": "Array"
+                }
+            ]
+        },
+        {
+            "name": "admin::report::filter",
+            "parameters": [
+                "string",
+                "ReportModel",
+                "Function",
+                "boolean"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::report",
+            "parameters": [
+                "Function",
+                "jQuery",
+                "string",
+                "string",
+                "string",
+                "string",
+                "string",
+                "boolean"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::report",
+            "parameters": [
+                "Function",
+                "jQuery",
+                "string",
+                "undefined",
+                "undefined",
+                "undefined",
+                "string",
+                "boolean"
+            ],
             "return": "undefined"
         },
         {
@@ -19,14 +137,53 @@
             "return": "undefined"
         },
         {
+            "name": "admin::tag::create",
+            "parameters": [
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::tags::view",
+            "parameters": [
+                "boolean",
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::tags",
+            "parameters": [
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "admin::tagsViewer",
             "parameters": [],
             "return": "undefined"
         },
         {
+            "name": "admin::viewCompany",
+            "parameters": [
+                "Element",
+                "boolean",
+                "null",
+                "boolean"
+            ],
+            "return": "jQuery"
+        },
+        {
             "name": "authentication::loggedin",
             "parameters": [],
             "return": "undefined"
+        },
+        {
+            "name": "authentication::need",
+            "parameters": [
+                "Function"
+            ],
+            "return": "boolean"
         },
         {
             "name": "autocomplete",
@@ -36,9 +193,129 @@
             "return": "Autocomplete"
         },
         {
+            "name": "billingInformation::need",
+            "parameters": [
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "credits::buy",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
             "name": "default::page",
             "parameters": [],
             "return": "undefined"
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "username",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "dataType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "username",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "dataType",
+                    "type": "string"
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
         },
         {
             "name": "error::ajax",
@@ -52,11 +329,11 @@
                         "name": "data",
                         "type": [
                             {
-                                "name": "username",
-                                "type": "undefined"
+                                "name": "contractType",
+                                "type": "null"
                             },
                             {
-                                "name": "period",
+                                "name": "dateEnd",
                                 "type": "string"
                             },
                             {
@@ -64,21 +341,21 @@
                                 "type": "string"
                             },
                             {
-                                "name": "dateEnd",
-                                "type": "undefined"
+                                "name": "period",
+                                "type": "string"
                             },
                             {
-                                "name": "contractType",
-                                "type": "null"
+                                "name": "username",
+                                "type": "string"
                             }
                         ]
                     },
                     {
-                        "name": "success",
+                        "name": "error",
                         "type": "Function"
                     },
                     {
-                        "name": "error",
+                        "name": "success",
                         "type": "Function"
                     }
                 ]
@@ -92,11 +369,11 @@
                     "name": "data",
                     "type": [
                         {
-                            "name": "username",
-                            "type": "undefined"
+                            "name": "contractType",
+                            "type": "null"
                         },
                         {
-                            "name": "period",
+                            "name": "dateEnd",
                             "type": "string"
                         },
                         {
@@ -104,21 +381,356 @@
                             "type": "string"
                         },
                         {
-                            "name": "dateEnd",
-                            "type": "undefined"
+                            "name": "period",
+                            "type": "string"
                         },
                         {
-                            "name": "contractType",
-                            "type": "null"
+                            "name": "username",
+                            "type": "string"
                         }
                     ]
                 },
                 {
-                    "name": "success",
+                    "name": "error",
                     "type": "Function"
                 },
                 {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "username",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "username",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
                     "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "username",
+                                "type": "undefined"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "username",
+                            "type": "undefined"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "commercialReference",
+                                "type": "string"
+                            },
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "commercialReference",
+                            "type": "string"
+                        },
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            },
+                            {
+                                "name": "tag",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        },
+                        {
+                            "name": "tag",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
                     "type": "Function"
                 }
             ]
@@ -149,29 +761,11 @@
             ]
         },
         {
-            "name": "error::ajax",
+            "name": "form",
             "parameters": [
-                [
-                    {
-                        "name": "success",
-                        "type": "Function"
-                    },
-                    {
-                        "name": "error",
-                        "type": "Function"
-                    }
-                ]
+                "Function"
             ],
-            "return": [
-                {
-                    "name": "success",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "type": "Function"
-                }
-            ]
+            "return": "GenerateForm"
         },
         {
             "name": "i18n",
@@ -191,22 +785,43 @@
             "return": "undefined"
         },
         {
+            "name": "inbox",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "instantSearch",
+            "parameters": [
+                "jQuery",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "loader::ajax",
             "parameters": [
                 [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
                     {
                         "name": "cache",
                         "type": "boolean"
                     },
                     {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
                         "name": "data",
                         "type": [
                             {
-                                "name": "username",
-                                "type": "undefined"
+                                "name": "contractType",
+                                "type": "null"
                             },
                             {
-                                "name": "period",
+                                "name": "dateEnd",
                                 "type": "string"
                             },
                             {
@@ -214,47 +829,47 @@
                                 "type": "string"
                             },
                             {
-                                "name": "dateEnd",
-                                "type": "undefined"
+                                "name": "period",
+                                "type": "string"
                             },
                             {
-                                "name": "contractType",
-                                "type": "null"
+                                "name": "username",
+                                "type": "string"
                             }
                         ]
-                    },
-                    {
-                        "name": "success",
-                        "type": "Function"
                     },
                     {
                         "name": "error",
                         "type": "Function"
                     },
                     {
-                        "name": "beforeSend",
-                        "type": "Function"
-                    },
-                    {
-                        "name": "complete",
+                        "name": "success",
                         "type": "Function"
                     }
                 ]
             ],
             "return": [
                 {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
                     "name": "cache",
                     "type": "boolean"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
                 },
                 {
                     "name": "data",
                     "type": [
                         {
-                            "name": "username",
-                            "type": "undefined"
+                            "name": "contractType",
+                            "type": "null"
                         },
                         {
-                            "name": "period",
+                            "name": "dateEnd",
                             "type": "string"
                         },
                         {
@@ -262,29 +877,596 @@
                             "type": "string"
                         },
                         {
-                            "name": "dateEnd",
-                            "type": "undefined"
+                            "name": "period",
+                            "type": "string"
                         },
                         {
-                            "name": "contractType",
-                            "type": "null"
+                            "name": "username",
+                            "type": "string"
                         }
                     ]
-                },
-                {
-                    "name": "success",
-                    "type": "Function"
                 },
                 {
                     "name": "error",
                     "type": "Function"
                 },
                 {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "username",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "username",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "cache",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "contractType",
+                                "type": "null"
+                            },
+                            {
+                                "name": "dateEnd",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "dateStart",
+                                "type": "string"
+                            },
+                            {
+                                "name": "period",
+                                "type": "string"
+                            },
+                            {
+                                "name": "username",
+                                "type": "undefined"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "cache",
+                    "type": "boolean"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "contractType",
+                            "type": "null"
+                        },
+                        {
+                            "name": "dateEnd",
+                            "type": "undefined"
+                        },
+                        {
+                            "name": "dateStart",
+                            "type": "string"
+                        },
+                        {
+                            "name": "period",
+                            "type": "string"
+                        },
+                        {
+                            "name": "username",
+                            "type": "undefined"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "commercialReference",
+                                "type": "string"
+                            },
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
                     "name": "beforeSend",
                     "type": "Function"
                 },
                 {
                     "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "commercialReference",
+                            "type": "string"
+                        },
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            },
+                            {
+                                "name": "tag",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        },
+                        {
+                            "name": "tag",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            },
+                            {
+                                "name": "text",
+                                "type": "undefined"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ],
+                "boolean"
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        },
+                        {
+                            "name": "text",
+                            "type": "undefined"
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "username",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "dataType",
+                        "type": "string"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "username",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "dataType",
+                    "type": "string"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
                     "type": "Function"
                 }
             ]
@@ -305,6 +1487,18 @@
             "return": "undefined"
         },
         {
+            "name": "modal",
+            "parameters": [],
+            "return": "Modal"
+        },
+        {
+            "name": "moreResults",
+            "parameters": [
+                "number"
+            ],
+            "return": "MoreResults"
+        },
+        {
             "name": "report",
             "parameters": [
                 "string",
@@ -319,9 +1513,35 @@
             "parameters": [
                 "string",
                 "string",
+                "string",
+                "boolean"
+            ],
+            "return": "ReportModel"
+        },
+        {
+            "name": "report",
+            "parameters": [
+                "string",
+                "string",
                 "string"
             ],
             "return": "ReportModel"
+        },
+        {
+            "name": "result",
+            "parameters": [],
+            "return": "Result"
+        },
+        {
+            "name": "section",
+            "parameters": [
+                "string",
+                "string",
+                "string",
+                "boolean",
+                "boolean"
+            ],
+            "return": "Array"
         },
         {
             "name": "site::buttons",
@@ -332,6 +1552,14 @@
             "name": "site::carrousel",
             "parameters": [],
             "return": "undefined"
+        },
+        {
+            "name": "tooltip",
+            "parameters": [
+                "jQuery",
+                "string"
+            ],
+            "return": "jQuery"
         }
     ]
 }

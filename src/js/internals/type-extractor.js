@@ -42,7 +42,7 @@ function getProperties(obj) {
         });
     }
 
-    return properties;
+    return properties.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
