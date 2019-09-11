@@ -3,6 +3,7 @@ import { ReportModel } from './modules/report';
 import { Modal } from './modules/modal';
 import { Result } from './modules/result';
 import { MoreResults } from './modules/more-results';
+import { GenerateForm } from './modules/form';
 
 export interface CallSignatures {
     (name: 'admin::changeAddress', p0: Element, p1: string, p2: JQuery<HTMLElement>): void;
