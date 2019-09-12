@@ -9,7 +9,7 @@ function visitProperty(property: Property) {
     return `${property.name}: ${visitType(property.type)}`;
 }
 
-function visitType(type: Type) {
+function visitType(type: Type): string {
     if (typeof type === 'string') {
         if (type === 'jQuery') {
             return 'JQuery<HTMLElement>';
@@ -33,8 +33,65 @@ function visitReturnType(type: Type) {
     }
 }
 
+function getParameterName(type: string) {
+    switch (type) {
+        case 'boolean':
+            return 'flag';
+        case 'number':
+            return 'num';
+        case 'string':
+            return 'text';
+        case 'Function':
+            return 'callback';
+        case 'HTMLDocument':
+            return 'document'
+        default:
+            if (type.startsWith('{') || type === 'undefined' || type === 'null') {
+                return 'obj';
+            } else {
+                return `${type[0].toLowerCase()}${type.substr(1)}`;
+            }
+    }
+}
+
 function visitSignature(signature: Signature) {
-    let parameters = signature.parameters.map((s, i) => `p${i}: ${visitType(s)}`);
+    let parameters = signature.parameters.map((s, i) => visitType(s));
+
+    let names: { [name: string]: number } = {};
+    let names2: { [name: string]: number } = {};
+
+    parameters.forEach(p => {
+        if (p.startsWith('{')) {
+            names.object = names.object ? names.object + 1 : 1;
+        } else {
+            const p2 = p === 'JQuery<HTMLElement>' ? 'Element' : p;
+
+            names[p2] = names[p2] ? names[p2] + 1 : 1;
+        }
+    });
+
+    parameters = parameters.map(p => {
+        if (p.startsWith('{')) {
+            if (names.object > 1) {
+                names2.object = names2.object ? names2.object + 1 : 1;
+
+                return `obj${names2.object}: ${p}`;
+            } else {
+                return `obj: ${p}`;
+            }
+        } else {
+            const p2 = p === 'JQuery<HTMLElement>' ? 'Element' : p;
+
+            if (names[p2] > 1) {
+                names2[p2] = names2[p2] ? names2[p2] + 1 : 1;
+
+                return `${getParameterName(p2)}${names2[p2]}: ${p}`;
+            } else {
+                return `${getParameterName(p2)}: ${p}`;
+            }
+        }
+    });
+
     return `(name: '${signature.name}'${parameters.length ? `, ${parameters.join(', ')}`: ''}): ${visitReturnType(signature.return)};`;
 }
 
