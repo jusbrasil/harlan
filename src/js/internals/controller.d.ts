@@ -1,42 +1,10 @@
 import { ParsedUrlQuery } from 'querystring';
-import { CallSignatures } from './signatures';
+import {
+    CallSignatures, ClickSignatures, RegisterBootstrapSignatures,
+    RegisterCallSignatures, RegisterTriggerSignatures, TriggerSignatures
+} from './signatures';
 
-type Modal = import('./modules/modal');
-
-interface Signatures {
-    (
-        name: 'findDatabase::table::RFB::CERTIDAO',
-        b: 'receitaCertidao::form',
-        c: ({ dom }: { dom: JQuery<HTMLElement> }, callback: () => void) => void
-    ): void;
-    (name: 'sync::start'): void;
-    (name: 'sync::end', b: unknown[]): void;
-    (name: 'sync::change'): void;
-    (name: 'accountOverview::dataset', b: (responses: unknown) => void): void;
-    (name: 'admin::createCompany'): void;
-    (name: 'admin::autocompleteCreateCompany', callback: (autocomplete: JQuery<HTMLElement>) => void): void;
-    (name: 'admin::fillCompanysAutocomplete', callback: (document: HTMLElement, autocomplete: JQuery<HTMLElement>) => void): void;
-    (
-        a: string,
-        {
-            document,
-            table,
-            parsedResult
-        }: {
-            document: string;
-            table: string;
-            parsedResult: JQuery<HTMLElement>;
-        }
-    ): void;
-    (name: 'progress::init', initProgress: number): unknown;
-    (name: 'modal'): Modal;
-    (d: (err: any, result?: unknown) => void): void;
-    (name: string | string[], id: string, callback: () => void): void;
-    (name: string, args: unknown, oComplete: () => void): this;
-    (name: string, ...parameters: unknown[]): void;
-    (name: string, callback?: () => void): void;
-    (name: string, callback: (data: unknown, err: unknown) => void): void;
-}
+type Modal = import('./modules/modal').Modal;
 
 declare class _export {
     confs: typeof import('./config');
@@ -48,18 +16,18 @@ declare class _export {
 
     sync: typeof import('./library/sync');
     query: ParsedUrlQuery;
-    registerBootstrap(name: string, callback: (cb: () => void) => void): this;
+    registerBootstrap: RegisterBootstrapSignatures<this>;
     unregisterTriggers(name: string, except: unknown[]): void;
     unregisterTrigger(name: string, ...list: string[]): void;
-    registerTrigger: Signatures;
-    trigger: Signatures;
+    registerTrigger: RegisterTriggerSignatures<this>;
+    trigger: TriggerSignatures<this>;
     triggered: unknown;
-    registerCall: Signatures;
+    registerCall: RegisterCallSignatures<this>;
     reference: (name: string) => (...parameters: unknown[]) => void;
-    click: (name: string, ...parameters: unknown[]) => (e: Event) => void;
+    click: ClickSignatures<this>;
     event: _export['click'];
     preventDefault: _export['click'];
-    call: CallSignatures;
+    call: CallSignatures<this>;
 
     promise(
         name: string,

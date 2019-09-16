@@ -10,8 +10,77 @@
             "return": "undefined"
         },
         {
+            "name": "admin::changeAddress",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::changeCompany",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::changeContract",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "admin::commercialReference",
             "parameters": [],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::contactTypes",
+            "parameters": [],
+            "return": [
+                {
+                    "name": "comercial",
+                    "type": "string"
+                },
+                {
+                    "name": "financeiro",
+                    "type": "string"
+                },
+                {
+                    "name": "tecnico",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "admin::email",
+            "parameters": [
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::fillCompanyAutocomplete",
+            "parameters": [
+                "Element",
+                "Autocomplete"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::fillCompanysAutocomplete",
+            "parameters": [
+                "XMLDocument",
+                "Autocomplete"
+            ],
             "return": "undefined"
         },
         {
@@ -49,6 +118,14 @@
             "name": "admin::openCompanys",
             "parameters": [
                 "ReportModel"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::phone",
+            "parameters": [
+                "string",
+                "jQuery"
             ],
             "return": "undefined"
         },
@@ -137,8 +214,34 @@
             "return": "undefined"
         },
         {
+            "name": "admin::roleTypes",
+            "parameters": [],
+            "return": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "avancado",
+                    "type": "string"
+                },
+                {
+                    "name": "simples",
+                    "type": "string"
+                }
+            ]
+        },
+        {
             "name": "admin::tag::create",
             "parameters": [
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::tags::view",
+            "parameters": [
+                "Array",
                 "string"
             ],
             "return": "undefined"
@@ -174,6 +277,13 @@
             "return": "jQuery"
         },
         {
+            "name": "admin::viewCompany",
+            "parameters": [
+                "jQuery"
+            ],
+            "return": "jQuery"
+        },
+        {
             "name": "authentication::loggedin",
             "parameters": [],
             "return": "undefined"
@@ -193,6 +303,20 @@
             "return": "Autocomplete"
         },
         {
+            "name": "billingInformation::changeAddress",
+            "parameters": [
+                "Function",
+                "XMLDocument",
+                "undefined"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "billingInformation::force",
+            "parameters": [],
+            "return": "undefined"
+        },
+        {
             "name": "billingInformation::need",
             "parameters": [
                 "Function"
@@ -208,6 +332,65 @@
             "name": "default::page",
             "parameters": [],
             "return": "undefined"
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "id",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "error",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "error",
+                    "type": "Function"
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
         },
         {
             "name": "error::ajax",
@@ -785,6 +968,14 @@
             "return": "undefined"
         },
         {
+            "name": "inbox::open",
+            "parameters": [
+                "XMLDocument",
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "inbox",
             "parameters": [],
             "return": "undefined"
@@ -794,6 +985,244 @@
             "parameters": [
                 "jQuery",
                 "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "link",
+            "parameters": [
+                "string",
+                [
+                    {
+                        "name": "altKey",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "bubbles",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "button",
+                        "type": "number"
+                    },
+                    {
+                        "name": "buttons",
+                        "type": "number"
+                    },
+                    {
+                        "name": "cancelable",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "changedTouches",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "char",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "charCode",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "clientX",
+                        "type": "number"
+                    },
+                    {
+                        "name": "clientY",
+                        "type": "number"
+                    },
+                    {
+                        "name": "code",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "constructor",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "ctrlKey",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "currentTarget",
+                        "type": "HTMLAnchorElement"
+                    },
+                    {
+                        "name": "data",
+                        "type": "null"
+                    },
+                    {
+                        "name": "delegateTarget",
+                        "type": "HTMLAnchorElement"
+                    },
+                    {
+                        "name": "detail",
+                        "type": "number"
+                    },
+                    {
+                        "name": "eventPhase",
+                        "type": "number"
+                    },
+                    {
+                        "name": "handleObj",
+                        "type": [
+                            {
+                                "name": "data",
+                                "type": "null"
+                            },
+                            {
+                                "name": "guid",
+                                "type": "number"
+                            },
+                            {
+                                "name": "handler",
+                                "type": "Function"
+                            },
+                            {
+                                "name": "namespace",
+                                "type": "string"
+                            },
+                            {
+                                "name": "needsContext",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "origType",
+                                "type": "string"
+                            },
+                            {
+                                "name": "selector",
+                                "type": "undefined"
+                            },
+                            {
+                                "name": "type",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "isDefaultPrevented",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "isImmediatePropagationStopped",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "isPropagationStopped",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "isSimulated",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "jQuery34105553482942536505",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "key",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "keyCode",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "metaKey",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "offsetX",
+                        "type": "number"
+                    },
+                    {
+                        "name": "offsetY",
+                        "type": "number"
+                    },
+                    {
+                        "name": "originalEvent",
+                        "type": "MouseEvent"
+                    },
+                    {
+                        "name": "pageX",
+                        "type": "number"
+                    },
+                    {
+                        "name": "pageY",
+                        "type": "number"
+                    },
+                    {
+                        "name": "pointerId",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "pointerType",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "preventDefault",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "relatedTarget",
+                        "type": "null"
+                    },
+                    {
+                        "name": "screenX",
+                        "type": "number"
+                    },
+                    {
+                        "name": "screenY",
+                        "type": "number"
+                    },
+                    {
+                        "name": "shiftKey",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "stopImmediatePropagation",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "stopPropagation",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "target",
+                        "type": "HTMLAnchorElement"
+                    },
+                    {
+                        "name": "targetTouches",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "timeStamp",
+                        "type": "number"
+                    },
+                    {
+                        "name": "toElement",
+                        "type": "HTMLAnchorElement"
+                    },
+                    {
+                        "name": "touches",
+                        "type": "undefined"
+                    },
+                    {
+                        "name": "type",
+                        "type": "string"
+                    },
+                    {
+                        "name": "view",
+                        "type": "Window"
+                    },
+                    {
+                        "name": "which",
+                        "type": "number"
+                    }
+                ]
             ],
             "return": "undefined"
         },
@@ -1185,6 +1614,133 @@
                         "name": "data",
                         "type": [
                             {
+                                "name": "id",
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ]
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
+                                "name": "limit",
+                                "type": "number"
+                            },
+                            {
+                                "name": "owner",
+                                "type": "string"
+                            },
+                            {
+                                "name": "skip",
+                                "type": "number"
+                            },
+                            {
+                                "name": "username",
+                                "type": "undefined"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "success",
+                        "type": "Function"
+                    }
+                ],
+                "boolean"
+            ],
+            "return": [
+                {
+                    "name": "beforeSend",
+                    "type": "Function"
+                },
+                {
+                    "name": "complete",
+                    "type": "Function"
+                },
+                {
+                    "name": "data",
+                    "type": [
+                        {
+                            "name": "limit",
+                            "type": "number"
+                        },
+                        {
+                            "name": "owner",
+                            "type": "string"
+                        },
+                        {
+                            "name": "skip",
+                            "type": "number"
+                        },
+                        {
+                            "name": "username",
+                            "type": "undefined"
+                        }
+                    ]
+                },
+                {
+                    "name": "success",
+                    "type": "Function"
+                }
+            ]
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                [
+                    {
+                        "name": "beforeSend",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "complete",
+                        "type": "Function"
+                    },
+                    {
+                        "name": "data",
+                        "type": [
+                            {
                                 "name": "limit",
                                 "type": "number"
                             },
@@ -1544,6 +2100,17 @@
             "return": "Array"
         },
         {
+            "name": "section",
+            "parameters": [
+                "string",
+                "string",
+                "string",
+                "boolean",
+                "undefined"
+            ],
+            "return": "Array"
+        },
+        {
             "name": "site::buttons",
             "parameters": [],
             "return": "undefined"
@@ -1554,12 +2121,3593 @@
             "return": "undefined"
         },
         {
+            "name": "subaccount::list",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
             "name": "tooltip",
             "parameters": [
                 "jQuery",
                 "string"
             ],
             "return": "jQuery"
+        }
+    ],
+    "registerTrigger": [
+        {
+            "name": "authentication::authenticated",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "authentication::logout",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "bootstrap::end",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "call::authentication::loggedin",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "database::error",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "database::success",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "findDatabase::instantSearch",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "findDatabase::table::RFB::CERTIDAO",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "logs::onerror",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "serverCommunication::websocket::authentication",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "serverCommunication::websocket::credits",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "serverCommunication::websocket::sendMessage",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "softphone::connected",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "softphone::disconnected",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "softphone::registered",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "softphone::registrationFailed",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "softphone::unregistered",
+            "parameters": [
+                "string",
+                "Function"
+            ],
+            "return": "undefined"
+        }
+    ],
+    "registerBootstrap": [
+        {
+            "name": "analytics::google",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "antiphishing::implement",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::cordova::clear",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "billingInformation",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bootstrap::end",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "cordova",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "databaseSearch",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "demonstrate",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "download",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "dropzone",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "email-activation",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "endpoint",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "facebook::track",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "forgotPassword",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "i18n",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iframeEmbed::open",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iframeEmbed::whitelabel",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inbox",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iugu::init",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "mainSearch",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "manifest",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "module",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "oauth",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parserCbusca",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parserCCbusca",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parserCCF",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parserIEPTB",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parserRFBCNPJ",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "password",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "remote-debug",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "site::buttons",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "site::carrousel",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "subaccount",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "urlParameter",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "watch::onerror",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        }
+    ],
+    "registerCall": [
+        {
+            "name": "accountOverview::dataset",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "accountOverview::download",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "accountOverview::filter",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "accountOverview",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::autocompleteCreateCompany",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::changeAddress",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::changeCompany",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::changeContract",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::changeHide",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::changePassword",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::commercialReference",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::contactTypes",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::createAccount::formDescription",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::createCompany",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::email",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::fillCompanyAutocomplete",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::fillCompanysAutocomplete",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::index",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::message",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::openCompanys",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::phone",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::remove::email",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::remove::phone",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::report::dataset",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::report::download",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::report::filter",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::report",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::roleTypes",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::tag::create",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::tags::view",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::tags",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::tagsViewer",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::trigger",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::viewCompany",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "alert",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::authenticate",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::force",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::loggedin",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::logout",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::need",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::unsetSessionId",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "autocomplete",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bankAccount::need",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bankAccount::update",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "billingInformation::changeAddress",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "billingInformation::force",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "billingInformation::need",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bipbop::createAccount::submit",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bipbop::createAccount",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "blockui",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "buyit",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "ccbusca::enable",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "ccbusca::parse",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "ccbusca",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "changePassword",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "confirm",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::buy",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::charge::bankSlip",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::charge::creditCard",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::charge",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::get",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "credits::has",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "data::company",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "databaseSearch::submit",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "default::page",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "download",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "endpoint",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "error::ajax",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "error::server",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "forgotPassword::code",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "forgotPassword",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "form::callback",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "form",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "generateRelations::createAdapter",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "generateRelations",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "geolocation",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "getCreditCard",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "i18n",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iframeEmbed::open",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iframeEmbed",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inboundMarketing::create",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inboundMarketing::open",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inboundMarketing",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inbox::check",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inbox::open",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "inbox",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "instantSearch",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "iugu::requestPaymentToken",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "link::register",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "link",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "loader::ajax",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "loader::catchElement",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "loader::register",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "loader::unregister",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "modal",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "module",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "moreResults",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "oauth::call",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "oauth::data",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "oauth::result",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "parent",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "password::change",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "price::create",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "price::list",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "price::update",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "progress::init",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "progress::ui::noblock",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "progress::update",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "report",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "result::import",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "result",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "section",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "selectedResults",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "site::buttons",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "site::carrousel",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::call",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::configuration",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::configure",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::disconnect",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::keypad",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::terminateCalls",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone::xirsys",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "softphone",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "subaccount::create",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "subaccount::formDescription",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "subaccount::limit",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "subaccount::list",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "takePicture",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "timeline",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "tooltip",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "welcomescreen::email",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "welcomescreen::putemail",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "welcomescreen::wizard::1",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "welcomescreen::wizard::2",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "welcomescreen::wizard",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "xmlDocument",
+            "parameters": [
+                "Function"
+            ],
+            "return": "this"
+        }
+    ],
+    "trigger": [
+        {
+            "name": "admin::commercialReference",
+            "parameters": [
+                "ReportModel",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::tagsViewer",
+            "parameters": [
+                "ReportModel",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::viewCompany",
+            "parameters": [
+                [
+                    {
+                        "name": "actions",
+                        "type": "jQuery"
+                    },
+                    {
+                        "name": "companyNode",
+                        "type": "Element"
+                    },
+                    {
+                        "name": "section",
+                        "type": "jQuery"
+                    },
+                    {
+                        "name": "username",
+                        "type": "string"
+                    }
+                ],
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin::viewCompany",
+            "parameters": [
+                [
+                    {
+                        "name": "actions",
+                        "type": "jQuery"
+                    },
+                    {
+                        "name": "companyNode",
+                        "type": "jQuery"
+                    },
+                    {
+                        "name": "section",
+                        "type": "jQuery"
+                    },
+                    {
+                        "name": "username",
+                        "type": "string"
+                    }
+                ],
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "admin",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::authenticated::end",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "authentication::authenticated",
+            "parameters": [
+                "undefined",
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "bootstrap::end",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::changeAddress",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::changeCompany",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::changeContract",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::commercialReference",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::contactTypes",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::email",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::fillCompanyAutocomplete",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::fillCompanysAutocomplete",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::index",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::openCompanys",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::phone",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::remove::email",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::remove::phone",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::report::dataset",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::report::filter",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::report",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::roleTypes",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::tag::create",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::tags::view",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::tags",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::tagsViewer",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::admin::viewCompany",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::authentication::loggedin",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::authentication::need",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::autocomplete",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::billingInformation::changeAddress",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::billingInformation::force",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::billingInformation::need",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::credits::buy",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::default::page",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::error::ajax",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::form",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::i18n",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::iframeEmbed",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::inbox::check",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::inbox::open",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::inbox",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::instantSearch",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::link",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::loader::ajax",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::loader::catchElement",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::loader::register",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::loader::unregister",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::modal",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::moreResults",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::accountOverview::dataset",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::accountOverview::download",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::accountOverview::filter",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::accountOverview",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::autocompleteCreateCompany",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::changeAddress",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::changeCompany",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::changeContract",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::changeHide",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::changePassword",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::commercialReference",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::contactTypes",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::createAccount::formDescription",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::createCompany",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::email",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::fillCompanyAutocomplete",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::fillCompanysAutocomplete",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::index",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::message",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::openCompanys",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::phone",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::remove::email",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::remove::phone",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::report::dataset",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::report::download",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::report::filter",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::report",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::roleTypes",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::tag::create",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::tags::view",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::tags",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::tagsViewer",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::trigger",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::admin::viewCompany",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::alert",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::authenticate",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::force",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::loggedin",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::logout",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::need",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::authentication::unsetSessionId",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::autocomplete",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::bankAccount::need",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::bankAccount::update",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::billingInformation::changeAddress",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::billingInformation::force",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::billingInformation::need",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::bipbop::createAccount::submit",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::bipbop::createAccount",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::blockui",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::buyit",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::ccbusca::enable",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::ccbusca::parse",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::ccbusca",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::changePassword",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::confirm",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::buy",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::charge::bankSlip",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::charge::creditCard",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::charge",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::get",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::credits::has",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::data::company",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::databaseSearch::submit",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::default::page",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::download",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::endpoint",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::error::ajax",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::error::server",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::forgotPassword::code",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::forgotPassword",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::form::callback",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::form",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::generateRelations::createAdapter",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::generateRelations",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::geolocation",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::getCreditCard",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::i18n",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::iframeEmbed::open",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::iframeEmbed",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inboundMarketing::create",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inboundMarketing::open",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inboundMarketing",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inbox::check",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inbox::open",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::inbox",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::instantSearch",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::iugu::requestPaymentToken",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::link::register",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::link",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::loader::ajax",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::loader::catchElement",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::loader::register",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::loader::unregister",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::modal",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::module",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::moreResults",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::oauth::call",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::oauth::data",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::oauth::result",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::parent",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::password::change",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::price::create",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::price::list",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::price::update",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::progress::init",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::progress::ui::noblock",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::progress::update",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::report",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::result::import",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::result",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::section",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::selectedResults",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::site::buttons",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::site::carrousel",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::call",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::configuration",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::configure",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::disconnect",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::keypad",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::terminateCalls",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone::xirsys",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::softphone",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::subaccount::create",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::subaccount::formDescription",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::subaccount::limit",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::subaccount::list",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::takePicture",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::timeline",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::tooltip",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::welcomescreen::email",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::welcomescreen::putemail",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::welcomescreen::wizard::1",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::welcomescreen::wizard::2",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::welcomescreen::wizard",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::register::xmlDocument",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::report",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::result",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::section",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::site::buttons",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::site::carrousel",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::subaccount::list",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "call::tooltip",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "findDatabase::instantSearch",
+            "parameters": [
+                "Array",
+                "Function"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "message",
+            "parameters": [
+                "MessageEvent",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "plugin::authenticated",
+            "parameters": [
+                "undefined",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::call",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::responseComplete",
+            "parameters": [
+                "Array",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::websocket::authentication::end",
+            "parameters": [
+                [
+                    {
+                        "name": "adminOf",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "apiKey",
+                        "type": "string"
+                    },
+                    {
+                        "name": "cnpj",
+                        "type": "string"
+                    },
+                    {
+                        "name": "commercialReference",
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractAccepted",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "contrato",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "cpf",
+                        "type": "string"
+                    },
+                    {
+                        "name": "credits",
+                        "type": "number"
+                    },
+                    {
+                        "name": "day-limit",
+                        "type": "number"
+                    },
+                    {
+                        "name": "email",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "emailUnchecked",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "endereco",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "geocode",
+                        "type": [
+                            {
+                                "name": "address_components",
+                                "type": "Array"
+                            },
+                            {
+                                "name": "formatted_address",
+                                "type": "string"
+                            },
+                            {
+                                "name": "geometry",
+                                "type": [
+                                    {
+                                        "name": "bounds",
+                                        "type": [
+                                            {
+                                                "name": "northeast",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "southwest",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "location",
+                                        "type": [
+                                            {
+                                                "name": "lat",
+                                                "type": "number"
+                                            },
+                                            {
+                                                "name": "lng",
+                                                "type": "number"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "location_type",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "viewport",
+                                        "type": [
+                                            {
+                                                "name": "northeast",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "southwest",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "place_id",
+                                "type": "string"
+                            },
+                            {
+                                "name": "types",
+                                "type": "Array"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "limit",
+                        "type": "number"
+                    },
+                    {
+                        "name": "nome",
+                        "type": "string"
+                    },
+                    {
+                        "name": "postPaid",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "responsavel",
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "type": "number"
+                    },
+                    {
+                        "name": "tags",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "telefone",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "username",
+                        "type": "string"
+                    }
+                ],
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::websocket::authentication",
+            "parameters": [
+                [
+                    {
+                        "name": "adminOf",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "apiKey",
+                        "type": "string"
+                    },
+                    {
+                        "name": "cnpj",
+                        "type": "string"
+                    },
+                    {
+                        "name": "commercialReference",
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractAccepted",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "contrato",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "cpf",
+                        "type": "string"
+                    },
+                    {
+                        "name": "credits",
+                        "type": "number"
+                    },
+                    {
+                        "name": "day-limit",
+                        "type": "number"
+                    },
+                    {
+                        "name": "email",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "emailUnchecked",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "endereco",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "geocode",
+                        "type": [
+                            {
+                                "name": "address_components",
+                                "type": "Array"
+                            },
+                            {
+                                "name": "formatted_address",
+                                "type": "string"
+                            },
+                            {
+                                "name": "geometry",
+                                "type": [
+                                    {
+                                        "name": "bounds",
+                                        "type": [
+                                            {
+                                                "name": "northeast",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "southwest",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "location",
+                                        "type": [
+                                            {
+                                                "name": "lat",
+                                                "type": "number"
+                                            },
+                                            {
+                                                "name": "lng",
+                                                "type": "number"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "location_type",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "viewport",
+                                        "type": [
+                                            {
+                                                "name": "northeast",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "name": "southwest",
+                                                "type": [
+                                                    {
+                                                        "name": "lat",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "lng",
+                                                        "type": "number"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "place_id",
+                                "type": "string"
+                            },
+                            {
+                                "name": "types",
+                                "type": "Array"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "limit",
+                        "type": "number"
+                    },
+                    {
+                        "name": "nome",
+                        "type": "string"
+                    },
+                    {
+                        "name": "postPaid",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "responsavel",
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "type": "number"
+                    },
+                    {
+                        "name": "tags",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "telefone",
+                        "type": "Array"
+                    },
+                    {
+                        "name": "username",
+                        "type": "string"
+                    }
+                ],
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::websocket::credits",
+            "parameters": [
+                [
+                    {
+                        "name": "credits",
+                        "type": "number"
+                    },
+                    {
+                        "name": "receipt",
+                        "type": [
+                            {
+                                "name": "_id",
+                                "type": "string"
+                            },
+                            {
+                                "name": "company",
+                                "type": [
+                                    {
+                                        "name": "$id",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "$ref",
+                                        "type": "string"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "credits",
+                                "type": [
+                                    {
+                                        "name": "after",
+                                        "type": "number"
+                                    },
+                                    {
+                                        "name": "before",
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "date",
+                                "type": "number"
+                            },
+                            {
+                                "name": "description",
+                                "type": "string"
+                            },
+                            {
+                                "name": "for",
+                                "type": [
+                                    {
+                                        "name": "$id",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "$ref",
+                                        "type": "string"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "forRole",
+                                "type": "string"
+                            },
+                            {
+                                "name": "quantity",
+                                "type": "number"
+                            },
+                            {
+                                "name": "role",
+                                "type": "string"
+                            },
+                            {
+                                "name": "server",
+                                "type": [
+                                    {
+                                        "name": "SERVER_HOSTNAME",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "SERVER_PID",
+                                        "type": "number"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "tag",
+                                "type": "string"
+                            },
+                            {
+                                "name": "total",
+                                "type": "number"
+                            },
+                            {
+                                "name": "uniq",
+                                "type": "string"
+                            },
+                            {
+                                "name": "value",
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::websocket::event",
+            "parameters": [
+                "MessageEvent",
+                "undefined"
+            ],
+            "return": "this"
+        },
+        {
+            "name": "serverCommunication::websocket::open",
+            "parameters": [
+                "WebSocket",
+                "undefined"
+            ],
+            "return": "this"
+        }
+    ],
+    "click": [
+        {
+            "name": "admin::changeAddress",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::changeCompany",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::changeContract",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::email",
+            "parameters": [
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::phone",
+            "parameters": [
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "admin::tags",
+            "parameters": [
+                "string"
+            ],
+            "return": "undefined"
+        },
+        {
+            "name": "subaccount::list",
+            "parameters": [
+                "jQuery",
+                "string",
+                "jQuery"
+            ],
+            "return": "undefined"
         }
     ]
 }

@@ -1,12 +1,21 @@
 import { readFileSync, writeFileSync, existsSync, renameSync, truncateSync } from 'fs';
 import { Property, Signature, Type } from './signature';
 
+const genericThisType = 'T'
+
 interface SignatureFile {
     [fname: string]: Signature[];
 }
 
 function visitProperty(property: Property) {
-    return `${property.name}: ${visitType(property.type)}`;
+    let name = property.name;
+
+    name =
+        name === '' ? '\'\'' :
+            name.includes('-') ? `'${name}'` :
+                name;
+
+    return `${name}: ${visitType(property.type)}`;
 }
 
 function visitType(type: Type): string {
@@ -28,9 +37,15 @@ function visitType(type: Type): string {
 function visitReturnType(type: Type) {
     if (type === 'undefined') {
         return 'void';
+    } else if (type === 'this') {
+        return genericThisType;
     } else {
         return visitType(type);
     }
+}
+
+function isObject(type: string) {
+    return type.startsWith('{') || type === 'undefined' || type === 'null';
 }
 
 function getParameterName(type: string) {
@@ -44,9 +59,14 @@ function getParameterName(type: string) {
         case 'Function':
             return 'callback';
         case 'HTMLDocument':
-            return 'document'
+            return 'document';
+        case 'Element':
+        case 'JQuery<HTMLElement>':
+            return 'element';
+        case 'Array<any>':
+            return 'array';
         default:
-            if (type.startsWith('{') || type === 'undefined' || type === 'null') {
+            if (isObject(type)) {
                 return 'obj';
             } else {
                 return `${type[0].toLowerCase()}${type.substr(1)}`;
@@ -61,7 +81,7 @@ function visitSignature(signature: Signature) {
     let names2: { [name: string]: number } = {};
 
     parameters.forEach(p => {
-        if (p.startsWith('{')) {
+        if (isObject(p)) {
             names.object = names.object ? names.object + 1 : 1;
         } else {
             const p2 = p === 'JQuery<HTMLElement>' ? 'Element' : p;
@@ -71,7 +91,7 @@ function visitSignature(signature: Signature) {
     });
 
     parameters = parameters.map(p => {
-        if (p.startsWith('{')) {
+        if (isObject(p)) {
             if (names.object > 1) {
                 names2.object = names2.object ? names2.object + 1 : 1;
 
@@ -160,11 +180,11 @@ import { Modal } from './modules/modal';
 import { Result } from './modules/result';
 import { MoreResults } from './modules/more-results';
 import { GenerateForm } from './modules/form';
-
 `;
 
         for (const fname in signatures) {
-            result += `export interface ${fname[0].toUpperCase()}${fname.substr(1)}Signatures {
+            result += `
+export interface ${fname[0].toUpperCase()}${fname.substr(1)}Signatures<${genericThisType}> {
     ${signatures[fname].map(visitSignature).join('\n    ')}
 }
 `;

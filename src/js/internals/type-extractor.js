@@ -58,7 +58,7 @@ function getType(obj) {
         case 'object':
             if (obj === null) {
                 return 'null'
-            } else if (obj.constructor !== Object) {
+            } else if (obj.constructor !== Object && obj.constructor.name) {
                 return obj.constructor.name;
             } else {
                 return getProperties(obj);
@@ -73,10 +73,11 @@ function getType(obj) {
  * @param {string} name
  * @param {any[]} parameters
  * @param {any} returnType
+ * @param {boolean} [returnThis]
  */
-export function addSignature(fname, name, parameters, returnType) {
+export function addSignature(fname, name, parameters, returnType, returnThis) {
     /** @type {Signature} */
-    const signature = { name, parameters: [], return: getType(returnType) };
+    const signature = { name, parameters: [], return: returnThis ? 'this' : getType(returnType) };
 
     for (let parameter of parameters) {
         signature.parameters.push(getType(parameter));

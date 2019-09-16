@@ -23,11 +23,23 @@ module.exports = function() {
     this.query = url.parse(window.location.href, true).query;
 
     this.registerBootstrap = (name, callback) => {
+        try {
+            addSignature('registerBootstrap', name, [callback], this, true);
+        } catch (e) {
+            console.error(e);
+        }
+
         bootstrapCalls[name] = callback;
         return this;
     };
 
     this.unregisterTriggers = (name, except = []) => {
+        try {
+            addSignature('unregisterTriggers', name, [except], undefined);
+        } catch (e) {
+            console.error(e);
+        }
+
         for (let i in events[name]) {
             if (except.includes(i)) {
                 continue;
@@ -37,6 +49,12 @@ module.exports = function() {
     };
 
     this.unregisterTrigger = (name, ...list) => {
+        try {
+            addSignature('unregisterTrigger', name, list, undefined);
+        } catch (e) {
+            console.error(e);
+        }
+
         if (events[name]) {
             for (let e of list) {
                 if (events[name][e]) {
@@ -53,6 +71,13 @@ module.exports = function() {
             }
             return;
         }
+
+        try {
+            addSignature('registerTrigger', name, [id, callback], undefined);
+        } catch (e) {
+            console.error(e);
+        }
+
         if (!(name in events)) {
             events[name] = {};
         }
@@ -60,6 +85,11 @@ module.exports = function() {
     };
 
     this.trigger = (name, args, onComplete) => {
+        try {
+            addSignature('trigger', name, [args, onComplete], this, true);
+        } catch (e) {
+            console.error(e);
+        }
 
         const run = () => {
             if (onComplete) {
@@ -98,6 +128,12 @@ module.exports = function() {
     this.triggered = Promise.promisify((...d) => this.trigger(...d));
 
     this.registerCall = (name, callback) => {
+        try {
+            addSignature('registerCall', name, [callback], this, true);
+        } catch (e) {
+            console.error(e);
+        }
+
         this.trigger(`call::register::${name}`);
         calls[name] = callback;
         return this;
@@ -106,6 +142,12 @@ module.exports = function() {
     this.reference = name => (...parameters) => this.call(name, ...parameters);
 
     this.click = (name, ...parameters) => e => {
+        try {
+            addSignature('click', name, parameters, undefined);
+        } catch (e) {
+            console.error(e);
+        }
+
         if (e) e.preventDefault();
         this.call(name, ...parameters);
     };
@@ -131,6 +173,12 @@ module.exports = function() {
     };
 
     this.promise = (name, cb = null, ...d) => new Promise((resolve, reject) => {
+        try {
+            addSignature('promise', name, [cb, ...d], undefined);
+        } catch (e) {
+            console.error(e);
+        }
+
         const ret = this.call(name, ...d, (data, err) => {
             if (err) reject(err);
             else resolve(data);
