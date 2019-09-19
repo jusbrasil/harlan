@@ -6,6 +6,7 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
+    "noEmit": true
     // "declaration": true,
     // "emitDeclarationOnly": true
   },
@@ -13,6 +14,8 @@
     "typings.d.ts",
     "seo/**/*.js",
     "src/js/**/*.js",
-    "src/plugins/**/*.js"
+    "src/plugins/**/*.js",
+    "src/js/internals/printer.ts",
+    "src/js/internals/disambiguate.ts"
   ]
 }

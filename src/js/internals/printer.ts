@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, existsSync, renameSync, truncateSync } from 'fs';
 import { Property, Signature, Type } from './signature';
+import { reduceSignatures } from './disambiguate';
 
 const genericThisType = 'T'
 
@@ -15,7 +16,7 @@ function visitProperty(property: Property) {
             name.includes('-') ? `'${name}'` :
                 name;
 
-    return `${name}: ${visitType(property.type)}`;
+    return `${name}${property.optional ? '?' : ''}: ${visitType(property.type)}`;
 }
 
 function visitType(type: Type): string {
@@ -27,10 +28,12 @@ function visitType(type: Type): string {
         } else {
             return type;
         }
-    } else {
+    } else if (Array.isArray(type)) {
         let properties = type.map(visitProperty);
 
         return `{ ${properties.join(', ')} }`;
+    } else {
+        return type.types.map(visitType).join(' | ');
     }
 }
 
@@ -45,10 +48,20 @@ function visitReturnType(type: Type) {
 }
 
 function isObject(type: string) {
-    return type.startsWith('{') || type === 'undefined' || type === 'null';
+    return type.startsWith('{') || type.startsWith('undefined') || type.startsWith('null');
 }
 
 function getParameterName(type: string) {
+    if (isObject(type)) {
+        return 'obj';
+    }
+
+    const index = type.indexOf(' | ');
+
+    if (index !== -1) {
+        type = type.substring(0, index);
+    }
+
     switch (type) {
         case 'boolean':
             return 'flag';
@@ -66,11 +79,7 @@ function getParameterName(type: string) {
         case 'Array<any>':
             return 'array';
         default:
-            if (isObject(type)) {
-                return 'obj';
-            } else {
-                return `${type[0].toLowerCase()}${type.substr(1)}`;
-            }
+            return `${type[0].toLowerCase()}${type.substr(1)}`;
     }
 }
 
@@ -81,35 +90,17 @@ function visitSignature(signature: Signature) {
     let names2: { [name: string]: number } = {};
 
     parameters.forEach(p => {
-        if (isObject(p)) {
-            names.object = names.object ? names.object + 1 : 1;
-        } else {
-            const p2 = p === 'JQuery<HTMLElement>' ? 'Element' : p;
-
-            names[p2] = names[p2] ? names[p2] + 1 : 1;
-        }
+        const name = getParameterName(p);
+        names[name] = names[name] ? names[name] + 1 : 1;
     });
 
-    parameters = parameters.map(p => {
-        if (isObject(p)) {
-            if (names.object > 1) {
-                names2.object = names2.object ? names2.object + 1 : 1;
+    parameters = parameters.map((p, i) => {
+        const optional = signature.firstOptionalParameterIndex !== undefined
+            && i >= signature.firstOptionalParameterIndex ? '?' : '';
 
-                return `obj${names2.object}: ${p}`;
-            } else {
-                return `obj: ${p}`;
-            }
-        } else {
-            const p2 = p === 'JQuery<HTMLElement>' ? 'Element' : p;
-
-            if (names[p2] > 1) {
-                names2[p2] = names2[p2] ? names2[p2] + 1 : 1;
-
-                return `${getParameterName(p2)}${names2[p2]}: ${p}`;
-            } else {
-                return `${getParameterName(p2)}: ${p}`;
-            }
-        }
+        const name = getParameterName(p);
+        names2[name] = names2[name] ? names2[name] + 1 : 1;
+        return `${name}${names[name] > 1 ? names2[name] : ''}${optional}: ${p}`;
     });
 
     return `(name: '${signature.name}'${parameters.length ? `, ${parameters.join(', ')}`: ''}): ${visitReturnType(signature.return)};`;
@@ -128,8 +119,8 @@ function removeJsonField(signatures: SignatureFile) {
 }
 
 function joinSignatures() {
-    let newSignatures: SignatureFile;
-    let signatures: SignatureFile;
+    let newSignatures!: SignatureFile;
+    let signatures!: SignatureFile;
 
     if (existsSync('./new-signatures.json')) {
         const content = readFileSync('./new-signatures.json', 'utf8');
@@ -156,7 +147,7 @@ function joinSignatures() {
                     }
                 }
 
-                signatures[fname].sort((a, b) => a.json.localeCompare(b.json));
+                signatures[fname].sort((a, b) => a.json!.localeCompare(b.json!));
             }
         }
 
@@ -183,9 +174,11 @@ import { GenerateForm } from './modules/form';
 `;
 
         for (const fname in signatures) {
+            const sigs = reduceSignatures(signatures[fname]);
+
             result += `
 export interface ${fname[0].toUpperCase()}${fname.substr(1)}Signatures<${genericThisType}> {
-    ${signatures[fname].map(visitSignature).join('\n    ')}
+    ${sigs.map(visitSignature).join('\n    ')}
 }
 `;
         }
