@@ -10,6 +10,7 @@ module.exports = controller => {
     const refinCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-refin/index.js').fail(failAlert));
     const veiculosCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-veiculos/index.js').fail(failAlert));
     const followCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-follow-document/index.js').fail(failAlert));
+    const statuspageCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-refin/index.js').fail(failAlert));
 
     controller.registerBootstrap('icheques::init::plataform', callback => $.getScript('/js/icheques.js').done(() => {
         callback();
@@ -17,6 +18,7 @@ module.exports = controller => {
         if (tags.indexOf('no-follow') === -1) followCall();
         if (tags.indexOf('no-refin') === -1) refinCall();
         if (tags.indexOf('no-veiculos') === -1) veiculosCall();
+        if (tags.indexOf('no-statuspage') === -1) statuspageCall();
     }).fail(() => {
         callback();
         failAlert();        
