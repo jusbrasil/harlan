@@ -15,8 +15,7 @@ module.exports = {
     icheques: {
         hosts: [
             'icheques',
-            //'painel.icheques.com.br'
-            'painel.icheques.localhost'
+            'painel.icheques.com.br'
         ]
     },
     instantSearchDelay: 500, /* ms */
