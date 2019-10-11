@@ -282,6 +282,7 @@ export default class KronoosParse {
                 resourceUseAnalytics(xml, true);
                 if (error) error(...args);
             } catch (e) {
+                console.error(e);
                 toastr.error(e);
             }
         };
@@ -291,6 +292,7 @@ export default class KronoosParse {
                 resourceUseAnalytics(args[0], false);
                 if (success) success(...args);
             } catch (e) {
+                console.error(e);
                 toastr.error(e);
             }
         };
@@ -2047,7 +2049,7 @@ export default class KronoosParse {
                 modal.close();
             };
 
-            list.add('fa-file-word-o', 'DOCX - Microsoft Word 2007 (Windows)').click(clickEvent('downloadDOCX'));
+            // list.add('fa-file-word-o', 'DOCX - Microsoft Word 2007 (Windows)').click(clickEvent('downloadDOCX'));
             list.add('fa-file-excel-o', 'Excel simples de processos instantâneo.').click(clickEvent('downloadXLSX'));
             list.add('fa-file-excel-o', 'Excel de processos via e-mail.').click(clickEvent('downloadXLSXEmail'));
             list.add('fa-file-pdf-o', 'Dossiê em formato PDF.').click(clickEvent('downloadPDF'));
@@ -2136,7 +2138,11 @@ export default class KronoosParse {
             }
 
             let namespace = $('namespace', element).text();
-            let [title, description] = NAMESPACE_DESCRIPTION[namespace];
+            let title = 'Apontamento Positivo';
+            let description = 'Consta apontamento positivo';
+            if (namespace && namespace in NAMESPACE_DESCRIPTION) {
+                [title, description] = NAMESPACE_DESCRIPTION[namespace];
+            }
             let kelement = this.kronoosElement(null, title, 'Existência de apontamentos cadastrais.', description);
             let notes = $('notes node', element);
             let source = $('source node', element);
@@ -2286,9 +2292,9 @@ export default class KronoosParse {
     }
 
     graphTrack() {
-        // let dontAskAgainInput = false,
-        //     dontAskAgain = {},
-        //     defaultActionSearch = {};
+        let dontAskAgainInput = false,
+             dontAskAgain = {},
+             defaultActionSearch = {};
 
         this.taskGraphTrack = async.timesSeries(this.depth, (i, callback) => this.generateRelations.track(data => {
             let elements = [];
@@ -2377,26 +2383,26 @@ export default class KronoosParse {
                         let edge = _.find(data.edges, edge => edge.from == node.id || edge.to == node.id);
                         let connection = _.find(data.nodes, c => c.id == (edge.from == node.id ? edge.to : edge.from));
 
-                        // if (dontAskAgain[edge.relationType]) {
-                        //     if (defaultActionSearch[edge.relationType]) searchTarget(cb);
-                        //     else cb();
-                        //     return;
-                        // }
+                        if (dontAskAgain[edge.relationType]) {
+                            if (defaultActionSearch[edge.relationType]) searchTarget(cb);
+                            else cb();
+                            return;
+                        }
 
                         this.call('confirm', {
                             title: `Você deseja consultar também o dossiê de ${node.label} que é relacionado em ${i+1}º grau com o target?`,
                             subtitle: `${node.label}, documento ${cpf_cnpj} é relacionado com ${this.name}.`,
                             paragraph: `A conexão é para ${connection.label} <small>(${f(connection.id)})</small> do tipo ${edge.relationType}.`
                         }, () => {
-                            // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            // defaultActionSearch[edge.relationType] = true;
+                            dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
+                            defaultActionSearch[edge.relationType] = true;
                             searchTarget(cb);
                         }, () => {
-                            // dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
-                            // defaultActionSearch[edge.relationType] = false;
+                            dontAskAgain[edge.relationType] = dontAskAgainInput[1].is(":checked");
+                            defaultActionSearch[edge.relationType] = false;
                             cb();
                         }, (modal, form, actions) => {
-                            // dontAskAgainInput = form.addCheckbox("confirm", `Aplicar ação para todos os targets relacionados (${edge.relationType}).`);
+                            dontAskAgainInput = form.addCheckbox("confirm", `Aplicar ação para todos os targets relacionados (${edge.relationType}).`);
                         });
                     }, () => callback()));
                 }
@@ -2733,6 +2739,7 @@ export default class KronoosParse {
         try {
             this._juristekCNJ(ret, cnj, findProc, nameSearch, checkName);
         } catch (e) {
+            console.error(e);
             if (cnj) {
                 let cnjInstance = this.procElements[cnj];
                 if (cnjInstance) {

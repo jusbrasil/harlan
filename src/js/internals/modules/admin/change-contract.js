@@ -1,5 +1,13 @@
 module.exports = controller => {
 
+    function numeralUS(str) {
+        const locale = numeral.locale();
+        numeral.locale('en');
+        const result = numeral(str || '0');
+        numeral.locale(locale);
+        return result;
+    }
+
     controller.registerCall('admin::changeContract', (companyNode, username, section) => {
         const form = controller.call('form', opts => {
             opts.username = username;
@@ -27,7 +35,7 @@ module.exports = controller => {
                         labelText: 'Valor do Contrato (R$)',
                         mask: '000.000.000.000.000,000',
                         optional: false,
-                        value : numeral(contrato.find('contrato:eq(1)').text() || '0.0').format('0,0.000'),
+                        value : numeralUS(contrato.find('contrato:eq(1)').text() || '0.0').format('0,0.000'),
                         maskOptions: {
                             reverse: true
                         },
@@ -39,7 +47,7 @@ module.exports = controller => {
                         labelText: 'Consulta Excedente (R$)',
                         mask: '000.000.000.000.000,000',
                         optional: false,
-                        value : numeral(contrato.find('contrato:eq(3)').text() || '0.0').format('0,0.000'),
+                        value : numeralUS(contrato.find('contrato:eq(3)').text() || '0.0').format('0,0.000'),
                         maskOptions: {
                             reverse: true
                         },

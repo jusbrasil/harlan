@@ -164,7 +164,7 @@ module.exports = controller => {
         }
 
         controller.serverCommunication.call('SELECT FROM \'HarlanAuthentication\'.\'Authenticate\'',
-            controller.call('loader::ajax', controller.call('error::ajax', {
+            controller.call('loader::ajax', {
                 error() {
                     inputUsername.addClass('error');
                     inputPassword.addClass('error');
@@ -187,7 +187,7 @@ module.exports = controller => {
                     username: inputUsername.val().trim(),
                     password: inputPassword.val()
                 }
-            })));
+            }));
     });
 
     controller.registerBootstrap('authentication::cordova::clear', callback => {

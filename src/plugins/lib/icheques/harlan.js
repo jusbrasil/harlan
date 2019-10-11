@@ -466,10 +466,12 @@ module.exports = controller => {
                 title: 'Deseja realmente forçar a atualização do cheque?',
                 subtitle: 'O cheque pode ser bloqueado por excesso de tentativas junto ao operador bancário.',
                 paragraph: 'Atenção! Caso não saiba o que está fazendo não proceda esta operação.'
-            }, () => controller.server.call('SELECT FROM \'PUSH\'.\'DAEMON\'', controller.call('loader::ajax', controller.call('error::ajax', {
+            }, () => controller.server.call('SELECT FROM \'PUSH\'.\'DAEMON\'', controller.call('loader::ajax', { 
+                dataType: 'json',
                 data: { id: check.pushId },
                 success: () => toastr.warning('O cheque foi atualizado com sucesso.', 'Aguarde até que a interface seja atualizada.'),
-            }))));
+                error: () => toastr.error('O cheque não foi atualizado com sucesso.', 'Aguarde ou entre em contato caso necessite com urgência da informação.'),
+            })));
         });        
 
         separator.addClass('external-source loading');

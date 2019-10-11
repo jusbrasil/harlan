@@ -19,6 +19,12 @@ import browserUpdate from 'browser-update';
     harlan.i18n = new I18n(localStorage.language ||
         navigator.language ||
         navigator.userLanguage || 'pt', this);
+    
+    if (harlan.confs.icheques.hosts.includes(document.location.hostname)) {
+        harlan.confs.webserviceAddress = 'https://irql.icheques.com.br/';
+        harlan.confs.websocketAddress = 'wss://irql.icheques.com.br/ws';
+    }
+
     harlan.server = harlan.serverCommunication = new ServerCommunication(harlan);
     harlan.xml = harlan.importXMLDocument = new ImportXMLDocument(harlan);
 

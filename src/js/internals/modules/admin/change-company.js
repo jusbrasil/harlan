@@ -122,7 +122,14 @@ module.exports = controller => {
                                 return CPF.isValid(element.val());
                             return true;
                         },
-                    }]
+                    }], {
+                        name: 'priceList',
+                        type: 'text',
+                        placeholder: 'Lista de Preços',
+                        labelText: 'Lista de Preços',
+                        value: $(companyNode).children('priceList').text(),
+                        optional: true
+                    }
                 ],
                 validate: (callback, configuration, screen, formManager) => {
                     formManager.defaultScreenValidation((isValid) => {

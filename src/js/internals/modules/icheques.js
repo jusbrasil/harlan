@@ -1,23 +1,24 @@
 import oneTime from 'one-time';
 
 module.exports = controller => {
-    const kronoosCall = oneTime(args => $.getScript('/js/kronoos.js', () => controller.trigger('kronoos::init', args)));
-    const refinCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-refin@1.0.9/index.js'));
-    const veiculosCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-veiculos@1.1.3/index.js'));
     if (!controller.confs.icheques.hosts.includes(document.location.hostname)) return;
+    const failAlert = () => harlan.alert({
+        subtitle: 'Não foi possível carregar um módulo da iCheques.',
+        paragraph: 'Verifique se o endereço cdn.jsdelivr.net é liberado na sua rede interna.',
+    });
 
-    controller.registerBootstrap('icheques::init::plataform', callback => $.getScript('/js/icheques.js', () => {
+    const refinCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-refin/index.js').fail(failAlert));
+    const veiculosCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-icheques-veiculos/index.js').fail(failAlert));
+    const followCall = oneTime(() => $.getScript('https://cdn.jsdelivr.net/npm/harlan-follow-document/index.js').fail(failAlert));
 
-        if (navigator.userAgent.match(/iPad/i) !== null) {
-            callback();
-            return;
-        }
-
+    controller.registerBootstrap('icheques::init::plataform', callback => $.getScript('/js/icheques.js').done(() => {
         callback();
-
-        if (!(controller.confs.user.tags && 
-                controller.confs.user.tags.indexOf('no-refin') !== -1)) refinCall();
-        if (!(controller.confs.user.tags && 
-                controller.confs.user.tags.indexOf('no-veiculos') !== -1)) veiculosCall();
+        const tags = (controller.confs.user || {}).tags || [];
+        if (tags.indexOf('no-follow') === -1) followCall();
+        if (tags.indexOf('no-refin') === -1) refinCall();
+        if (tags.indexOf('no-veiculos') === -1) veiculosCall();
+    }).fail(() => {
+        callback();
+        failAlert();        
     }));
 };

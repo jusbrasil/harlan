@@ -94,6 +94,12 @@
     input:last-child {
         margin-bottom: 0;
     }
+
+    form .list-container {
+        margin-bottom: 20px;
+        clear: both;
+    }
+
     form ul.list {
         display: table;
         table-layout: fixed;

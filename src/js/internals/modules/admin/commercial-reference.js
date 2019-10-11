@@ -9,6 +9,14 @@ module.exports = controller => {
 
     let harmonizer = new Harmonizer();
 
+    function numeralUS(str) {
+        const locale = numeral.locale();
+        numeral.locale('en');
+        const result = numeral(str || '0');
+        numeral.locale(locale);
+        return result;
+    }
+
     controller.registerCall('admin::tagsViewer', (data = {}) => {
         controller.server.call('SELECT FROM \'BIPBOPCOMPANYSREPORT\'.\'TAGS\'', {
             dataType: 'json',
@@ -57,7 +65,7 @@ module.exports = controller => {
                     if (!tag) {
                         return;
                     }
-                    report.label(`${label} : ${numeral(value).format('0,0')}`).css({
+                    report.label(`${label} : ${numeralUS(value).format('0,0')}`).css({
                         'background-color': colors[i],
                         color: new Color(colors[i]).light() ? '#000' : '#fff',
                         cursor: 'pointer'
