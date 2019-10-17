@@ -1,6 +1,9 @@
 import gamificationIcons from './data/gamification-icons';
 
 import Form from './lib/form';
+import { header } from 'change-case';
+import { copyFile } from 'fs';
+import buildURL from 'build-url';
 
 module.exports = controller => {
 
@@ -12,6 +15,9 @@ module.exports = controller => {
         let elementContent = $('<div />').addClass('content');
         const elementResults = $('<div />').addClass('results');
         let elementOpen = null;
+        let elementRow = $('<div />').addClass('mdl-grid');
+        let elementCol = $('<div />').addClass('mdl-cell mdl-cell--6-col left-col');
+        let elementColRight = $('<div />').addClass('mdl-cell mdl-cell--6-col right-col').css({'overflow-x': 'auto'});
 
         universalContainer.append(elementNews.append(elementContainer
             .append(elementActions)
@@ -41,6 +47,122 @@ module.exports = controller => {
             elementContent.append($('<h3 />').text(subtitle));
             return this;
         };
+
+        this.labelGrid = content => {
+            const span = $('<span />').addClass('label').text(content);
+            elementCol.append(span);
+            return span;
+        };
+
+        this.canvasGrid = (width, height) => {
+            width = width || 250;
+            height = height || 250;
+            const canvas = $('<canvas />').attr({
+                width,
+                height
+            }).addClass('chart');
+            elementCol.append(canvas);
+            return canvas.get(0);
+        };
+
+        this.grid = () => {
+            elementRow.append(elementCol);
+            elementRow.append(elementColRight);
+            elementContent.append(elementRow);
+
+            return elementRow;
+        };
+
+        this.relatorioUrl = (now) => {
+            let url = buildURL(bipbop.webserviceAddress, {
+                queryParams: {
+                    q: controller.endpoint.myIChequesAccountOverview,
+                    download: 'true',
+                    apiKey: controller.server.apiKey(),
+                    report: 'querys',
+                    consumption: '',
+                    now: now
+                }
+            });
+
+            return url;
+        };
+
+        this.table = content => {
+
+            let url = this.relatorioUrl(true);
+            $.ajax({
+                url: url,
+                dataType: 'text',
+                success: function (response) {
+                    let consultas = JSON.parse(response);
+
+                    let table = `
+                    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp' style="margin-top: 10px">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="mdl-data-table__cell--non-numeric">Resumo do mês atual</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Cheques<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Veículos<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">CPF/CNPJ<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Imoveis(SP)<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Pefin/Refin Serasa<br>Consultados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.cheques}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.veiculos}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.cpf_cnpj}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.imoveis}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.refin + consultas.serasa}</td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+                    $('.right-col').append(table);
+                }
+            });
+
+            let urlMesAnterior = this.relatorioUrl(0);
+            $.ajax({
+                url: urlMesAnterior,
+                dataType: 'text',
+                success: function (response) {
+                    let consultas = JSON.parse(response);
+                    let table2 = `
+                    <table class='mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp' style="margin-top: 10px">
+                        <thead>
+                            <tr>
+                                <th colspan="3" class="mdl-data-table__cell--non-numeric">Resumo do mês Anterior</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Cheques<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Veículos<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">CPF/CNPJ<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Imoveis(SP)<br>Consultados</th>
+                                <th class="mdl-data-table__cell--non-numeric">Pefin/Refin Serasa<br>Consultados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.cheques}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.veiculos}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.cpf_cnpj}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.imoveis}</td>
+                                <td class="mdl-data-table__cell--non-numeric">${consultas.refin + consultas.serasa}</td>
+                            </tr>
+                        </tbody>
+                    </table>`;
+                    $('.right-col').append(table2);
+                }
+            });
+        }
 
         this.label = content => {
             const span = $('<span />').addClass('label').text(content);

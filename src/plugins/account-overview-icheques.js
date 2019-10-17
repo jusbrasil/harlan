@@ -133,6 +133,8 @@ harlan.addPlugin(controller => {
                 cache: true,
                 data: ajaxQuery,
                 success(response) {
+                    console.log('the response: ')
+                    console.log(response);
                     const dataset = controller.call('myIChequesAccountOverview::dataset', $('BPQL > body > node', response));
                     const report = controller.call('report',
                         'Relatório de Consumo',
@@ -141,14 +143,17 @@ harlan.addPlugin(controller => {
                         'identificando dias em que é mais ou menos intensivo. Pode ser utilizado também para geração ' +
                         'de faturas para clientes que não possuem esse processo automatizado.',
                         closeable);
-                    const canvas = report.canvas(800, 250);
+                    const canvas = report.canvasGrid(500, 250);
                     (element || $('.app-content'))[method || 'append'](report.element());
                     for (const i in dataset.datasets) {
-                        report.label(dataset.datasets[i].label).css({
+                        report.labelGrid(dataset.datasets[i].label).css({
                             'background-color': dataset.datasets[i].strokeColor,
                             color: dataset.datasets[i].color.light() ? '#000' : '#fff'
                         });
                     }
+
+                    report.table();
+                    report.grid();
 
                     report.action('fa-cloud-download', () => {
                         controller.call('myIChequesAccountOverview::download', ajaxQuery, dataset.datasets);
