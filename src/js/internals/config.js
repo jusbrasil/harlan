@@ -15,12 +15,8 @@ module.exports = {
     icheques: {
         hosts: [
             'icheques',
-            'painel.icheques.com.br'
-        ]
-    },
-    credithub: {
-        hosts: [
             'credithub',
+            'painel.icheques.com.br',
             'painel.credithub.com.br'
         ]
     },
