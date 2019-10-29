@@ -18,6 +18,12 @@ module.exports = {
             'painel.icheques.com.br'
         ]
     },
+    credithub: {
+        hosts: [
+            'credithub',
+            'painel.credithub.com.br'
+        ]
+    },
     instantSearchDelay: 500, /* ms */
     animatedShowTable: 300,
     hideAutocomplete: 300,
