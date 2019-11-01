@@ -3,9 +3,9 @@ module.exports = controller => {
     controller.registerCall('icheques::welcome', ret => {
 
         var report = controller.call('report',
-            'Seja bem vindo ao iCheques',
+            'Seja bem vindo ao Credithub',
             'Cheque sem susto.',
-            'O iCheques é uma ferramenta desenvolvida para você evitar inadimplência em sua carteira de cheques e tambem possibilita a antecipação com seus parceiros financeiros.',
+            'A Credithub é uma ferramenta desenvolvida para você evitar inadimplência em sua carteira de cheques e tambem possibilita a antecipação com seus parceiros financeiros.',
             false);
 
         if (!controller.confs.isCordova) {
