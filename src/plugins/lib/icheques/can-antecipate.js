@@ -32,7 +32,7 @@ module.exports = controller => {
 
         report.button('Cotar taxas e limites', () => {
             controller.call('icheques::register::all');
-        }).addClass('green-button');
+        }).addClass('credithub-button');
 
         report.gamification('checkPoint');
 
@@ -59,7 +59,7 @@ module.exports = controller => {
         report.button('Antecipar Cheques', () => {
             const checks = controller.call('icheques::resultDatabase', controller.database.exec(obtainChecks)[0]).values;
             controller.call('icheques::antecipate', checks);
-        }).addClass('green-button');
+        }).addClass('credithub-button');
 
         report.gamification('checkPoint');
 

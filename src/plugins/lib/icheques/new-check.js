@@ -102,7 +102,7 @@ module.exports = controller => {
             newCheckWrapper = null;
             controller.call('icheques::checkout', _.filter(storage, i => i));
             modal.close();
-        }).addClass('green-button');
+        }).addClass('credithub-button');
 
         modal.createActions().add('Cancelar Operação').click(e => {
             e.preventDefault();
@@ -304,7 +304,7 @@ module.exports = controller => {
 
         form.element().submit(newCheckFormAction);
 
-        form.addSubmit('addcheck', 'Adicionar Cheque').addClass('strong green-button');
+        form.addSubmit('addcheck', 'Adicionar Cheque').addClass('strong credithub-button');
 
         const actions = modal.createActions();
         actions.add('Arquivo BAN ou REM').click(e => {

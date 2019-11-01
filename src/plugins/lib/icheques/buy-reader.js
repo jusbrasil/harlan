@@ -144,7 +144,7 @@ module.exports = controller => {
                     e.preventDefault();
                     modal.close();
                 });
-            }).addClass('green-button');
+            }).addClass('credithub-button');
 
             report.button('Já Tenho', () => {
                 localStorage.cmc7Reader = true;

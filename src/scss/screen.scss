@@ -1065,6 +1065,18 @@ textarea {
                 background-color: lighten(rgb(52, 163, 54), 12%);
             }
         }
+
+        &.credithub-button {
+            background-color: #004a84;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            box-shadow: 1px 1px 1px rgb(210, 210, 210);
+            border: none;
+
+            &:hover {
+                background-color: #0186ef;
+            }
+        }
     }
 
     &[type="checkbox"] {

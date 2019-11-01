@@ -393,7 +393,7 @@ var AccountOverview = function(closeable) {
         );
     }, 'Arquivo BAN');
 
-    var openButton = report.button('Filtrar Cheques', modalFilter).addClass('green-button');
+    var openButton = report.button('Filtrar Cheques', modalFilter).addClass('credithub-button');
 
     report.newContent();
 
@@ -500,7 +500,7 @@ var AccountOverview = function(closeable) {
 
         if (!_.without(datasetQueryStatus, 1).length) {
             status.html(messages.noOcurrence);
-            manipulationItens.push(report.button('Antecipar Cheques', antecipateAction).insertBefore(openButton).addClass('green-button'));
+            manipulationItens.push(report.button('Antecipar Cheques', antecipateAction).insertBefore(openButton).addClass('credithub-button'));
         } else if (!_.without(datasetQueryStatus, 10, null).length) {
             status.html(messages.processing);
         } else if (!_.intersection(datasetQueryStatus, [null, 10, 1]).length) {
