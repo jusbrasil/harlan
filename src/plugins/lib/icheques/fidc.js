@@ -121,7 +121,7 @@ module.exports = controller => {
             report.gamification('fail');
         } else if (approved) {
             report.title('Bem-vindo Parceiro Financeiro. Boas operações!');
-            report.subtitle('Essa conta está habilitada como Factoring/FIDC/Securitizadora/ESC e conta com todos serviços Credithub.');
+            report.subtitle('Essa conta está habilitada como Factoring/FIDC/Securitizadora/ESC e conta com todos serviços CreditHub.');
             report.paragraph(bio);
 
             const timeline = report.timeline(controller);

@@ -3,9 +3,9 @@ module.exports = controller => {
     controller.registerCall('icheques::welcome', ret => {
 
         var report = controller.call('report',
-            'Seja bem vindo ao Credithub',
+            'Seja bem vindo ao CreditHub',
             'Cheque sem susto.',
-            'A Credithub é uma ferramenta desenvolvida para você evitar inadimplência em sua carteira de cheques e tambem possibilita a antecipação com seus parceiros financeiros.',
+            'A CreditHub é uma ferramenta desenvolvida para você evitar inadimplência em sua carteira de cheques e tambem possibilita a antecipação com seus parceiros financeiros.',
             false);
 
         if (!controller.confs.isCordova) {
