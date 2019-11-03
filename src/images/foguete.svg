@@ -1,78 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.1"
-   id="Layer_1"
-   x="0px"
-   y="0px"
-   width="106.93"
-   height="106.93"
-   viewBox="0 0 106.93 106.93"
-   xml:space="preserve"
-   inkscape:version="0.48.5 r10040"
-   sodipodi:docname="foguete.svg"
-   inkscape:export-filename="/home/lfamorim/projects/harlan/src/images/foguete_highres.png"
-   inkscape:export-xdpi="861.87"
-   inkscape:export-ydpi="861.87"><metadata
-     id="metadata25"><rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
-     id="defs23" /><sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1600"
-     inkscape:window-height="861"
-     id="namedview21"
-     showgrid="false"
-     inkscape:zoom="1.665138"
-     inkscape:cx="-132.04215"
-     inkscape:cy="53.466999"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="Layer_1"
-     fit-margin-top="10"
-     fit-margin-left="10"
-     fit-margin-right="10"
-     fit-margin-bottom="10" /><g
-     id="g3"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)"><g
-       id="g5"
-       style="fill:#343645;fill-opacity:1"><path
-         style="fill:#343645;fill-opacity:1;fill-rule:evenodd"
-         d="m 66.96,40.259 -3.942,3.124 3.296,4.032 11.119,-8.809 -0.158,-0.193 0.061,-0.05 -8.879,-10.965 -4.067,3.252 3.442,4.25 C 48.911,36.124 33.943,51.76 33.943,70.873 h 5.302 C 39.246,54.966 51.387,41.88 66.96,40.259 z M 81.109,92.356 92.588,77.962 81.306,63.812 81.328,63.783 69.851,49.39 58.372,63.783 58.396,63.812 47.111,77.962 58.59,92.356 69.85,78.235 81.109,92.356 z M 64.22,67.65 c 0,-3.084 2.521,-5.586 5.63,-5.586 3.109,0 5.63,2.501 5.63,5.586 0,3.085 -2.521,5.586 -5.63,5.586 -3.109,0 -5.63,-2.5 -5.63,-5.586 z m 42.281,3.223 h -5.302 c 0,15.909 -12.144,28.998 -27.723,30.616 l 3.949,-3.131 -3.295,-4.028 -11.116,8.803 0.158,0.193 -0.063,0.049 8.881,10.957 4.066,-3.249 -3.437,-4.237 c 18.918,-1.228 33.882,-16.864 33.882,-35.973 z"
-         id="path7"
-         inkscape:connector-curvature="0" /></g></g><g
-     id="g9"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /><g
-     id="g11"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /><g
-     id="g13"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /><g
-     id="g15"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /><g
-     id="g17"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /><g
-     id="g19"
-     style="fill:#343645;fill-opacity:1"
-     transform="translate(-16.757,-17.4)" /></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="Layer_1" inkscape:export-filename="/home/lfamorim/projects/harlan/src/images/foguete_highres.png" inkscape:export-xdpi="861.87" inkscape:export-ydpi="861.87" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 106.9 106.9"
+	 style="enable-background:new 0 0 106.9 106.9;" xml:space="preserve">
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1" fit-margin-bottom="10" fit-margin-left="10" fit-margin-right="10" fit-margin-top="10" gridtolerance="10" guidetolerance="10" id="namedview21" inkscape:current-layer="Layer_1" inkscape:cx="-132.04215" inkscape:cy="53.466999" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="861" inkscape:window-maximized="1" inkscape:window-width="1600" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="1.665138" objecttolerance="10" pagecolor="#ffffff" showgrid="false">
+	</sodipodi:namedview>
+<g id="g9" transform="translate(-16.757,-17.4)">
+</g>
+<g id="g11" transform="translate(-16.757,-17.4)">
+</g>
+<g id="g13" transform="translate(-16.757,-17.4)">
+</g>
+<g id="g15" transform="translate(-16.757,-17.4)">
+</g>
+<g id="g17" transform="translate(-16.757,-17.4)">
+</g>
+<image style="overflow:visible;" width="564" height="564" xlink:href="../MKT/CREDIT HUB/logo-small.png"  transform="matrix(0.1896 0 0 0.1896 0 0)">
+</image>
+</svg>
