@@ -17,7 +17,7 @@ module.exports = {
             'icheques',
             'credithub',
             'painel.icheques.com.br',
-            'painel.credithub.localhost'
+            'painel.credithub.com.br'
         ]
     },
     instantSearchDelay: 500, /* ms */
