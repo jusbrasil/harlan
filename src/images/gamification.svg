@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 23.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
-   xmlns:i="&amp;ns_ai;"
+   xmlns:i="&amp;#38;ns_ai;"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -79,8 +79,8 @@
    guidetolerance="10"
    id="namedview4"
    inkscape:current-layer="g10"
-   inkscape:cx="563.67561"
-   inkscape:cy="942.37865"
+   inkscape:cx="476.83219"
+   inkscape:cy="939.75696"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
    inkscape:window-height="707"
@@ -1231,7 +1231,7 @@
    d="M-85-49.1c-1.1,0-17.7,17.6-17.7,17.6l-10.4-10.4l16.3-16.7   l57.9,36.5l0.9,0.9l-10.4,10.4C-48.4-10.8-84-49.1-85-49.1" />
 <switch
    id="switch757"
-   transform="matrix(1.068508,0,0,-1.068508,-594.99495,553.70008)">
+   transform="matrix(1.068508,0,0,-1.068508,-594.99495,552.10008)">
 	<foreignObject
    height="1"
    width="1"

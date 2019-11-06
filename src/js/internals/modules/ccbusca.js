@@ -57,13 +57,15 @@ module.exports = controller => {
         controller.call('tooltip', sectionDocumentGroup[2], 'Imprimir').append($('<i />').addClass('fa fa-print')).click(e => {
             e.preventDefault();
             const html = sectionDocumentGroup[0].html();
+            /*
             const printWindow = window.open('about:blank', '', '_blank');
             if (!printWindow) return;
             printWindow.document.write($('<html />')
                 .append($('<head />'))
                 .append($('<body />').html(html)).html());
             printWindow.focus();
-            printWindow.print();
+            printWindow.print();*/
+            harlan.call('relatorioAnalitico::print', html);
         });
 
         const juntaEmpresaHTML = controller.call('xmlDocument', ret, 'CCBUSCA', 'DOCUMENT');
