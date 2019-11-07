@@ -38,7 +38,7 @@ module.exports = controller => {
         let position = [40, 40];
         radialProject.element.css({
             position: 'fixed',
-            right: 40,
+            left: 40,
             bottom: 40,
             cursor: 'move',
             'user-select': 'none',

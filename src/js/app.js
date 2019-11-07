@@ -101,7 +101,6 @@ import browserUpdate from 'browser-update';
     require('./internals/modules/ccbusca')(harlan);
     require('./internals/modules/generate-relations')(harlan);
     require('./internals/modules/admin/contact-types')(harlan);
-    require('./internals/modules/smartsupp')(harlan);
     require('./internals/modules/cordova')(harlan);
     require('./internals/modules/blockui')(harlan);
     require('./internals/modules/push-notification')(harlan);

@@ -54,7 +54,7 @@ const NAMESPACE_DESCRIPTION = {
     ceispj: ['Pessoa Jurídica listada no Cadastro listada no Cadastro Nacional de Empresas Inidôneas e Suspensas', 'Banco de informações mantido pela Controladoria-Geral da União'],
     ceispf: ['Pessoas Físicas listadas no Cadastro listada no Cadastro Nacional de Empresas Inidôneas e Suspensas', 'Banco de informações mantido pela Controladoria-Geral da União'],
     bovespa: ['Apontamento em Empresa de Capital Aberto - Bovespa', 'Cargos em empresas e/ou participações em assembleias.'],
-    clear: ['Não Constam Apontamentos Cadastrais', 'Não há nenhum apontamento cadastral registrado no sistema Kronoos.'],
+    clear: ['Resultados do Dossiê Kronoos', 'Visualização dos apontamentos'],
     licitacoes: ['Participação em Licitações', 'Constam participações em licitações.'],
     hsbc: ['Fortunas e Offshores Ligadas a Brasileiros no HSBC da Suiça', 'Brasileiros com contas sigilosas na filial suíça do banco HSBC, por meio das "offshores"'],
 
@@ -629,6 +629,7 @@ export default class KronoosParse {
         let trf1Search = _.pairs(trf1List).map(x => [`SELECT FROM 'TRF01'.'DOCUMENTO' WHERE 'SECAO' = '${x[0]}' AND 'DOCUMENTO' = '${this.cpf_cnpj.replace(/[^\d]/g, '')}'`, true, `Pesquisando pelo documento ${this.cpf_cnpj} no Tribunal Federal 1º Região - ${x[1]}`, `Não foram localizados processos associados ao documento ${this.cpf_cnpj} no Tribunal Federal 1º Região - ${x[1]}`, `Tribunal Federal 1º Região - ${x[1]}`]);
 
         this.tribunaisSync = async.eachLimit([
+            [`SELECT FROM 'TJPA'.'CONSULTAPORNOME' WHERE 'NOME_PARTE' = '${this.name}'`, false, `Pesquisando pelo nome ${this.name} no Tribunal de Justiça do Pará, em todas as comarcas`, null, 'Tribunal de Justiça do Pará, todas as comarcas'],
             [`SELECT FROM 'TJRJ'.'NOME' WHERE 'NOME_PARTE' = '${this.name}' AND 'ORIGEM' = '1'`, false, `Pesquisando pelo nome ${this.name} no Tribunal de Justiça do Rio de Janeiro, em todas as comarcas`, null, 'Tribunal de Justiça do Rio de Janeiro, todas as comarcas'],
             [`SELECT FROM 'JFPR'.'DOCUMENTO' WHERE 'DOCUMENTO' = '${this.cpf_cnpj.replace(/[^\d]/g, '')}'`, true, `Pesquisando pelo documento ${this.cpf_cnpj} no Tribunal Federal 4º Região (Paraná)`, `Não foram localizados processos associados ao documento ${this.cpf_cnpj} no Tribunal Federal 4º Região (Paraná)`, 'Tribunal Federal 4º Região (Paraná)'],
             [`SELECT FROM 'JFRS'.'DOCUMENTO' WHERE 'DOCUMENTO' = '${this.cpf_cnpj.replace(/[^\d]/g, '')}'`, true, `Pesquisando pelo documento ${this.cpf_cnpj} no Tribunal Federal 4º Região (Rio Grande do Sul)`, `Não foram localizados processos associados ao documento ${this.cpf_cnpj} no Tribunal Federal 4º Região (Rio Grande do Sul)`, 'Tribunal Federal 4º Região (Rio Grande do Sul)'],
@@ -1609,97 +1610,97 @@ export default class KronoosParse {
         return _.object(_.keys(groupContent), _.map(groupContent, n => _.countBy(n, i => i[1])));
     }
 
-    changeResult() {
-        if (this._notFoundObject && this._notFoundObject.list.is(':empty')) {
-            this._notFoundObject.container.remove();
-            this._notFoundObject = null;
-            this._notFoundList = null;
-        }
+    // changeResult() {
+    //     if (this._notFoundObject && this._notFoundObject.list.is(':empty')) {
+    //         this._notFoundObject.container.remove();
+    //         this._notFoundObject = null;
+    //         this._notFoundList = null;
+    //     }
 
-        if (this._briefElement && this._briefElement.find('ol').is(':empty')) {
-            this._brief = null;
-            this._briefElement.remove();
-            this._briefElement = null;
-        }
+    //     if (this._briefElement && this._briefElement.find('ol').is(':empty')) {
+    //         this._brief = null;
+    //         this._briefElement.remove();
+    //         this._briefElement = null;
+    //     }
 
-        this.firstElement().stageClear();
-        let informationQA = this.informationQA();
-        if (informationQA.hasNotation && informationQA.hasNotation.behaviourAccurate) {
-            this.header.element
-                .removeClass('kronoos-hasNotation')
-                .removeClass('kronoos-hasntNotation')
-                .addClass('kronoos-hasConfirmedNotation');
-        } else if (informationQA.hasNotation) {
-            this.header.element
-                .removeClass('kronoos-hasConfirmedNotation')
-                .removeClass('kronoos-hasntNotation')
-                .addClass('kronoos-hasNotation');
-        } else {
-            this.header.element
-                .removeClass('kronoos-hasConfirmedNotation')
-                .removeClass('kronoos-hasNotation')
-                .addClass('kronoos-hasntNotation');
-        }
+    //     this.firstElement().stageClear();
+    //     let informationQA = this.informationQA();
+    //     if (informationQA.hasNotation && informationQA.hasNotation.behaviourAccurate) {
+    //         this.header.element
+    //             .removeClass('kronoos-hasNotation')
+    //             .removeClass('kronoos-hasntNotation')
+    //             .addClass('kronoos-hasConfirmedNotation');
+    //     } else if (informationQA.hasNotation) {
+    //         this.header.element
+    //             .removeClass('kronoos-hasConfirmedNotation')
+    //             .removeClass('kronoos-hasntNotation')
+    //             .addClass('kronoos-hasNotation');
+    //     } else {
+    //         this.header.element
+    //             .removeClass('kronoos-hasConfirmedNotation')
+    //             .removeClass('kronoos-hasNotation')
+    //             .addClass('kronoos-hasntNotation');
+    //     }
 
-        if (this.titleCanChange) {
-            if (informationQA.hasNotation) {
-                this.firstElement().title('Constam Apontamentos Cadastrais');
-                this.firstElement().subtitle('Há apontamento cadastral registrado no sistema Kronoos.');
-                this.firstElement().sidenote('Constam apontamentos cadastrais.');
-            } else {
-                this.firstElement().title('Não Constam Apontamentos Cadastrais');
-                this.firstElement().subtitle('Não há nenhum apontamento cadastral registrado no sistema Kronoos.');
-                this.firstElement().sidenote('Não consta nenhum apontamento cadastral.');
-            }
+    //     if (this.titleCanChange) {
+    //         if (informationQA.hasNotation) {
+    //             this.firstElement().title('Constam Apontamentos Cadastrais');
+    //             this.firstElement().subtitle('Há apontamento cadastral registrado no sistema Kronoos.');
+    //             this.firstElement().sidenote('Constam apontamentos cadastrais.');
+    //         } else {
+    //             this.firstElement().title('Não Constam Apontamentos Cadastrais');
+    //             this.firstElement().subtitle('Não há nenhum apontamento cadastral registrado no sistema Kronoos.');
+    //             this.firstElement().sidenote('Não consta nenhum apontamento cadastral.');
+    //         }
 
-        }
-        for (let notationType in informationQA) {
-            let pieces = [];
-            let notationMessage;
-            let icon = 'exclamation';
-            switch (notationType) {
-            case 'hasNotation':
-                notationMessage = ['apresenta registro nos órgãos pesquisados', 'apresentam registros nos órgãos pesquisados'];
-                break;
-            case 'hasntNotation':
-                notationMessage = ['não apresenta registro nos órgãos pesquisados', 'não apresentam registros nos órgãos pesquisados'];
-                break;
-            default:
-                notationMessage = ['de registro desconhecido e', 'de registros desconhecidos e'];
-            }
-            for (let behaviourType in informationQA[notationType]) {
-                let behaviourMessage;
-                switch (behaviourType) {
-                case 'behaviourAccurate':
-                    if (notationType === 'hasntNotation') icon = 'check';
-                    else icon = 'times';
-                    behaviourMessage = ['', ''];
-                    break;
-                case 'behaviourUnstructured':
-                    behaviourMessage = [' e pode conter dados não estruturados, devendo ser verificado ', ' e podem conter dados não estruturados, devendo ser verificados'];
-                    break;
-                case 'behaviourUnstructuredHomonym':
-                    behaviourMessage = [' e pode conter homônimos e dados não estruturados, devendo ser verificado', ' e podem conter homônimos e dados não estruturados, devendo ser verificados'];
-                    break;
-                case 'behaviourHomonym':
-                    behaviourMessage = [' e pode conter homônimos, devendo ser verificado', ' e podem conter homônimos, devendo ser verificados'];
-                    break;
-                default:
-                    behaviourMessage = ['pendente de verificação', 'pendentes de verificação'];
-                }
+    //     }
+    //     for (let notationType in informationQA) {
+    //         let pieces = [];
+    //         let notationMessage;
+    //         let icon = 'exclamation';
+    //         switch (notationType) {
+    //         case 'hasNotation':
+    //             notationMessage = ['apresenta registro nos órgãos pesquisados', 'apresentam registros nos órgãos pesquisados'];
+    //             break;
+    //         case 'hasntNotation':
+    //             notationMessage = ['não apresenta registro nos órgãos pesquisados', 'não apresentam registros nos órgãos pesquisados'];
+    //             break;
+    //         default:
+    //             notationMessage = ['de registro desconhecido e', 'de registros desconhecidos e'];
+    //         }
+    //         for (let behaviourType in informationQA[notationType]) {
+    //             let behaviourMessage;
+    //             switch (behaviourType) {
+    //             case 'behaviourAccurate':
+    //                 if (notationType === 'hasntNotation') icon = 'check';
+    //                 else icon = 'times';
+    //                 behaviourMessage = ['', ''];
+    //                 break;
+    //             case 'behaviourUnstructured':
+    //                 behaviourMessage = [' e pode conter dados não estruturados, devendo ser verificado ', ' e podem conter dados não estruturados, devendo ser verificados'];
+    //                 break;
+    //             case 'behaviourUnstructuredHomonym':
+    //                 behaviourMessage = [' e pode conter homônimos e dados não estruturados, devendo ser verificado', ' e podem conter homônimos e dados não estruturados, devendo ser verificados'];
+    //                 break;
+    //             case 'behaviourHomonym':
+    //                 behaviourMessage = [' e pode conter homônimos, devendo ser verificado', ' e podem conter homônimos, devendo ser verificados'];
+    //                 break;
+    //             default:
+    //                 behaviourMessage = ['pendente de verificação', 'pendentes de verificação'];
+    //             }
 
-                let searchMessage;
-                if (informationQA[notationType][behaviourType] > 1) {
-                    searchMessage = `${informationQA[notationType][behaviourType]} resultados encontrados ${notationMessage[1]} ${behaviourMessage[1]}.`;
-                }   else {
-                    searchMessage = `1 resultado encontrado ${notationMessage[0]} ${behaviourMessage[0]}.`;
-                }
-                this.firstElement().stage(icon, searchMessage.replace(/\s+,/, ',')).addClass(`type-${notationType}-${behaviourType}`);
-            }
-        }
+    //             let searchMessage;
+    //             if (informationQA[notationType][behaviourType] > 1) {
+    //                 searchMessage = `${informationQA[notationType][behaviourType]} resultados encontrados ${notationMessage[1]} ${behaviourMessage[1]}.`;
+    //             }   else {
+    //                 searchMessage = `1 resultado encontrado ${notationMessage[0]} ${behaviourMessage[0]}.`;
+    //             }
+    //             this.firstElement().stage(icon, searchMessage.replace(/\s+,/, ',')).addClass(`type-${notationType}-${behaviourType}`);
+    //         }
+    //     }
 
-        this.controller.trigger('kronoos::changeResult');
-    }
+    //     this.controller.trigger('kronoos::changeResult');
+    // }
 
     firstElement() {
         return this.kelements[0];
@@ -1710,7 +1711,7 @@ export default class KronoosParse {
         if (this.kelements.length && group) kelement.notFound = (element, ...x) => this.notFound(element, group, ...x);
         kelement.brief = (...args) => this.brief(...args);
         this.kelements.push(kelement);
-        kelement.aggregate(() => this.changeResult());
+        // kelement.aggregate(() => this.changeResult());
         kelement.behaviourAccurate(false);
         return kelement;
     }
@@ -2266,7 +2267,7 @@ export default class KronoosParse {
     emptyChecker() {
         if (!this.kelements.length) {
             let [title, description] = NAMESPACE_DESCRIPTION.clear;
-            let nelement = this.kronoosElement(null, title, 'Não consta nenhum apontamento cadastral.', description);
+            let nelement = this.kronoosElement(null, title, null, null);
             this.titleCanChange = true;
             this.append(nelement.element());
             searchBar.addClass('minimize').removeClass('full');
@@ -2675,7 +2676,7 @@ export default class KronoosParse {
                     this.procElements[cnj].remove();
                     delete this.kelements[this.kelements.indexOf(this.procElements[cnj])];
                     delete this.procElements[cnj];
-                    this.changeResult();
+                    // this.changeResult();
                 }
             }), lowPriority);
 
@@ -2769,7 +2770,7 @@ export default class KronoosParse {
                 cnjInstance.remove();
                 delete this.procElements[cnj];
                 delete this.kelements[this.kelements.indexOf(cnjInstance)];
-                this.changeResult();
+                // this.changeResult();
                 return;
             }
 
