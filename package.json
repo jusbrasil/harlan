@@ -69,7 +69,7 @@
     "email-regex": "^2.0.0",
     "es6-shim": "^0.35.3",
     "escape-string-regexp": "^1.0.5",
-    "eslint": "^4.15.0",
+    "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.8.0",
