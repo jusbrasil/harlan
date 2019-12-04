@@ -955,7 +955,7 @@ export default class KronoosParse {
         this.searchCRF();
         this.searchMPT();
         this.searchTribunais();
-        this.searchMandados();
+        // this.searchMandados();
         this.searchCNDT();
         this.searchMTE();
         this.searchIbama();
