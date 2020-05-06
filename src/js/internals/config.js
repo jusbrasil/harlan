@@ -9,6 +9,7 @@ module.exports = {
     kronoos: {
         hosts: [
             'kronoos',
+            'kronoos.bipbop.com.br',
             'painel.kronoos.com'
         ]
     },
