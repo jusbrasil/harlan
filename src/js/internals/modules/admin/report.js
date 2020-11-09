@@ -101,6 +101,7 @@ module.exports = controller => {
         modal.paragraph('Selecione o relatório que deseja para começar o download em CSV.');
 
         let list = modal.createForm().createList();
+        list.add('fa-cloud-download', 'Consolidado - Consumo completo para período.').click(download('consolidado'));
         for (let item of labels) {
             list.add('fa-cloud-download', `${item.label} - ${item.description}`).click(download(item.id));
         }
