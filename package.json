@@ -146,7 +146,7 @@
     "metaphone": "^1.0.3",
     "mobile-detect": "^1.4.1",
     "moment": "^2.20.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "node-uuid": "^1.4.8",
     "observed": "^1.1.2",
     "one-time": "0.0.4",
