@@ -9041,9 +9041,9 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-querystringify@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
+querystringify@^2.1.1:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
 
 queue-fifo@^0.2.3:
   version "0.2.5"
@@ -11139,11 +11139,11 @@ url-parse-lax@^1.0.0:
   dependencies:
     prepend-http "^1.0.1"
 
-url-parse@^1.2.0:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.4.tgz#cac1556e95faa0303691fec5cf9d5a1bc34648f8"
+url-parse@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.0.tgz#90aba6c902aeb2d80eac17b91131c27665d5d828"
   dependencies:
-    querystringify "^2.0.0"
+    querystringify "^2.1.1"
     requires-port "^1.0.0"
 
 url2@^0.0.0:
@@ -11457,10 +11457,6 @@ weevil@^0.1.2:
   resolved "https://registry.yarnpkg.com/weevil/-/weevil-0.1.2.tgz#95607d056cbf223449c6c86677fff161fe2bd18c"
   dependencies:
     deval "^0.1.1"
-
-weight-manager@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/weight-manager/-/weight-manager-1.0.1.tgz#432bda1582877dc4d11446fbb71a3833bf553929"
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"
