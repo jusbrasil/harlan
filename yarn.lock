@@ -2199,8 +2199,8 @@ cache-base@^1.0.1:
     unset-value "^1.0.0"
 
 cached-path-relative@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/cached-path-relative/-/cached-path-relative-1.0.2.tgz#a13df4196d26776220cc3356eb147a52dba2c6db"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/cached-path-relative/-/cached-path-relative-1.1.0.tgz#865576dfef39c0d6a7defde794d078f5308e3ef3"
 
 caller-path@^0.1.0:
   version "0.1.0"
@@ -11457,10 +11457,6 @@ weevil@^0.1.2:
   resolved "https://registry.yarnpkg.com/weevil/-/weevil-0.1.2.tgz#95607d056cbf223449c6c86677fff161fe2bd18c"
   dependencies:
     deval "^0.1.1"
-
-weight-manager@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/weight-manager/-/weight-manager-1.0.1.tgz#432bda1582877dc4d11446fbb71a3833bf553929"
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"
