@@ -8448,8 +8448,8 @@ path@^0.12.7:
     util "^0.10.3"
 
 pathval@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pathval/-/pathval-1.1.0.tgz#b942e6d4bde653005ef6b71361def8727d0645e0"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/pathval/-/pathval-1.1.1.tgz#8534e77a77ce7ac5a2512ea21e0fdb8fcf6c3d8d"
 
 pause-stream@0.0.11, pause-stream@^0.0.11:
   version "0.0.11"
@@ -11457,10 +11457,6 @@ weevil@^0.1.2:
   resolved "https://registry.yarnpkg.com/weevil/-/weevil-0.1.2.tgz#95607d056cbf223449c6c86677fff161fe2bd18c"
   dependencies:
     deval "^0.1.1"
-
-weight-manager@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/weight-manager/-/weight-manager-1.0.1.tgz#432bda1582877dc4d11446fbb71a3833bf553929"
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"
