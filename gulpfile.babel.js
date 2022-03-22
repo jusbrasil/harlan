@@ -1,4 +1,3 @@
-import prepackify from 'prepackify';
 import streamqueue from 'streamqueue';
 import browserify from 'browserify';
 import browserSync from 'browser-sync';
@@ -10,7 +9,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import merge from 'merge-stream';
 import path from 'path';
-import persistify from 'persistify';
 import runSequence from 'run-sequence';
 import source from 'vinyl-source-stream';
 import basename from 'basename';

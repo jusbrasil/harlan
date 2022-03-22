@@ -36,6 +36,7 @@
     "moment": "~2.20.1",
     "numeral": "~2.0.6",
     "jquery": "~3.2.1",
+    "enjoyhint": "^3.0.0",
     "material-design-lite": "~1.3.0",
     "mocha": "~4.1.0",
     "chai": "~4.1.2",

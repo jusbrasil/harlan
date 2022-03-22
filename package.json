@@ -156,7 +156,6 @@
     "path": "^0.12.7",
     "persistify": "^1.1.1",
     "prepack": "^0.2.18",
-    "prepackify": "^1.0.0",
     "promise-worker": "^1.1.1",
     "pseudo-worker": "^1.1.1",
     "qs": "^6.5.1",
