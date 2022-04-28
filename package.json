@@ -21,7 +21,7 @@
   "dependencies": {
     "apk-signer": "^0.1.0",
     "array-to-sentence": "^1.1.0",
-    "async": "^2.6.0",
+    "async": "^2.6.4",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-plugin-flow-prepack": "^0.13.0",
