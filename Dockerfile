@@ -23,4 +23,10 @@ RUN gulp build
 FROM nginx:1.21.6
 
 COPY --from=builder /usr/local/src/harlan/Server/web /usr/local/src/harlan/Server/web
-COPY nginx.conf /etc/nginx/
+
+COPY ./cert/kronoos.bipbop.com.br/fullchain.pem /etc/letsencrypt/live/kronoos.bipbop.com.br/
+COPY ./cert/kronoos.bipbop.com.br/privkey.pem /etc/letsencrypt/live/kronoos.bipbop.com.br/
+COPY ./cert/options-ssl-nginx.conf /etc/letsencrypt/
+COPY ./cert/ssl-dhparams.pem /etc/letsencrypt/
+
+COPY harlan.conf /etc/nginx/conf.d/harlan.conf

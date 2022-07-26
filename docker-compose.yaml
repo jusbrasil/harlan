@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  harlan:
+    build:
+      context: .
+    ports:
+      - "80:80"
+      - "443:443"
+    # volumes:
+    #   - "./cert:/etc/letsencrypt/live/kronoos.bipbop.com.br/"
+    #   - "./cert/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf"
+    #   - "./cert/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem"
