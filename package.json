@@ -35,7 +35,7 @@
     "basename": "^0.1.2",
     "bluebird": "^3.5.1",
     "blueimp-canvas-to-blob": "^3.14.0",
-    "brfs": "^1.4.3",
+    "brfs": "^1.6.1",
     "browser-image-size": "^1.1.0",
     "browser-ipfs": "0.0.6",
     "browser-sync": "^2.23.3",
