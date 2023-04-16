@@ -55,7 +55,7 @@
     "color-harmony": "^0.3.0",
     "concat-stream": "^1.6.0",
     "convnetjs": "^0.3.0",
-    "cordova": "^8.0.0",
+    "cordova": "^11.1.0",
     "cpf_cnpj": "0.2.0",
     "crypto-js": "^3.1.9-1",
     "csv": "^2.0.0",
