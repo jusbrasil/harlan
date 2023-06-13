@@ -57,7 +57,7 @@
     "convnetjs": "^0.3.0",
     "cordova": "^8.0.0",
     "cpf_cnpj": "0.2.0",
-    "crypto-js": "^3.1.9-1",
+    "crypto-js": "^3.2.1",
     "csv": "^2.0.0",
     "csv-string": "^3.1.2",
     "detect-gender": "^1.0.0",
