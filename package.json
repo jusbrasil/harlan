@@ -83,7 +83,7 @@
     "glob": "^7.1.2",
     "google-maps": "^3.2.1",
     "greenlet": "^0.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-add-src": "^0.2.0",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-babel": "^7.0.0",
