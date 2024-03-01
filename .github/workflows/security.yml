@@ -1,0 +1,6 @@
+on: [pull_request]
+jobs:
+  call-jusbrasil-check:
+    uses: jusbrasil/gh-actions/.github/workflows/jusbrasil-check.yml@roger/jusbrasil-check
+    with:
+      sonarcloud-proj: jusbrasil_harlan
